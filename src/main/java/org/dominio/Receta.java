@@ -1,6 +1,7 @@
 package org.dominio;
 
 import org.dominio.ingredientes.Ingrediente;
+import org.dominio.perfiles.Perfil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,18 @@ public class Receta {
     private List<Ingrediente> ingredientes;
 
     public List<Ingrediente> getIngredientes() { return ingredientes;}
+    private int puntaje;
+
+    public String getNombre() {
+        return nombre;
+    }
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public void sumarPuntaje(int puntaje) {
+        this.puntaje += puntaje;
+    }
 
     public int cantidadCalorias() {
         return ingredientes.stream().map(x -> x.getCalorias()).reduce(0, Integer::sum);
@@ -19,6 +32,7 @@ public class Receta {
     public Receta(String titulo) {
         this.nombre = titulo;
         this.ingredientes = new ArrayList<Ingrediente>();
+        this.puntaje = 0;
     }
 
     public void agregarIngrediente(Ingrediente ingredientePorAgregar){
@@ -40,5 +54,10 @@ public class Receta {
         //return ingredientes.stream().map( x -> x.getGrupo()).collect(Collectors.toList()).contains(grupo);
         //return ingredientes.stream().filter(y -> y.getNombre() == alimento).findAny();
     }
+//Preguntar si este metodo es valido
+    public boolean esAptoPara(Perfil perfil) {
+        return perfil.puedeComer(this);
+    }
+
 
 }
