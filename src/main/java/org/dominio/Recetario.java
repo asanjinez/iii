@@ -11,12 +11,19 @@ public class Recetario {
         this.titulo = nombre;
         recetas = new ArrayList<Receta>();
     }
-
-    public void agregarReceta(Receta receta) {
-        recetas.add(receta);
-    }
-
+/*
+TODO Deberia implementar un especie de observer? porque acada vez que se agrega una receta a un recetario, posiblemente
+    el ranking se deba volver a ordenar??
+ */
     public int cantidadRecetas(){
         return recetas.size();
     }
+
+    public void agregarReceta(Receta receta){
+        receta.accionAgregar();
+        recetas.add(receta);
+        //this.actualizarRankingsSubscriptos()          ???
+
+    }
+
 }

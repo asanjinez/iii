@@ -12,12 +12,6 @@ public class Ranking {
         this.nombre = nombre;
     }
 
-    public void agregarReceta(Receta receta){
-        receta.sumarPuntaje(10);
-        this.recetas.add(receta);
-        this.ordenarRanking();
-    }
-
     public void ordenarRanking() {
         this.recetas.stream().sorted(Comparator.comparing(x->x.getPuntaje()));
     }

@@ -1,5 +1,6 @@
 package org.dominio;
 
+import org.dominio.acciones.Accion;
 import org.dominio.ingredientes.Ingrediente;
 import org.dominio.perfiles.Perfil;
 
@@ -14,11 +15,17 @@ public class Receta {
     public List<Ingrediente> getIngredientes() { return ingredientes;}
     private int puntaje;
 
+    private Accion estadoAgregar;
+
     public String getNombre() {
         return nombre;
     }
     public int getPuntaje() {
         return puntaje;
+    }
+
+    public void setEstadoAgregar(Accion estadoAgregar) {
+        this.estadoAgregar = estadoAgregar;
     }
 
     public void sumarPuntaje(int puntaje) {
@@ -59,5 +66,13 @@ public class Receta {
         return perfil.puedeComer(this);
     }
 
+    public void accionAgregar(){
+        this.estadoAgregar.accionar(this);
+
+    }
+
+    public void cambiarEstadoAgregar(){
+        this.estadoAgregar.cambiarEstado(this);
+    }
 
 }
