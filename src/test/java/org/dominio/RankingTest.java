@@ -3,235 +3,194 @@ package org.dominio;
 import org.dominio.ingredientes.Carnes;
 import org.dominio.ingredientes.Cereales;
 import org.dominio.ingredientes.Ingrediente;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class RankingTest {
+
+        Ingrediente ingrediente1;
+        Ingrediente ingrediente2;
+
+        Receta receta1;
+        Receta receta2;
+        Receta receta3;
+        Receta receta4;
+
+        Recetario recetario1;
+        Recetario recetario2;
+        Recetario recetario3;
+
+        Ranking rankingMarzo;
+        Ranking rankingAbril;
+        Ranking rankingMayo;
+        @Before
+        public void before() {
+            this.ingrediente1 = new Carnes("Milanesa", 1, 20, "Gramos");
+            this.ingrediente2 = new Cereales("Cereal", 3, 44, "Unidades");
+
+            this.receta1 = new Receta("Receta de prueba1");
+            this.receta2 = new Receta("Receta de prueba2");
+            this.receta3 = new Receta("Receta de prueba3");
+            this.receta4 = new Receta("Receta de prueba4");
+
+            this.recetario1 = new Recetario("Primer recetario");
+            this.recetario2 = new Recetario("Segundo recetario");
+            this.recetario3 = new Recetario("Tercero recetario");
+
+
+            this.rankingMarzo = new Ranking("Ranking de Marzo");
+            this.rankingAbril = new Ranking("Ranking de Abril");
+            this.rankingMayo = new Ranking("Ranking de Mayo");
+
+
+            receta1.agregarIngrediente(ingrediente1);
+
+            receta2.agregarIngrediente(ingrediente1);
+            receta2.agregarIngrediente(ingrediente2);
+
+            receta3.agregarIngrediente(ingrediente1);
+            receta3.agregarIngrediente(ingrediente2);
+            receta3.agregarIngrediente(ingrediente1);
+            receta3.agregarIngrediente(ingrediente2);
+
+            recetario1.agregarReceta(receta1);
+
+            recetario2.agregarReceta(receta1);
+            recetario2.agregarReceta(receta2);
+
+
+            recetario3.agregarReceta(receta1);
+            recetario3.agregarReceta(receta2);
+            recetario3.agregarReceta(receta3);
+
+//          putnajes iniciales
+//          receta1 = 30
+//          receta2 = 20
+//          receta3 = 10
+
+
+            this.rankingMarzo.agregarReceta(receta1);
+            this.rankingMarzo.agregarReceta(receta2);
+            this.rankingMarzo.agregarReceta(receta3);
+
+            this.rankingAbril.agregarReceta(receta1);
+            this.rankingAbril.agregarReceta(receta2);
+            this.rankingAbril.agregarReceta(receta3);
+        }
     @Test
     public void recetaAccionSumarPuntajeON(){
-        Ingrediente ingrediente1 = new Cereales("Cereal",1,20,"Gramos");
-        Ingrediente ingrediente2 = new Carnes("Milanesa",3,44,"Unidades");
-
-        Receta receta1 = new Receta("Receta de prueba1");
-        receta1.agregarIngrediente(ingrediente1);
-
-        Receta receta2 = new Receta("Receta de prueba2");
-        receta2.agregarIngrediente(ingrediente1);
-        receta2.agregarIngrediente(ingrediente2);
-
-        Receta receta3 = new Receta("Receta de prueba3");
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-
-        receta2.cambiarEstadoAgregar();
-
-        Recetario recetario1 = new Recetario("Primer recetario");
-        recetario1.agregarReceta(receta1);
-
-        Recetario recetario2 = new Recetario("Segundo recetario");
-        recetario2.agregarReceta(receta1);
-        recetario2.agregarReceta(receta2);
-
-        Recetario recetario3 = new Recetario("Tercero recetario");
-        recetario3.agregarReceta(receta1);
-        recetario3.agregarReceta(receta2);
-        recetario3.agregarReceta(receta3);
-
-
 
         assertEquals(30,receta1.getPuntaje());
-        //Desactivado
-        assertEquals(0,receta2.getPuntaje());
 
-        //activado
+        assertEquals(20,receta2.getPuntaje());
+
+        //receta2 desactivada
         receta2.cambiarEstadoAgregar();
-        recetario3.agregarReceta(receta2);
-        assertEquals(10,receta2.getPuntaje());
 
-        assertEquals(10,receta3.getPuntaje());
+        recetario1.agregarReceta(receta2);
+        recetario2.agregarReceta(receta2);
+        recetario3.agregarReceta(receta2);
+
+        assertEquals(20,receta2.getPuntaje());
     }
 
     @Test
     public void seAgreganRecetasOrdenadasAlRanking(){
-        Ingrediente ingrediente1 = new Cereales("Cereal",1,20,"Gramos");
-        Ingrediente ingrediente2 = new Carnes("Milanesa",3,44,"Unidades");
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(0), receta3);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(1), receta2);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(2), receta1);
+        this.rankingMarzo.imprimirRanking();
 
-        Receta receta1 = new Receta("Receta de prueba1");
-        receta1.agregarIngrediente(ingrediente1);
+        this.recetario1.agregarReceta(receta4);
+        this.recetario1.agregarReceta(receta4);
 
-        Receta receta2 = new Receta("Receta de prueba2");
-        receta2.agregarIngrediente(ingrediente1);
-        receta2.agregarIngrediente(ingrediente2);
+        this.rankingMarzo.agregarReceta(receta4);
 
-        Receta receta3 = new Receta("Receta de prueba3");
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
+        this.rankingMarzo.imprimirRanking();
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(0), receta3);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(1), receta2);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(2), receta4);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(3), receta1);
 
-        receta2.cambiarEstadoAgregar();
 
-        Recetario recetario1 = new Recetario("Primer recetario");
-        recetario1.agregarReceta(receta1);
-
-        Recetario recetario2 = new Recetario("Segundo recetario");
-        recetario2.agregarReceta(receta1);
-        recetario2.agregarReceta(receta2);
-
-        Recetario recetario3 = new Recetario("Tercero recetario");
-        recetario3.agregarReceta(receta1);
-        recetario3.agregarReceta(receta2);
-        recetario3.agregarReceta(receta3);
-
-        Ranking rankingMarzo = new Ranking("Ranking de marzo");
-        rankingMarzo.imprimirRanking();
-        rankingMarzo.agregarReceta(receta1);
-        rankingMarzo.agregarReceta(receta2);
-        rankingMarzo.agregarReceta(receta3);
-
-        rankingMarzo.imprimirRanking();
-
-        assertEquals(3,rankingMarzo.getRecetas().size());
     }
 
     @Test
     public void seReordenaLalista(){
-        Ingrediente ingrediente1 = new Cereales("Cereal",1,20,"Gramos");
-        Ingrediente ingrediente2 = new Carnes("Milanesa",3,44,"Unidades");
+        this.rankingMarzo.imprimirRanking();
+        this.recetario1.agregarReceta(receta3);
+        this.recetario1.agregarReceta(receta3);
+        this.recetario1.agregarReceta(receta3);
 
-        Receta receta1 = new Receta("Receta de prueba1");
-        receta1.agregarIngrediente(ingrediente1);
-
-        Receta receta2 = new Receta("Receta de prueba2");
-        receta2.agregarIngrediente(ingrediente1);
-        receta2.agregarIngrediente(ingrediente2);
-
-        Receta receta3 = new Receta("Receta de prueba3");
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-
-
-        Recetario recetario1 = new Recetario("Primer recetario");
-        recetario1.agregarReceta(receta1);
-
-        Recetario recetario2 = new Recetario("Segundo recetario");
-        recetario2.agregarReceta(receta1);
-        recetario2.agregarReceta(receta2);
-
-        Ranking rankingMarzo = new Ranking("Ranking de marzo");
-
-        rankingMarzo.agregarReceta(receta1);
-        rankingMarzo.agregarReceta(receta2);
-        rankingMarzo.agregarReceta(receta3);
-        rankingMarzo.imprimirRanking();
-
-        Recetario recetario3 = new Recetario("Tercero recetario");
-
-        recetario3.agregarReceta(receta2);
-        recetario3.agregarReceta(receta3);
-        recetario3.agregarReceta(receta3);
-        recetario3.agregarReceta(receta3);
-        recetario3.agregarReceta(receta2);
-        recetario3.agregarReceta(receta2);
-
-        rankingMarzo.imprimirRanking();
+        this.rankingMarzo.imprimirRanking();
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(0), receta2);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(1), receta1);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(2), receta3);
 
     }
 
     @Test
     public void recetasEnRankingsDistintos(){
-        Ingrediente ingrediente1 = new Cereales("Cereal",1,20,"Gramos");
-        Ingrediente ingrediente2 = new Carnes("Milanesa",3,44,"Unidades");
+        rankingMarzo.imprimirRanking();
+        System.out.println("----------------------");
 
-        Receta receta1 = new Receta("Receta de prueba1");
-        receta1.agregarIngrediente(ingrediente1);
+        rankingAbril.imprimirRanking();
+        System.out.println("----------------------");
 
-        Receta receta2 = new Receta("Receta de prueba2");
-        receta2.agregarIngrediente(ingrediente1);
-        receta2.agregarIngrediente(ingrediente2);
-
-        Receta receta3 = new Receta("Receta de prueba3");
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente1);
-
-        Recetario recetario1 = new Recetario("Primer recetario");
-        recetario1.agregarReceta(receta1);
-
-        Recetario recetario2 = new Recetario("Segundo recetario");
-        recetario2.agregarReceta(receta1);
-        recetario2.agregarReceta(receta2);
-
-        Ranking rankingMarzo = new Ranking("Ranking de Marzo");
-        Ranking rankingAbril = new Ranking("Ranking de Abril");
-
-        rankingMarzo.agregarReceta(receta1);
-        rankingAbril.agregarReceta(receta2);
-        rankingMarzo.agregarReceta(receta3);
-        rankingAbril.agregarReceta(receta3);
+        this.recetario3.agregarReceta(receta3);
+        this.recetario3.agregarReceta(receta3);
+        this.recetario3.agregarReceta(receta3);
 
         rankingMarzo.imprimirRanking();
+        System.out.println("----------------------");
         rankingAbril.imprimirRanking();
 
-        Recetario recetario3 = new Recetario("Tercer recetario");
-        recetario3.agregarReceta(receta3);
-        recetario3.agregarReceta(receta3);
-        recetario3.agregarReceta(receta3);
-
-        System.out.println("-----------------");
-        rankingMarzo.imprimirRanking();
-        rankingAbril.imprimirRanking();
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(2), receta3);
+        assertSame("Error al ordenar nuevas recetas", this.rankingAbril.getRecetas().get(2), receta3);
 
     }
 
     @Test
     public void recetasAccionAgregarDesactivada(){
-        Ingrediente ingrediente1 = new Cereales("Cereal",1,20,"Gramos");
-
-        Receta receta1 = new Receta("Receta de prueba1");
-        receta1.agregarIngrediente(ingrediente1);
-
-        Receta receta2 = new Receta("Receta de prueba2");
-        receta2.agregarIngrediente(ingrediente1);
-
-        Receta receta3 = new Receta("Receta de prueba3");
-        receta3.agregarIngrediente(ingrediente1);
-
-
-        receta2.cambiarEstadoAgregar();
+        //Desactivamos la accion de sumar
+        receta1.cambiarEstadoAgregar();
         receta3.cambiarEstadoAgregar();
 
-        Recetario recetario1 = new Recetario("Primer recetario");
-        Recetario recetario2 = new Recetario("Segundo recetario");
-        Recetario recetario3 = new Recetario("Tercero recetario");
-        recetario1.agregarReceta(receta1);
-        recetario2.agregarReceta(receta2);
-        recetario3.agregarReceta(receta3);
+        this.rankingMarzo.imprimirRanking();
+        System.out.println("---------------------");
 
-        Ranking rankingPrueba = new Ranking("prueba");
-        rankingPrueba.agregarReceta(receta1);
-        rankingPrueba.agregarReceta(receta2);
-        rankingPrueba.agregarReceta(receta3);
-
-        rankingPrueba.imprimirRanking();
-
-        receta2.cambiarEstadoAgregar();
-        receta3.cambiarEstadoAgregar();
-
+        //Agrego las recetas
         recetario3.agregarReceta(receta1);
         recetario3.agregarReceta(receta2);
         recetario3.agregarReceta(receta3);
-        recetario3.agregarReceta(receta2);
-        recetario3.agregarReceta(receta3);
-        recetario3.agregarReceta(receta2);
-        recetario3.agregarReceta(receta3);
 
-        rankingPrueba.imprimirRanking();
+        this.rankingMarzo.imprimirRanking();
+        System.out.println("---------------------");
+        assertSame("Error al desactivarAccionAgregar", 30, receta1.getPuntaje());
+        assertSame("Error al desactivarAccionAgregar", 30, receta2.getPuntaje());
+        assertSame("Error al desactivarAccionAgregar", 10, receta3.getPuntaje());
+
+        //Activamos las acciones
+        receta1.cambiarEstadoAgregar();
+        receta3.cambiarEstadoAgregar();
+        receta2.cambiarEstadoAgregar();
+        for (int i =0; i <10; i++){
+            recetario3.agregarReceta(receta1);
+            recetario3.agregarReceta(receta2);
+            recetario3.agregarReceta(receta3);
+        }
+
+        this.rankingMarzo.imprimirRanking();
+        System.out.println("---------------------");
+
+        assertSame("Error al desactivarAccionAgregar", 130, receta1.getPuntaje());
+        assertSame("Error al desactivarAccionAgregar", 30, receta2.getPuntaje());
+        assertSame("Error al desactivarAccionAgregar", 110, receta3.getPuntaje());
+
+
+
     }
-
 
 }
