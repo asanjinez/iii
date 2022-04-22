@@ -6,6 +6,7 @@ public class AccionAgregarHabilitada implements Accion{
     @Override
     public void accionar(Receta receta) {
         receta.sumarPuntaje(10);
+        receta.notificarAgrego();
     }
 
     public void cambiarEstado(Receta receta){

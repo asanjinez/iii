@@ -1,6 +1,7 @@
 package org.dominio;
 
 import org.dominio.acciones.Accion;
+import org.dominio.acciones.AccionAgregarHabilitada;
 import org.dominio.ingredientes.Ingrediente;
 import org.dominio.perfiles.Perfil;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Receta {
+    PublisherRanking notificadorCambios;
     private String nombre;
     private List<Ingrediente> ingredientes;
 
@@ -17,6 +19,9 @@ public class Receta {
 
     private Accion estadoAgregar;
 
+    public PublisherRanking getNotificadorCambios() {
+        return this.notificadorCambios;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -40,6 +45,8 @@ public class Receta {
         this.nombre = titulo;
         this.ingredientes = new ArrayList<Ingrediente>();
         this.puntaje = 0;
+        this.notificadorCambios = new PublisherRanking();
+        this.estadoAgregar = new AccionAgregarHabilitada();
     }
 
     public void agregarIngrediente(Ingrediente ingredientePorAgregar){
@@ -73,6 +80,10 @@ public class Receta {
 
     public void cambiarEstadoAgregar(){
         this.estadoAgregar.cambiarEstado(this);
+    }
+
+    public void notificarAgrego(){
+        this.notificadorCambios.notificarRankings();
     }
 
 }

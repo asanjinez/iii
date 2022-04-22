@@ -20,9 +20,8 @@ TODO Deberia implementar un especie de observer? porque acada vez que se agrega 
     }
 
     public void agregarReceta(Receta receta){
-        receta.accionAgregar();
         recetas.add(receta);
-        //this.actualizarRankingsSubscriptos()          ???
+        receta.accionAgregar();
 
     }
 
