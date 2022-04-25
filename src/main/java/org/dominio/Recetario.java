@@ -38,7 +38,7 @@ TODO Deberia implementar un especie de observer? porque acada vez que se agrega 
     }
 
     public void accionNotificar(Receta receta){
-        this.notificadorPerfiles.getPerfiles().stream().filter(perfil-> perfil.puedeComer(receta)).forEach(perfil -> perfil.getEstadoNotificar().accionar(null,perfil));
+        this.notificadorPerfiles.notificarPerfiles(receta);
     }
 
     public void agregarReceta(Receta receta){

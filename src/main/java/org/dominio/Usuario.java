@@ -46,7 +46,7 @@ public class Usuario {
     public List<Perfil> filtrarPerfiles(String nombre) throws Exception {
         List<Perfil> perfiles = this.perfiles.stream().filter(x-> x.getNombre() == nombre).collect(Collectors.toList());
         if (perfiles.size() == 0){
-            throw new Exception("No existe el perfil");
+            throw new Exception("Error: No existe el perfil");
         } else {
             return perfiles;
         }

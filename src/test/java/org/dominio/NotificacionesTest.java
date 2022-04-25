@@ -64,7 +64,7 @@ public class NotificacionesTest {
         usuario1.agegarPerfil(perfil1);
         usuario2.agegarPerfil(perfil2);
         usuario3.agegarPerfil(perfil3);
-        usuario3.agegarPerfil(perfil3);
+        usuario3.agegarPerfil(perfil4);
 
 
     }
