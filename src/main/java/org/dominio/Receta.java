@@ -59,14 +59,10 @@ public class Receta {
 
     public boolean contieneAlimento(String alimento){
         return ingredientes.stream().anyMatch(x->x.getNombre() == alimento);
-        //return ingredientes.stream().map( x -> x.getNombre()).collect(Collectors.toList()).contains(alimento);
-        //return ingredientes.stream().filter(y -> y.getNombre() == alimento).findAny();
     }
 
     public boolean contieneGrupoAlimenticio(String grupo){
         return ingredientes.stream().anyMatch(x->x.getGrupo() == grupo);
-        //return ingredientes.stream().map( x -> x.getGrupo()).collect(Collectors.toList()).contains(grupo);
-        //return ingredientes.stream().filter(y -> y.getNombre() == alimento).findAny();
     }
 //Preguntar si este metodo es valido
     public boolean esAptoPara(Perfil perfil) {
@@ -74,12 +70,12 @@ public class Receta {
     }
 
     public void accionAgregar(){
-        this.estadoAgregar.accionar(this);
+        this.estadoAgregar.accionar(this,null);
 
     }
 
     public void cambiarEstadoAgregar(){
-        this.estadoAgregar.cambiarEstado(this);
+        this.estadoAgregar.cambiarEstado(this,null);
     }
 
     public void notificarAgrego(){
