@@ -4,7 +4,7 @@ import org.dominio.Receta;
 import org.dominio.Recetario;
 import org.dominio.perfiles.Perfil;
 
-public class AccionNotificarHabilitada extends Accion{
+public class AccionNotificarHabilitada implements Accion{
 
     public void accionar(Receta receta, Perfil perfil) {
         System.out.println("Perfil "+ perfil.getNombre() +" notificado");

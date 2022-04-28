@@ -20,6 +20,10 @@ public class Vegetariano implements Perfil {
         this.estadoNotificar = new AccionNotificarHabilitada();
     }
 
+    public Vegetariano(Accion accionNotificar) {
+        this.estadoNotificar = accionNotificar;
+    }
+
     public String getNombre() {
         return nombre;
     }

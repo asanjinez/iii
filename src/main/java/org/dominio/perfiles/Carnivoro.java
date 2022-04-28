@@ -20,6 +20,10 @@ public class Carnivoro implements Perfil {
         this.estadoNotificar = new AccionNotificarHabilitada();
     }
 
+    public Carnivoro(Accion accionNotificar){
+        this.estadoNotificar = accionNotificar;
+    }
+
     public String getNombre() {
         return nombre;
     }

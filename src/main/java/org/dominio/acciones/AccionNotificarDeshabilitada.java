@@ -4,7 +4,7 @@ import org.dominio.Receta;
 import org.dominio.Recetario;
 import org.dominio.perfiles.Perfil;
 
-public class AccionNotificarDeshabilitada extends Accion {
+public class AccionNotificarDeshabilitada implements Accion {
     public void accionar(Receta receta, Perfil perfil) {
         return;
     }

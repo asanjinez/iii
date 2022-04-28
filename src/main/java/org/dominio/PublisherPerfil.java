@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PublisherPerfil {
+
     private List<Perfil> perfiles;
 
     public List<Perfil> getPerfiles() {

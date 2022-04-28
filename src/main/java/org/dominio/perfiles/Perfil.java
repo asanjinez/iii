@@ -15,7 +15,7 @@ import org.dominio.acciones.AccionNotificarHabilitada;
 public interface Perfil {
     public boolean puedeComer(Receta receta);
     public default void notificar(){
-        System.out.println("Perfil " + "notificado");
+//        System.out.println("Perfil " + "notificado");
     }
     String getNombre();
 

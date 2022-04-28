@@ -4,7 +4,7 @@ import org.dominio.Receta;
 import org.dominio.Recetario;
 import org.dominio.perfiles.Perfil;
 
-public class AccionAgregarHabilitada extends Accion{
+public class AccionAgregarHabilitada implements Accion{
     @Override
     public void accionar(Receta receta, Perfil perfil) {
         receta.sumarPuntaje(10);
