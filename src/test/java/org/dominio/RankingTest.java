@@ -1,15 +1,13 @@
 package org.dominio;
 
-import org.dominio.ingredientes.Carnes;
-import org.dominio.ingredientes.Cereales;
 import org.dominio.ingredientes.Ingrediente;
+import org.dominio.ingredientes.TipoIngrediente;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class RankingTest {
-
         Ingrediente ingrediente1;
         Ingrediente ingrediente2;
 
@@ -27,8 +25,8 @@ public class RankingTest {
         Ranking rankingMayo;
         @Before
         public void before() {
-            this.ingrediente1 = new Carnes("Milanesa", 1, 20, "Gramos");
-            this.ingrediente2 = new Cereales("Cereal", 3, 44, "Unidades");
+            this.ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa", 1, 20, "Gramos");
+            this.ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal", 3, 44, "Unidades");
 
             this.receta1 = new Receta("Receta de prueba1");
             this.receta2 = new Receta("Receta de prueba2");

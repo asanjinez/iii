@@ -14,8 +14,8 @@ public class RecetaTest {
     Receta receta3;
     @Before
     public void before(){
-        this.ingrediente1 = new Carnes("Milanesa",1,20,"Gramos");
-        this.ingrediente2 = new Cereales("Cereal",3,44,"Unidades");
+        this.ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",1,20,"Gramos");
+        this.ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",3,44,"Unidades");
 
         this.receta1 = new Receta("Receta de prueba1");
         this.receta2 = new Receta("Receta de prueba2");

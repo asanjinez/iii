@@ -1,8 +1,7 @@
 package org.dominio;
 
-import org.dominio.ingredientes.Carnes;
-import org.dominio.ingredientes.Cereales;
 import org.dominio.ingredientes.Ingrediente;
+import org.dominio.ingredientes.TipoIngrediente;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,8 +9,8 @@ import static org.junit.Assert.*;
 public class RecetarioTest {
     @Test
     public void cantidadComidas(){
-        Ingrediente ingrediente1 = new Cereales("Cereal",1,20,"Gramos");
-        Ingrediente ingrediente2 = new Carnes("Milanesa",3,44,"Unidades");
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",1,20,"Gramos");
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",3,44,"Unidades");
 
         Receta receta1 = new Receta("Receta de prueba1");
         receta1.agregarIngrediente(ingrediente1);

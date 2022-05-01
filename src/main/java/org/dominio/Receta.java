@@ -38,7 +38,7 @@ public class Receta {
     }
 
     public int cantidadCalorias() {
-        return ingredientes.stream().map(x -> x.getCalorias()).reduce(0, Integer::sum);
+        return ingredientes.stream().map(ingrediente -> ingrediente.getCalorias()).reduce(0, Integer::sum);
     }
 
     public Receta(String titulo) {
@@ -62,7 +62,7 @@ public class Receta {
     }
 
     public boolean contieneGrupoAlimenticio(String grupo){
-        return ingredientes.stream().anyMatch(x->x.getGrupo() == grupo);
+        return ingredientes.stream().anyMatch(ingrediente -> ingrediente.getGrupo() == grupo);
     }
 //Preguntar si este metodo es valido
     public boolean esAptoPara(Perfil perfil) {

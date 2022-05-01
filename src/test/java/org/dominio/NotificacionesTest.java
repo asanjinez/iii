@@ -48,8 +48,8 @@ public class NotificacionesTest {
     @Before
     public void setUp() throws Exception {
 
-        this.ingrediente1 = new Carnes("Milanesa", 200, 20, "Gramos");
-        this.ingrediente2 = new Cereales("Cereal", 3, 44, "Unidades");
+        this.ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa", 200, 20, "Gramos");
+        this.ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal", 3, 44, "Unidades");
 
         this.receta1 = new Receta("Receta de prueba1");
         this.receta2 = new Receta("Receta de prueba2");
@@ -115,7 +115,7 @@ public class NotificacionesTest {
         usuario1.suscribirse(recetario1);
 
         Receta receta4 = new Receta("RecetaVegetariana");
-        receta4.agregarIngrediente(new Legumbres("legumbre",20, 20, "Gr"));
+        receta4.agregarIngrediente(new Ingrediente(TipoIngrediente.LEGUMBRES,"legumbre",20, 20, "Gr"));
 
 
 //      Agrego receta no Apta para vegetarianos

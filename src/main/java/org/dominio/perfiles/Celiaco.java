@@ -7,7 +7,9 @@ import org.dominio.acciones.AccionNotificarHabilitada;
 public class Celiaco implements Perfil {
     private final String nombre = "Celiaco";
     private Accion estadoNotificar;
-
+    public Celiaco() {
+        this.estadoNotificar = new AccionNotificarHabilitada();
+    }
     public Accion getEstadoNotificar() {
         return estadoNotificar;
     }
@@ -15,11 +17,6 @@ public class Celiaco implements Perfil {
     public void setEstadoNotificar(Accion estadoNotificar) {
         this.estadoNotificar = estadoNotificar;
     }
-
-    public Celiaco() {
-        this.estadoNotificar = new AccionNotificarHabilitada();
-    }
-
     public String getNombre() {
         return nombre;
     }

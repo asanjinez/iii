@@ -10,6 +10,6 @@ public class AccionAgregarDeshabilitada implements Accion{
     }
 
     public void cambiarEstado(Receta receta, Perfil perfil) {
-        perfil.setEstadoNotificar(new AccionAgregarHabilitada());
+        receta.setEstadoAgregar(new AccionAgregarHabilitada());
     }
 }
