@@ -9,12 +9,13 @@ import java.util.List;
 @Entity
 @Table(name= "INGREDIENTES")
 public class Ingrediente {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @Enumerated
     @Column(name = "TIPO_INGREDIENTE")
-    private final TipoIngrediente grupo;
+    private TipoIngrediente grupo;
     @Column(name = "NOMBRE_INGREDIENTE",
             unique = true)
     private String nombre;
@@ -23,7 +24,7 @@ public class Ingrediente {
     @Column(name = "CANTIDAD")
     private int cantidad;
     @Column(name = "UNIDAD")
-    private final String unidad;
+    private String unidad;
 
     @ManyToMany(mappedBy = "ingredientes")
     private List<Receta> recetas;
@@ -45,9 +46,14 @@ public class Ingrediente {
     public Long getId() {
         return id;
     }
-    public String getGrupo() {
-        return this.grupo.getTipo();
+    public void setId(Long id) {
+        this.id = id;
     }
+    public TipoIngrediente getGrupo() {
+        return this.grupo;
+    }
+
+    public void setGrupo(TipoIngrediente grupo){this.grupo = grupo;}
 
     public String getNombre() {
         return nombre;
@@ -75,6 +81,9 @@ public class Ingrediente {
 
     public String getUnidad() {
         return unidad;
+    }
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
     }
 
     @Override

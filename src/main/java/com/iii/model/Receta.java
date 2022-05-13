@@ -68,7 +68,7 @@ public class Receta {
     }
 
     public boolean contieneGrupoAlimenticio(String grupo){
-        return this.ingredientes.stream().anyMatch(ingrediente -> ingrediente.getGrupo()== grupo);
+        return this.ingredientes.stream().anyMatch(ingrediente -> ingrediente.getGrupo().getTipo()== grupo);
     }
     //Preguntar si este metodo es valido
     public boolean esAptoPara(Perfil perfil) {
