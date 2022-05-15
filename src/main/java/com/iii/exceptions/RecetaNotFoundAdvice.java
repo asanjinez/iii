@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @ControllerAdvice
-public class IngredienteNotFoundAdvice {
+public class RecetaNotFoundAdvice {
     @ResponseBody
-    @ExceptionHandler(IngredienteNotFoundException.class)
+    @ExceptionHandler(RecetaNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String ingredienteNotFoundHandler(IngredienteNotFoundException ex) {
+    String recetaNotFoundHandler(RecetaNotFoundException ex) {
         return ex.getMessage();
     }
 }
