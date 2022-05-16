@@ -33,15 +33,6 @@ public class Receta {
     private int puntaje;
     @Transient
     private Accion estadoAgregar;
-
-    public void sumarPuntaje(int puntaje) {
-        this.puntaje += puntaje;
-    }
-
-    public int cantidadCalorias() {
-        return ingredientes.stream().map(ingrediente -> ingrediente.getCalorias()).reduce(0, Integer::sum);
-    }
-
     public Receta(){
         this.puntaje = 0;
         this.notificadorCambios = new PublisherRanking();
@@ -55,6 +46,13 @@ public class Receta {
         this.estadoAgregar = new AccionAgregarHabilitada();
     }
 
+    public void sumarPuntaje(int puntaje) {
+        this.puntaje += puntaje;
+    }
+
+    public int cantidadCalorias() {
+        return ingredientes.stream().map(ingrediente -> ingrediente.getCalorias()).reduce(0, Integer::sum);
+    }
     public void agregarIngrediente(Ingrediente ingredientePorAgregar){
         this.ingredientes.add(ingredientePorAgregar);
     }
