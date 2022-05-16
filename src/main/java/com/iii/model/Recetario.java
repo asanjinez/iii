@@ -50,6 +50,21 @@ public class Recetario {
         this.titulo = titulo;
     }
 
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Receta> getRecetas() {
+        return recetas;
+    }
+
+    public void setRecetas(List<Receta> recetas) {
+        this.recetas = recetas;
+    }
+
     @Override
     public String toString() {
         return "Recetario{" +
