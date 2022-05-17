@@ -2,38 +2,35 @@ package org.dominio.ingredientes;
 
 import org.dominio.ingredientes.cantidad.CantidadNecesaria;
 import org.dominio.ingredientes.cantidad.TipoCantidad;
+import org.dominio.ingredientes.cantidad.Unidades;
 
 public class Ingrediente {
     private final TipoIngrediente grupo;
     private String nombre;
-    private String cantidad;
-    private int calorias;
-    
     private TipoCantidad tipoCantidad;
 
     public Ingrediente(TipoIngrediente tipo, String nombre, TipoCantidad tipoCantidad){
         this.grupo = tipo;
         this.nombre = nombre;
-        this.cantidad = tipoCantidad.getCantidad();
-        this.calorias = tipoCantidad.getCalorias();
+        this.tipoCantidad = tipoCantidad;
 
     }
 
-    public String getCantidad() {
-        return cantidad;
+    public int getCantidad() {
+        return tipoCantidad.getCantidad();
     }
 
     public void setCantidad(TipoCantidad cantidad){
-        this.cantidad =  cantidad.getCantidad();
-        this.calorias = cantidad.getCalorias();
+        this.tipoCantidad = cantidad;
     }
 
     public int getCalorias() {
-        return this.calorias;
+        return this.tipoCantidad.getCalorias();
     }
     public TipoIngrediente getGrupo() {
         return this.grupo;
     }
 
     public String getNombre() { return nombre;}
+
 }
