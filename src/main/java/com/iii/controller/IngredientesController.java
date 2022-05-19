@@ -34,8 +34,8 @@ public class IngredientesController {
           }
 
         @PostMapping("/ingredientes")
-            public  Ingrediente create(@RequestBody Ingrediente alimento) {
-                return servicioIngredientes.save(alimento);
+            public  EntityModel<Ingrediente> create(@RequestBody Ingrediente alimento) {
+                return ingredienteAssembler.toModel(servicioIngredientes.save(alimento));
         }
     // Single item
         @GetMapping("/ingredientes/{id}")
@@ -45,20 +45,14 @@ public class IngredientesController {
         }
 
         @PutMapping("/ingredientes/{id}")
-        public  Ingrediente modifyIngrediente(@RequestBody Ingrediente ingredienteNuevo, @PathVariable Long id) {
+        public  EntityModel<Ingrediente> modifyIngrediente(@RequestBody Ingrediente ingredienteNuevo, @PathVariable Long id) {
             return servicioIngredientes.findById(id)
                     .map(ingrediente -> {
-                        ingrediente.setNombre(ingredienteNuevo.getNombre());
-                        ingrediente.setCalorias(ingredienteNuevo.getCalorias());
-                        ingrediente.setCantidad(ingredienteNuevo.getCantidad());
-                        ingrediente.setGrupo(ingredienteNuevo.getGrupo());
-                        ingrediente.setUnidad(ingredienteNuevo.getUnidad());
-
-                        return servicioIngredientes.save(ingrediente);
+                        return ingredienteAssembler.toModel(servicioIngredientes.updateByIngrediente(ingrediente,ingredienteNuevo));
                     })
                     .orElseGet(() -> {
                         ingredienteNuevo.setId(id);
-                        return servicioIngredientes.save(ingredienteNuevo);
+                        return ingredienteAssembler.toModel(servicioIngredientes.save(ingredienteNuevo));
                     });
         }
 
