@@ -27,12 +27,10 @@ public class Receta {
 
     public boolean contieneAlimento(String alimento){
         return ingredientes.stream().map( x -> x.getNombre()).collect(Collectors.toList()).contains(alimento);
-        //return ingredientes.stream().filter(y -> y.getNombre() == alimento).findAny();
     }
 
     public boolean contieneGrupoAlimenticio(String grupo){
         return ingredientes.stream().map( x -> x.getGrupo().getTipo()).collect(Collectors.toList()).contains(grupo);
-        //return ingredientes.stream().filter(y -> y.getNombre() == alimento).findAny();
     }
 
 }
