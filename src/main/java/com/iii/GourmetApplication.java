@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class GourmetApplication {
-
 	public static void main(String[] args) {
 		ApplicationContext apc= SpringApplication.run(GourmetApplication.class, args);
 //		IngredientesRepositorio repo = apc.getBean(IngredientesRepositorio.class);

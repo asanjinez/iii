@@ -19,6 +19,19 @@ public class IngredientesServicios {
         return repo.save(ingrediente);
     }
 
+    public Ingrediente updateByIngrediente(Ingrediente ingredienteViejo,Ingrediente ingredienteNuevo) {
+        if (!ingredienteViejo.getNombre().equals(ingredienteNuevo.getNombre()))
+            this.nombreExistenteThrowException(ingredienteNuevo);
+
+        ingredienteViejo.setNombre(ingredienteNuevo.getNombre());
+        ingredienteViejo.setUnidad(ingredienteNuevo.getUnidad());
+        ingredienteViejo.setGrupo(ingredienteNuevo.getGrupo());
+        ingredienteViejo.setCantidad(ingredienteNuevo.getCantidad());
+        ingredienteViejo.setCalorias(ingredienteNuevo.getCalorias());
+
+        return repo.save(ingredienteViejo);
+
+    }
     public Ingrediente updateByNombre(Ingrediente ingrediente) {
         Ingrediente ingredienteExistente = repo.findByNombre(ingrediente.getNombre()).orElse(null);
         if (ingredienteExistente != null){
@@ -31,26 +44,11 @@ public class IngredientesServicios {
         }
         return repo.save(ingrediente);
     }
-
-    public Ingrediente updateByIngrediente(Ingrediente ingredienteViejo,Ingrediente ingredienteNuevo) {
-        this.nombreExistenteThrowException(ingredienteNuevo);
-        ingredienteViejo.setNombre(ingredienteNuevo.getNombre());
-        ingredienteViejo.setUnidad(ingredienteNuevo.getUnidad());
-        ingredienteViejo.setGrupo(ingredienteNuevo.getGrupo());
-        ingredienteViejo.setCantidad(ingredienteNuevo.getCantidad());
-        ingredienteViejo.setCalorias(ingredienteNuevo.getCalorias());
-        return repo.save(ingredienteViejo);
-
-    }
-
     public void nombreExistenteThrowException(Ingrediente ingrediente){
         Ingrediente ingredienteNombreExistente = repo.findByNombre(ingrediente.getNombre()).orElse(null);
         if (ingredienteNombreExistente != null)
-            throw new NombreExistenteException(ingredienteNombreExistente.getNombre());
+                throw new NombreExistenteException(ingredienteNombreExistente.getNombre());
     }
-
-
-
     public List<Ingrediente> findAll() {
         return (List<Ingrediente>) repo.findAll();
 
