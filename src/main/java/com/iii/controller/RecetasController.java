@@ -28,8 +28,6 @@ public class RecetasController {
     private RecetasServicios recetasServicios;
 
     @Autowired
-    IngredientesServicios ingredientesServicios;
-    @Autowired
     private RecetaAssemebler recetaAssembler;
 
     public RecetasController() {
