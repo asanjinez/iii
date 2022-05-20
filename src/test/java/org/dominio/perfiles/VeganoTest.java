@@ -2,15 +2,17 @@ package org.dominio.perfiles;
 
 import org.dominio.Receta;
 import org.dominio.ingredientes.*;
+import org.dominio.ingredientes.cantidad.Medibles;
 import org.junit.Test;
 
+import static org.dominio.ingredientes.cantidad.Unidades.*;
 import static org.junit.Assert.*;
 
 public class VeganoTest {
     @Test
     public void comidaApta(){
-        Ingrediente ingrediente1 = new Legumbres("Lentejas",197,20,"Gramos");
-        Ingrediente ingrediente2 = new Frutas("Manzana",3,44,"Unidades");
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.LEGUMBRES,"Lenteja",new Medibles(20,GR,197));
+        Ingrediente ingrediente2 =  new Ingrediente(TipoIngrediente.CEREALES,"Cereal",new Medibles(3,UNIDADES,44));
 
         Receta receta1 = new Receta("Receta de prueba1");
         receta1.agregarIngrediente(ingrediente1);
@@ -24,9 +26,9 @@ public class VeganoTest {
 
     @Test
     public void comidaNoApta(){
-        Ingrediente ingrediente1 = new Carnes("Milanesa",197,20,"Gramos");
-        Ingrediente ingrediente2 = new Cereales("Cereal",3,44,"Unidades");
-        Ingrediente ingrediente3 = new Lacteos("Leche",3,44,"Ml");
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",new Medibles(20,GR,197));
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",new Medibles(3,UNIDADES,44));
+        Ingrediente ingrediente3 = new Ingrediente(TipoIngrediente.LACTEOS,"Leche",new Medibles(3,ML,44));
 
         Receta receta1 = new Receta("Receta de prueba1");
         receta1.agregarIngrediente(ingrediente1);

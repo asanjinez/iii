@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\asanjinez\IdeaProjects\asanjinez\src\test\java\org\dominio\perfiles\CeliacoTest.java
 C:\Users\asanjinez\IdeaProjects\asanjinez\src\test\java\org\dominio\perfiles\VegetarianoTest.java
 C:\Users\asanjinez\IdeaProjects\asanjinez\src\test\java\org\dominio\RecetarioTest.java
@@ -5,3 +6,7 @@ C:\Users\asanjinez\IdeaProjects\asanjinez\src\test\java\org\dominio\perfiles\Car
 C:\Users\asanjinez\IdeaProjects\asanjinez\src\test\java\org\dominio\RecetaTest.java
 C:\Users\asanjinez\IdeaProjects\asanjinez\src\test\java\org\dominio\perfiles\VeganoTest.java
 C:\Users\asanjinez\IdeaProjects\asanjinez\src\test\java\org\dominio\IngredienteTest.java
+=======
+C:\Users\asanjinez\IdeaProjects\asanjinez\src\test\java\org\dominio\RecetarioTest.java
+C:\Users\asanjinez\IdeaProjects\asanjinez\src\test\java\org\dominio\RecetaTest.java
+>>>>>>> f876643957941e4ad9a16da0d325c8f58923a2f9

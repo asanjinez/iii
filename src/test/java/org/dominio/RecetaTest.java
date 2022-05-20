@@ -1,104 +1,136 @@
 package org.dominio;
 
 import org.dominio.ingredientes.*;
+import org.dominio.ingredientes.cantidad.CantidadNecesaria;
+import org.dominio.ingredientes.cantidad.Medibles;
+import org.dominio.ingredientes.cantidad.Unidades;
+import org.junit.Before;
 import org.junit.Test;
+import java.security.cert.CertificateRevokedException;
 
 import static org.junit.Assert.*;
 
 public class RecetaTest {
     @Test
-    public void cantidadDeIngredientes() {
-        Ingrediente ingrediente1 = new Carnes("Milanesa",1,20,"Gramos");
-        Ingrediente ingrediente2 = new Cereales("Cereal",3,44,"Unidades");
-
+    public void cantidadDeIngredientesCero() {
         Receta receta1 = new Receta("Receta de prueba1");
-        receta1.agregarIngrediente(ingrediente1);
-
-        Receta receta2 = new Receta("Receta de prueba2");
-        receta2.agregarIngrediente(ingrediente1);
-        receta2.agregarIngrediente(ingrediente2);
-
-        Receta receta3 = new Receta("Receta de prueba3");
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-
-        assertEquals(receta1.cantidadIngredientes(),1);
-        assertEquals(receta2.cantidadIngredientes(),2);
-        assertEquals(receta3.cantidadIngredientes(),4);
+        assertEquals(receta1.cantidadIngredientes(),0);
     }
 
     @Test
-    public void cantidadCalorias(){
-        //estamos suponiendo que la persona que crea el ingrediente ya sabe cuantas calorias le corresponden a determinada cantidad de ingredientes
-        Ingrediente ingrediente1 = new Frutas("Banana",1,20,"Gramos");
-        Ingrediente ingrediente2 = new Legumbres("Lentejas",3,44,"Unidades");
+    public void cantidadDeIngredientesMayorACero() {
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",new Medibles(1, Unidades.KG,20));
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CARNES,"Cereal",new Medibles(3, Unidades.UNIDADES,44));
 
         Receta receta1 = new Receta("Receta de prueba1");
-        receta1.agregarIngrediente(ingrediente1);
+        for (int i=0;i<5;i++){
+            receta1.agregarIngrediente(ingrediente1);
+            receta1.agregarIngrediente(ingrediente2);
+        }
 
-        Receta receta2 = new Receta("Receta de prueba2");
-        receta2.agregarIngrediente(ingrediente1);
-        receta2.agregarIngrediente(ingrediente2);
+        assertEquals(receta1.cantidadIngredientes(),10);
+    }
 
-        Receta receta3 = new Receta("Receta de prueba3");
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
+    @Test
+    public void cantidadCaloriasCero(){
+        Receta receta1 = new Receta("Receta de prueba1");
+        assertEquals(receta1.cantidadCalorias(),0);
+    }
+    @Test
+    public void cantidadCaloriasMayorACero(){
+        //estamos suponiendo que la persona que crea el ingrediente ya sabe cuantas calorias le corresponden a determinada cantidad de ingredientes
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.FRUTAS,"Banana",new Medibles(1, Unidades.GR,3));
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.LEGUMBRES,"Lentejas",new Medibles(3, Unidades.KG,2));
+        Ingrediente ingrediente3 = new Ingrediente(TipoIngrediente.LEGUMBRES,"Lentejas",new CantidadNecesaria());
 
-        assertEquals(receta1.cantidadCalorias(),1);
-        assertEquals(receta2.cantidadCalorias(),4);
-        assertEquals(receta3.cantidadCalorias(),8);
+        Receta receta1 = new Receta("Receta de prueba1");
+        for (int i=0;i<5;i++){
+            receta1.agregarIngrediente(ingrediente1);
+            receta1.agregarIngrediente(ingrediente2);
+            receta1.agregarIngrediente(ingrediente3);
+        }
+        assertEquals(receta1.cantidadCalorias(),25);
+
 
     }
 
     @Test
     public void existeAlimento(){
-        Ingrediente ingrediente1 = new Frutas("Banana",1,20,"Gramos");
-        Ingrediente ingrediente2 = new Legumbres("Lentejas",3,44,"Unidades");
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.LEGUMBRES,"Lentejas",new Medibles(3, Unidades.KG,44));
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.FRUTAS,"Banana",new Medibles(1, Unidades.GR,20));
 
         Receta receta1 = new Receta("Receta de prueba1");
         receta1.agregarIngrediente(ingrediente1);
-
-        Receta receta2 = new Receta("Receta de prueba2");
-        receta2.agregarIngrediente(ingrediente1);
-        receta2.agregarIngrediente(ingrediente2);
-
-        Receta receta3 = new Receta("Receta de prueba3");
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
+        receta1.agregarIngrediente(ingrediente2);
 
         assertTrue("El ingrediente esta en la receta",receta1.contieneAlimento("Banana"));
-        assertTrue("El ingrediente esta en la receta",receta2.contieneAlimento("Lentejas"));
-        assertTrue("El ingrediente no esta en la receta",!receta3.contieneAlimento("Milanesa"));
-
-
     }
 
+
     @Test
-    public void existeGrupoAlimenticio(){
-        Ingrediente ingrediente1 = new Frutas("Banana",1,20,"Gramos");
-        Ingrediente ingrediente2 = new Legumbres("Lentejas",3,44,"Unidades");
+    public void existeGrupoAlimenticioCarnes(){
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.FRUTAS,"Banana",new Medibles(1, Unidades.GR,20));
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",new Medibles(3, Unidades.KG,44));
 
         Receta receta1 = new Receta("Receta de prueba1");
         receta1.agregarIngrediente(ingrediente1);
+        receta1.agregarIngrediente(ingrediente2);
 
-        Receta receta2 = new Receta("Receta de prueba2");
-        receta2.agregarIngrediente(ingrediente1);
-        receta2.agregarIngrediente(ingrediente2);
+        assertTrue("El ingrediente esta en la receta",receta1.contieneGrupoAlimenticio("Carnes"));
+    }
+       @Test
+    public void existeGrupoAlimenticioCereales(){
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.FRUTAS,"Banana",new Medibles(1, Unidades.GR,20));
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",new Medibles(3, Unidades.KG,44));
 
-        Receta receta3 = new Receta("Receta de prueba3");
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
+        Receta receta1 = new Receta("Receta de prueba1");
+        receta1.agregarIngrediente(ingrediente1);
+        receta1.agregarIngrediente(ingrediente2);
+
+        assertTrue("El ingrediente esta en la receta",receta1.contieneGrupoAlimenticio("Cereales"));
+    }
+       @Test
+    public void existeGrupoAlimenticioFrutas(){
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Lentejas",new Medibles(3, Unidades.KG,44));
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.FRUTAS,"Banana",new Medibles(1, Unidades.GR,20));
+
+        Receta receta1 = new Receta("Receta de prueba1");
+        receta1.agregarIngrediente(ingrediente1);
+        receta1.agregarIngrediente(ingrediente2);
 
         assertTrue("El ingrediente esta en la receta",receta1.contieneGrupoAlimenticio("Frutas"));
-        assertTrue("El ingrediente esta en la receta",receta2.contieneGrupoAlimenticio("Legumbres"));
-        assertTrue("El ingrediente no esta en la receta",!receta3.contieneGrupoAlimenticio("Carnes"));
+    }
+       @Test
+    public void existeGrupoAlimenticioLacteos(){
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.FRUTAS,"Banana",new Medibles(1, Unidades.GR,20));
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.LACTEOS,"Queso",new Medibles(3, Unidades.KG,44));
+
+        Receta receta1 = new Receta("Receta de prueba1");
+        receta1.agregarIngrediente(ingrediente1);
+        receta1.agregarIngrediente(ingrediente2);
+
+        assertTrue("El ingrediente esta en la receta",receta1.contieneGrupoAlimenticio("Lacteos"));
+    }
+       @Test
+    public void existeGrupoAlimenticioLegumbres(){
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.FRUTAS,"Banana",new Medibles(1, Unidades.GR,20));
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.LEGUMBRES,"Legumbre",new Medibles(3, Unidades.KG,44));
+
+        Receta receta1 = new Receta("Receta de prueba1");
+        receta1.agregarIngrediente(ingrediente1);
+        receta1.agregarIngrediente(ingrediente2);
+
+        assertTrue("El ingrediente esta en la receta",receta1.contieneGrupoAlimenticio("Legumbres"));
+    }
+       @Test
+    public void existeGrupoAlimenticioVegetales(){
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.FRUTAS,"Banana",new Medibles(1, Unidades.GR,20));
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.VEGETALES,"Lechuga",new Medibles(3, Unidades.KG,44));
+
+        Receta receta1 = new Receta("Receta de prueba1");
+        receta1.agregarIngrediente(ingrediente1);
+        receta1.agregarIngrediente(ingrediente2);
+
+        assertTrue("El ingrediente esta en la receta",receta1.contieneGrupoAlimenticio("Vegetales"));
     }
 }

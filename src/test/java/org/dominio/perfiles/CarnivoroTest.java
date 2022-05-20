@@ -1,19 +1,19 @@
 package org.dominio.perfiles;
 
 import org.dominio.Receta;
-import org.dominio.ingredientes.Carnes;
-import org.dominio.ingredientes.Cereales;
 import org.dominio.ingredientes.Ingrediente;
-import org.dominio.ingredientes.Legumbres;
+import org.dominio.ingredientes.TipoIngrediente;
+import org.dominio.ingredientes.cantidad.Medibles;
 import org.junit.Test;
 
+import static org.dominio.ingredientes.cantidad.Unidades.*;
 import static org.junit.Assert.*;
 
 public class CarnivoroTest {
     @Test
     public void comidaApta(){
-        Ingrediente ingrediente1 = new Carnes("Milanesa",197,20,"Gramos");
-        Ingrediente ingrediente2 = new Cereales("Cereal",3,44,"Unidades");
+        Ingrediente ingrediente1 =  new Ingrediente(TipoIngrediente.CARNES,"milanesa",new Medibles(20,GR,197));
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",new Medibles(3,UNIDADES,44));
 
         Receta receta1 = new Receta("Receta de prueba1");
         receta1.agregarIngrediente(ingrediente1);
@@ -27,8 +27,8 @@ public class CarnivoroTest {
 
     @Test
     public void comidaNoApta(){
-        Ingrediente ingrediente1 = new Legumbres("Lenteja",1,20,"Gramos");
-        Ingrediente ingrediente2 = new Cereales("Cereal",3,44,"Unidades");
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.LEGUMBRES,"Lenteja",new Medibles(1,GR,20));
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",new Medibles(3,UNIDADES,44));
 
         Receta receta1 = new Receta("Receta de prueba1");
         receta1.agregarIngrediente(ingrediente1);

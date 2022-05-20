@@ -1,0 +1,8 @@
+org\dominio\ingredientes\cantidad\Medibles.class
+org\dominio\ingredientes\cantidad\TipoCantidad.class
+org\dominio\ingredientes\cantidad\Unidades.class
+org\dominio\ingredientes\Ingrediente.class
+org\dominio\ingredientes\TipoIngrediente.class
+org\dominio\ingredientes\cantidad\CantidadNecesaria.class
+org\dominio\Receta.class
+org\dominio\Recetario.class
