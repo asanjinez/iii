@@ -35,8 +35,10 @@ public class RecetasServicios {
 
     public Receta updateByNombre(Receta recetaNueva) {
         Receta recetaExistente = repo.findByNombre(recetaNueva.getNombre()).orElse(null);
-        if (recetaExistente == null)
-            return recetaNueva;
+        if (recetaExistente == null){
+            recetaNueva.setIngredientes(this.actualizarIngredientes((recetaNueva)));
+            return repo.save(recetaNueva);
+        }
         List<Ingrediente> ingredientesNuevos = this.actualizarIngredientes(recetaNueva);
 
         recetaExistente.setNombre(recetaNueva.getNombre());
