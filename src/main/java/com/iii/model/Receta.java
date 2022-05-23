@@ -1,5 +1,6 @@
 package com.iii.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iii.model.acciones.Accion;
 import com.iii.model.acciones.AccionAgregarHabilitada;
 import com.iii.model.ingredientes.Ingrediente;
@@ -14,25 +15,27 @@ public class Receta {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    @Transient
-    PublisherRanking notificadorCambios;
     @Column(name = "NOMBRE_RECETA",
             unique = true)
     private String nombre;
 
+    @Transient
+    private int puntaje;
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},
                 fetch = FetchType.EAGER )
     @JoinTable(joinColumns =  @JoinColumn(name = "receta_id"),
     inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
     private List<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
-
+    @Transient
+    @JsonIgnore
+    PublisherRanking notificadorCambios;
+    @Transient
+    @JsonIgnore
+    private Accion estadoAgregar;
     @ManyToMany(mappedBy = "recetas")
+    @JsonIgnore
     private List<Recetario> recetarios;
 
-    @Transient
-    private int puntaje;
-    @Transient
-    private Accion estadoAgregar;
     public Receta(){
         this.puntaje = 0;
         this.notificadorCambios = new PublisherRanking();
