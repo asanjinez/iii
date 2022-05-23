@@ -1,5 +1,7 @@
 package com.iii.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ public class Recetario {
             inverseJoinColumns = @JoinColumn(name = "receta_id"))
     private List<Receta> recetas;
     @Transient
+    @JsonIgnore
     private PublisherPerfil notificadorPerfiles = new PublisherPerfil();
 
     public Recetario(){

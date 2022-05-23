@@ -1,5 +1,6 @@
 package com.iii.model.ingredientes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iii.model.Receta;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class Ingrediente {
     private String unidad;
 
     @ManyToMany(mappedBy = "ingredientes")
+    @JsonIgnore
     private List<Receta> recetas;
 
     public Ingrediente() {
@@ -84,6 +86,10 @@ public class Ingrediente {
     }
     public void setUnidad(String unidad) {
         this.unidad = unidad;
+    }
+
+    public List<Receta> getRecetas() {
+        return recetas;
     }
 
     @Override
