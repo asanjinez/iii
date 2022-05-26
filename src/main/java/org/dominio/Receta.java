@@ -7,18 +7,22 @@ import org.dominio.perfiles.Perfil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Receta {
     PublisherRanking notificadorCambios;
     private String nombre;
     private List<Ingrediente> ingredientes;
-
-    public List<Ingrediente> getIngredientes() { return ingredientes;}
     private int puntaje;
-
     private Accion estadoAgregar;
 
+    public Receta(String titulo) {
+        this.nombre = titulo;
+        this.ingredientes = new ArrayList<Ingrediente>();
+        this.puntaje = 0;
+        this.notificadorCambios = new PublisherRanking();
+        this.estadoAgregar = new AccionAgregarHabilitada();
+    }
+    public List<Ingrediente> getIngredientes() { return ingredientes;}
     public PublisherRanking getNotificadorCambios() {
         return this.notificadorCambios;
     }
@@ -40,15 +44,6 @@ public class Receta {
     public int cantidadCalorias() {
         return ingredientes.stream().map(ingrediente -> ingrediente.getCalorias()).reduce(0, Integer::sum);
     }
-
-    public Receta(String titulo) {
-        this.nombre = titulo;
-        this.ingredientes = new ArrayList<Ingrediente>();
-        this.puntaje = 0;
-        this.notificadorCambios = new PublisherRanking();
-        this.estadoAgregar = new AccionAgregarHabilitada();
-    }
-
     public void agregarIngrediente(Ingrediente ingredientePorAgregar){
         this.ingredientes.add(ingredientePorAgregar);
     }
@@ -62,19 +57,19 @@ public class Receta {
     }
 
     public boolean contieneGrupoAlimenticio(String grupo){
-        return ingredientes.stream().anyMatch(ingrediente -> ingrediente.getGrupo() == grupo);
+        return ingredientes.stream().anyMatch(ingrediente -> ingrediente.getGrupo().getTipo() == grupo);
     }
-//Preguntar si este metodo es valido
+
+//Consultar si es necesario un metodo para consultar desde la Receta
     public boolean esAptoPara(Perfil perfil) {
         return perfil.puedeComer(this);
     }
 
     public void accionAgregar(){
         this.estadoAgregar.accionar(this,null);
-
     }
 
-    public void cambiarEstadoAgregar(){
+    public void cambiarEstadoSumarPuntaje(){
         this.estadoAgregar.cambiarEstado(this,null);
     }
 

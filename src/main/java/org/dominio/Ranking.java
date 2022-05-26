@@ -23,8 +23,13 @@ public class Ranking {
     public void ordenarRanking() {
         this.recetas = this.recetas.stream()
                 .sorted(Comparator
-                .comparingInt(x->x.getPuntaje()))
+                .comparing( (Receta s)-> (s.getPuntaje())).reversed())
                 .collect(Collectors.toList());
+    /*
+    sorted(Comparator.<String>comparingInt(s->Integer.parseInt(s.split(":")[0].trim())).reversed())
+            .collect(Collectors.toList());
+
+     */
     }
 
     public void agregarReceta(Receta receta){

@@ -15,7 +15,6 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
         <dependency>
             <groupId>org.mockito</groupId>
@@ -23,11 +22,7 @@
             <version>4.5.1</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
-
-
-
 
     <build>
 

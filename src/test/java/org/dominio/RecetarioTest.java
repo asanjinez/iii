@@ -1,46 +1,41 @@
 package org.dominio;
 
-import org.dominio.ingredientes.Ingrediente;
-import org.dominio.ingredientes.TipoIngrediente;
+import org.dominio.ingredientes.*;
+import org.dominio.ingredientes.cantidad.*;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class RecetarioTest {
+    Recetario recetario1;
+    Recetario recetario2;
+
+    Receta receta1;
+    Receta receta2;
+    @Before
+    public void before(){
+        this.recetario1 = new Recetario("Receta de prueba1");
+        this.recetario2 = new Recetario("Receta Vacia");
+
+        this.receta1 = new Receta("Receta de prueba1");
+        this.receta2 = new Receta("Receta de prueba2");
+
+    }
     @Test
-    public void cantidadComidas(){
-        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",1,20,"Gramos");
-        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",3,44,"Unidades");
+    public void cantidadComidasCero(){
+        assertEquals(recetario2.cantidadRecetas(),0);
+    }
+    @Test
+    public void cantidadComidasMayoACero(){
+        receta1.agregarIngrediente(new Ingrediente(TipoIngrediente.CARNES,"Milanesa",new Medibles(3, Unidades.UNIDADES,44)));
+        receta2.agregarIngrediente(new Ingrediente(TipoIngrediente.VEGETALES,"Lechuga",new Medibles(3, Unidades.UNIDADES,44)));
 
-        Receta receta1 = new Receta("Receta de prueba1");
-        receta1.agregarIngrediente(ingrediente1);
-
-        Receta receta2 = new Receta("Receta de prueba2");
-        receta2.agregarIngrediente(ingrediente1);
-        receta2.agregarIngrediente(ingrediente2);
-
-        Receta receta3 = new Receta("Receta de prueba3");
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-        receta3.agregarIngrediente(ingrediente1);
-        receta3.agregarIngrediente(ingrediente2);
-
-        Recetario recetario1 = new Recetario("Primer recetario");
-        recetario1.agregarReceta(receta1);
-
-        Recetario recetario2 = new Recetario("Segundo recetario");
-        recetario2.agregarReceta(receta1);
-        recetario2.agregarReceta(receta2);
-
-        Recetario recetario3 = new Recetario("Tercero recetario");
-        recetario3.agregarReceta(receta1);
-        recetario3.agregarReceta(receta2);
-        recetario3.agregarReceta(receta3);
-
-        assertEquals(recetario1.cantidadRecetas(),1);
-        assertEquals(recetario2.cantidadRecetas(),2);
-        assertEquals(recetario3.cantidadRecetas(),3);
-
+        for (int i=0; i < 5; i++){
+            recetario1.agregarReceta(receta1);
+            recetario1.agregarReceta(receta2);
+        }
+        assertEquals(recetario1.cantidadRecetas(),10);
 
     }
 

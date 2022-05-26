@@ -2,6 +2,8 @@ package org.dominio;
 
 import org.dominio.ingredientes.Ingrediente;
 import org.dominio.ingredientes.TipoIngrediente;
+import org.dominio.ingredientes.cantidad.Medibles;
+import org.dominio.ingredientes.cantidad.Unidades;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,8 +27,8 @@ public class RankingTest {
         Ranking rankingMayo;
         @Before
         public void before() {
-            this.ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa", 1, 20, "Gramos");
-            this.ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal", 3, 44, "Unidades");
+            this.ingrediente1 = new Ingrediente(TipoIngrediente.CARNES, "Milanesa", new Medibles(1, Unidades.KG, 20));
+            this.ingrediente2 = new Ingrediente(TipoIngrediente.CARNES, "Cereal", new Medibles(3, Unidades.UNIDADES, 44));
 
             this.receta1 = new Receta("Receta de prueba1");
             this.receta2 = new Receta("Receta de prueba2");
@@ -58,16 +60,14 @@ public class RankingTest {
             recetario2.agregarReceta(receta1);
             recetario2.agregarReceta(receta2);
 
-
             recetario3.agregarReceta(receta1);
             recetario3.agregarReceta(receta2);
             recetario3.agregarReceta(receta3);
 
-//          putnajes iniciales
-//          receta1 = 30
-//          receta2 = 20
-//          receta3 = 10
-
+//                  puntajes iniciales
+//                      receta1 = 30
+//                      receta2 = 20
+//                      receta3 = 10
 
             this.rankingMarzo.agregarReceta(receta1);
             this.rankingMarzo.agregarReceta(receta2);
@@ -78,116 +78,95 @@ public class RankingTest {
             this.rankingAbril.agregarReceta(receta3);
         }
     @Test
-    public void recetaAccionSumarPuntajeON(){
-
-        assertEquals(30,receta1.getPuntaje());
-
+    public void recetaAccionSumarPuntaje(){
         assertEquals(20,receta2.getPuntaje());
-
-        //receta2 desactivada
-        receta2.cambiarEstadoAgregar();
 
         recetario1.agregarReceta(receta2);
         recetario2.agregarReceta(receta2);
         recetario3.agregarReceta(receta2);
 
-        assertEquals(20,receta2.getPuntaje());
-    }
+        receta2.cambiarEstadoSumarPuntaje();
+        recetario1.agregarReceta(receta2);
+        recetario2.agregarReceta(receta2);
+        recetario3.agregarReceta(receta2);
 
+        receta2.cambiarEstadoSumarPuntaje();
+        recetario1.agregarReceta(receta2);
+        recetario2.agregarReceta(receta2);
+        recetario3.agregarReceta(receta2);
+
+        assertEquals(80,receta2.getPuntaje());
+    }
     @Test
     public void seAgreganRecetasOrdenadasAlRanking(){
-        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(0), receta3);
-        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(1), receta2);
-        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(2), receta1);
-        this.rankingMarzo.imprimirRanking();
 
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(0), receta1);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(1), receta2);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(2), receta3);
+
+        //Le agrego +20 a la receta4
         this.recetario1.agregarReceta(receta4);
-        this.recetario1.agregarReceta(receta4);
+        this.recetario2.agregarReceta(receta4);
 
         this.rankingMarzo.agregarReceta(receta4);
 
-        this.rankingMarzo.imprimirRanking();
-        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(0), receta3);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(0), receta1);
         assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(1), receta2);
         assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(2), receta4);
-        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(3), receta1);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(3), receta3);
 
 
     }
 
     @Test
     public void seReordenaLalista(){
-        this.rankingMarzo.imprimirRanking();
         this.recetario1.agregarReceta(receta3);
         this.recetario1.agregarReceta(receta3);
         this.recetario1.agregarReceta(receta3);
 
-        this.rankingMarzo.imprimirRanking();
-        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(0), receta2);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(0), receta3);
         assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(1), receta1);
-        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(2), receta3);
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(2), receta2);
 
     }
 
     @Test
     public void recetasEnRankingsDistintos(){
-        rankingMarzo.imprimirRanking();
-        System.out.println("----------------------");
-
-        rankingAbril.imprimirRanking();
-        System.out.println("----------------------");
-
+//      Le sumo +30 a la receta 3, con lo que deberia estar top1 en los dos rankings
         this.recetario3.agregarReceta(receta3);
         this.recetario3.agregarReceta(receta3);
         this.recetario3.agregarReceta(receta3);
 
-        rankingMarzo.imprimirRanking();
-        System.out.println("----------------------");
-        rankingAbril.imprimirRanking();
 
-        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(2), receta3);
-        assertSame("Error al ordenar nuevas recetas", this.rankingAbril.getRecetas().get(2), receta3);
-
+        assertSame("Error al ordenar nuevas recetas", this.rankingMarzo.getRecetas().get(0), receta3);
+        assertSame("Error al ordenar nuevas recetas", this.rankingAbril.getRecetas().get(0), receta3);
     }
 
     @Test
     public void recetasAccionAgregarDesactivada(){
         //Desactivamos la accion de sumar
-        receta1.cambiarEstadoAgregar();
-        receta3.cambiarEstadoAgregar();
+        receta1.cambiarEstadoSumarPuntaje();
+        receta3.cambiarEstadoSumarPuntaje();
 
-        this.rankingMarzo.imprimirRanking();
-        System.out.println("---------------------");
+        //+0 receta1 y receta3, +20 receta2
+        recetario1.agregarReceta(receta1);
+        recetario2.agregarReceta(receta2);
+        recetario1.agregarReceta(receta2);
+        recetario3.agregarReceta(receta3);
 
-        //Agrego las recetas
+        //Activamos las acciones
+        receta1.cambiarEstadoSumarPuntaje();
+        receta3.cambiarEstadoSumarPuntaje();
+
+//      +10 a todas
         recetario3.agregarReceta(receta1);
         recetario3.agregarReceta(receta2);
         recetario3.agregarReceta(receta3);
 
-        this.rankingMarzo.imprimirRanking();
-        System.out.println("---------------------");
-        assertSame("Error al desactivarAccionAgregar", 30, receta1.getPuntaje());
-        assertSame("Error al desactivarAccionAgregar", 30, receta2.getPuntaje());
-        assertSame("Error al desactivarAccionAgregar", 10, receta3.getPuntaje());
 
-        //Activamos las acciones
-        receta1.cambiarEstadoAgregar();
-        receta3.cambiarEstadoAgregar();
-        receta2.cambiarEstadoAgregar();
-        for (int i =0; i <10; i++){
-            recetario3.agregarReceta(receta1);
-            recetario3.agregarReceta(receta2);
-            recetario3.agregarReceta(receta3);
-        }
-
-        this.rankingMarzo.imprimirRanking();
-        System.out.println("---------------------");
-
-        assertSame("Error al desactivarAccionAgregar", 130, receta1.getPuntaje());
-        assertSame("Error al desactivarAccionAgregar", 30, receta2.getPuntaje());
-        assertSame("Error al desactivarAccionAgregar", 110, receta3.getPuntaje());
-
-
+        assertEquals("Error al desactivarAccionAgregar", 40, receta1.getPuntaje());
+        assertSame("Error al desactivarAccionAgregar", 50, receta2.getPuntaje());
+        assertSame("Error al desactivarAccionAgregar", 20, receta3.getPuntaje());
 
     }
 
