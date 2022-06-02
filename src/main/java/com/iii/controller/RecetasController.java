@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 public class RecetasController {
     @Autowired

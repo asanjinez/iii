@@ -1,0 +1,10 @@
+<div id="container" [@listAnimation]="recetarios.length">
+  <button (click)="agregarElemento()">Agregar elemento </button>
+  <button (click)="eliminarElemento()">Eliminar elemento </button>
+
+  <div id="list" *ngFor="let recetario of recetarios">
+    <ul>
+      <li>{{recetario}}</li>
+    </ul>
+  </div>
+</div>
