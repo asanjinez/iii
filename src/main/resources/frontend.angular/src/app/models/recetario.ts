@@ -1,8 +1,10 @@
+import {IReceta} from "./receta";
+
 export interface IRecetario{
   id: number,
   titulo: string,
-  recetas: any;
-  links: any;
+  recetas: IReceta[],
+  links: any
 
 }
 // {

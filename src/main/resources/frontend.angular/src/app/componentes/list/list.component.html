@@ -4,10 +4,13 @@
   <button (click)="agregarElemento()">Add item</button>
   <button (click)="eliminarElemento()">Remove item</button>
   <ul>
-    <div id="list" *ngFor="let recetario of recetarios">
-      <p>Id: {{recetario.id}}</p>
-      <p>Nombre: {{recetario.titulo}}</p>
-    </div>
+
+      <div id="list" *ngFor="let recetario of recetarios">
+        <a  class ="underline" href="#">
+          <p>{{recetario.titulo}}</p>
+        </a>
+      </div>
+
   </ul>
 
 </div>
