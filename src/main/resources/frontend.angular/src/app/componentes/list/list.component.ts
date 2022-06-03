@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, keyframes, query, stagger, style, transition, trigger} from "@angular/animations";
 import {DataService} from "./data.service";
+import {IRecetario} from "../../models/recetario";
+import {IRecetarioSerializado} from "../../models/recetariosSerializados";
 
 @Component({
   selector: 'app-list',
@@ -28,21 +30,35 @@ import {DataService} from "./data.service";
 })
 
 export class ListComponent implements OnInit {
-  recetarios;
+  recetarios : IRecetario[] = [];
+  prueba: string[] = [];
 
   constructor(private dataService: DataService) {
-    this.recetarios = ["item1","item2","item3"];
+  }
+  agregarElemento(){
+    let elemento:IRecetario = {
+      id: 999,
+      titulo: "NuevoPrueba",
+      recetas: [],
+      links: null
+    }
+    this.recetarios.push(elemento)
   }
 
-  agregarElemento(){
-    this.recetarios.push("nuevoElemento")
-  }
+
+
+
   eliminarElemento(){
     this.recetarios.pop();
   }
-
   ngOnInit(): void {
-    this.dataService.getAllRecetarios().subscribe(recetario => console.log(recetario));
+    this.showTodos()
   }
+
+  showTodos(){
+    this.dataService.getAllRecetarios().subscribe(recetario => this.recetarios= recetario.recetarioList);
+  }
+
+
 
 }

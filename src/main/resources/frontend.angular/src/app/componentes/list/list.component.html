@@ -1,10 +1,13 @@
-<div id="container" [@listAnimation]="recetarios.length">
-  <button (click)="agregarElemento()">Agregar elemento </button>
-  <button (click)="eliminarElemento()">Eliminar elemento </button>
+<!--<div id="container" [@listAnimation]="recetarios.length">-->
 
-  <div id="list" *ngFor="let recetario of recetarios">
-    <ul>
-      <li>{{recetario}}</li>
-    </ul>
-  </div>
+<div id="container" [@listAnimation]="recetarios.length">
+  <button (click)="agregarElemento()">Add item</button>
+  <button (click)="eliminarElemento()">Remove item</button>
+  <ul>
+    <div id="list" *ngFor="let recetario of recetarios">
+      <p>Id: {{recetario.id}}</p>
+      <p>Nombre: {{recetario.titulo}}</p>
+    </div>
+  </ul>
+
 </div>
