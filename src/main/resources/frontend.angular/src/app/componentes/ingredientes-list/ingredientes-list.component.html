@@ -1,0 +1,8 @@
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<button class="button-18" role="button" (click)="toggleIngredientesVisibility()">mostrar ingredientes</button>
+<ul *ngIf="showIngredientes" [@animate]>
+  <li *ngFor="let ingrediente of this.ingredientes">
+    {{ingrediente.cantidad+ " " + ingrediente.unidad + " de " + ingrediente.nombre +" (id:"+ ingrediente.id + ")"    }}
+  </li>
+</ul>

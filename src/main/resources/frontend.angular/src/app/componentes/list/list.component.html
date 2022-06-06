@@ -1,16 +1,40 @@
-<!--<div id="container" [@listAnimation]="recetarios.length">-->
-
 <div id="container" [@listAnimation]="recetarios.length">
-  <button (click)="agregarElemento()">Add item</button>
-  <button (click)="eliminarElemento()">Remove item</button>
-  <ul>
+  <button class="buttonCrud" (click)="agregarElemento()">Add item</button>
+  <button class="buttonCrud" (click)="eliminarElemento()">Remove item</button>
+      <ul>
+        <div class="button" *ngFor="let recetario of recetarios">
+          <div>
+            <details>
+              <summary>
+                <div id="nameRecetario">
+                  <span class="underline">
+                    {{recetario.titulo}}
+                  </span>
+                </div>
+                <div class="details-modal-overlay"></div>
+              </summary>
+              <div class="details-modal">
+                <div class="details-modal-close">
 
-      <div id="list" *ngFor="let recetario of recetarios">
-        <a  class ="underline" href="#">
-          <p>{{recetario.titulo}}</p>
-        </a>
-      </div>
+                </div>
+                <div class="details-modal-title">
+                  <h1>Informacion</h1>
+                </div>
+                <div class="details-modal-content">
+                  <p>
+                    ID: {{recetario.id}}
+                  </p>
+                  <p>TITULO: {{recetario.titulo}}</p>
+                  <p>({{recetario.recetas.length}}) RECETAS: </p>
+                  <div class="recetas" *ngFor="let receta of recetario.recetas">
+                    {{receta.id}}
+                    {{receta.nombre}} <app-ingredientes-list [ingredientes] = receta.ingredientes> </app-ingredientes-list>
+                  </div>
 
-  </ul>
-
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </ul>
 </div>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {animate, keyframes, query, stagger, style, transition, trigger} from "@angular/animations";
 import {DataService} from "./data.service";
 import {IRecetario} from "../../models/recetario";
-import {IRecetarioSerializado} from "../../models/recetariosSerializados";
 
 @Component({
   selector: 'app-list',
@@ -31,8 +30,6 @@ import {IRecetarioSerializado} from "../../models/recetariosSerializados";
 
 export class ListComponent implements OnInit {
   recetarios : IRecetario[] = [];
-  prueba: string[] = [];
-
   constructor(private dataService: DataService) {
   }
   agregarElemento(){
@@ -45,9 +42,6 @@ export class ListComponent implements OnInit {
     this.recetarios.push(elemento)
   }
 
-
-
-
   eliminarElemento(){
     this.recetarios.pop();
   }
@@ -58,7 +52,5 @@ export class ListComponent implements OnInit {
   showTodos(){
     this.dataService.getAllRecetarios().subscribe(recetario => this.recetarios= recetario.recetarioList);
   }
-
-
 
 }
