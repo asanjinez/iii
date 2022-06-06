@@ -52,5 +52,8 @@ export class ListComponent implements OnInit {
   showTodos(){
     this.dataService.getAllRecetarios().subscribe(recetario => this.recetarios= recetario.recetarioList);
   }
+  editar(recetario:IRecetario){
+  console.log(recetario);
+  }
 
 }
