@@ -1,0 +1,25 @@
+<div class="modal-body">
+  <form>
+  <p>ID: {{recetarioEdit.id}}</p>
+  <hr>
+  <span class="float-md-start"> Titulo: </span> <input class="editable" name="tituloRecetario" [(ngModel)]=recetarioBuilder.titulo> <i class="fa-solid fa-pencil edit-icon float-sm-end"></i>
+  <hr>
+  ({{recetarioEdit.recetas.length}}) Recetas:
+  <div class="recetas" *ngFor="let receta of recetarioBuilder.recetas;let i = index">
+    <hr>
+    <span class="float-md-start">Titulo receta:</span> <input class="editable"  [name]="'receta-'+i" [(ngModel)]="receta.nombre"> <i class="fa-solid fa-pencil edit-icon float-sm-end"> </i>
+    <div *ngFor="let ingrediente of receta.ingredientes">
+      <hr>
+      <ul>
+        <span> Nombre Ingrediente: </span><input class="editable"  name="ingredienteNombre" [(ngModel)]="ingrediente.nombre"><i class="fa-solid fa-pencil edit-icon float-sm-end"> </i><br>
+        <span> Cantidad: </span><input class="editable"  name="ingredienteCantidad" [(ngModel)]="ingrediente.cantidad"><i class="fa-solid fa-pencil edit-icon float-sm-end"> </i><br>
+        <span> Unidades: </span><input class="editable"  name="ingredienteUnidad" [(ngModel)]="ingrediente.unidad"><i class="fa-solid fa-pencil edit-icon float-sm-end"> </i>
+      </ul>
+    </div>
+  </div>
+  <br><br>
+  </form>
+  <div (click)="guardarCambios()" class="btn btn-lg btn-outline-dark"> Modificar </div>
+</div>
+<pre>{{recetarioBuilder|json}}</pre>
+

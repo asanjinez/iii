@@ -1,0 +1,12 @@
+
+<div id="container" [@listAnimation]="recetarios.length">
+  <button class="buttonCrud" (click)="agregarElemento()">Add item</button>
+  <button class="buttonCrud" (click)="eliminarElemento()">Remove item</button>
+      <ul>
+        <!-- Button trigger modal -->
+        <div class="button" *ngFor="let recetario of recetarios">
+          <app-recetario-edit-modal [recetario]="recetario"></app-recetario-edit-modal>
+          <app-recetario-modal [recetario]="recetario"></app-recetario-modal>
+        </div>
+      </ul>
+</div>

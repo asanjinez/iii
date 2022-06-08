@@ -24,5 +24,8 @@ export class AppComponent {
   title = 'Gourmet';
   constructor() {
   }
+  prueba(){
+    this.title="cambio";
+  }
 
 }

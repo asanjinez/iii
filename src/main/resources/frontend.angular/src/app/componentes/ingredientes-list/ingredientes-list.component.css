@@ -1,7 +1,7 @@
 /* CSS */
 .button-18 {
 align-items: center;
-background-color: #0A66C2;
+background-color: #6A5ACDFF;
 border: 0;
 border-radius: 100px;
 box-sizing: border-box;
@@ -30,7 +30,7 @@ display: inline-flex;
 
 .button-18:hover,
 .button-18:focus {
-  background-color: #16437E;
+  background-color: #6A5ACDFF;
   color: #ffffff;
 }
 
