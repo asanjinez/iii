@@ -11,3 +11,15 @@ span{
   position: absolute;
   left: 30px;
 }
+
+.btnAgregar {
+  margin-top: 10px;
+  color: #6A5ACDFF;
+  border-color: #6A5ACDFF;
+}
+
+.btnAgregar:hover {
+  color: #000;
+  background-color: #6A5ACDFF;
+  border-color: #6A5ACDFF;
+}

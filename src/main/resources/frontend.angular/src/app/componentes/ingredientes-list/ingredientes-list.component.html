@@ -3,6 +3,7 @@
 <button class="button-18" role="button" (click)="toggleIngredientesVisibility()">mostrar ingredientes</button>
 <ul *ngIf="showIngredientes" [@animate]>
   <li *ngFor="let ingrediente of this.ingredientes">
-    {{ingrediente.cantidad+ " " + ingrediente.unidad + " de " + ingrediente.nombre +" (id:"+ ingrediente.id + ")" }}
+    ({{ingrediente.grupo}}, {{ingrediente.cantidad}} calorias) {{ingrediente.cantidad}} {{ingrediente.unidad}} de {{ingrediente.nombre}} (id: {{ingrediente.id}})
+<!--    {{"(" + ingrediente.grupo + ", " + ")" + ingrediente.cantidad+ " " + ingrediente.unidad + " de " + ingrediente.nombre +" (id:"+ ingrediente.id + ")" }}-->
   </li>
 </ul>

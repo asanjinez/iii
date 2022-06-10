@@ -9,11 +9,13 @@ import { RecetarioModalComponent } from './componentes/recetario-modal/recetario
 import { RecetarioEditModalComponent } from './componentes/recetario-edit-modal/recetario-edit-modal.component';
 import { RecetarioFormComponent } from './componentes/recetario-form/recetario-form.component';
 import {FormsModule} from "@angular/forms";
+// import {MatSelectModule} from '@angular/select'
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
+    // MatSelectModule,
     IngredientesListComponent,
     RecetarioModalComponent,
     RecetarioEditModalComponent,

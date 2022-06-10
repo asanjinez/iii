@@ -17,4 +17,7 @@ export class DataService {
   getAllRecetarios(): Observable<IRecetarioWrapper>{
     return this.http.get<IRecetarioSerializado>(`${this.urlApi}/recetarios`).pipe(map(response => response._embedded));
   }
+  putRecetario(id:number, objeto:IRecetario){
+    this.http.put<IRecetario>(`${this.urlApi}/recetarios/ ${id}`,objeto).subscribe();
+  }
 }
