@@ -44,3 +44,13 @@ display: inline-flex;
   background: rgba(0, 0, 0, .08);
   color: rgba(0, 0, 0, .3);
 }
+.card-read-more {
+  border-top: 1px solid #D4D4D4;
+  text-decoration: none !important;
+  padding:13px;
+  font-weight:700;
+  text-transform: uppercase;
+  border: none;
+  display: block;
+  width: 100%;
+}

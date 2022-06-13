@@ -1,11 +1,123 @@
-<div attr.id="{{'editModal-'+recetario.id}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<div data-toggle="modal" attr.data-target="{{ '#editModal-' + recetario.id }}" class="btn btn-outline-info card-read-more">Editar <i class="fas fa-edit float-end" ></i> </div>
+
+<div class="modal fade" attr.id="{{'editModal-'+recetario.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" attr.aria-labelledby="{{ '#staticEditBackdropLabel-' + recetario.id }}" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-      EDITAR "{{recetario.titulo}}"
-      <app-recetario-form [recetarioEdit]="recetario"></app-recetario-form>
+      <div class="modal-header">
+        <h5 class="modal-title" attr.id="{{'staticEditBackdropLabel-'+ recetario.id}}"  >{{recetario.titulo }} - Informacion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="EditClose"></button>
+      </div>
+
+
+      <div class="modal-body">
+        <form class="form-select-lg">
+          <div class="input-group mb-3">
+            <span class="input-group-text">ID</span>
+            <input
+              mdbInput
+              class="form-control"
+              attr.id="{{'id-field-recetario'+recetario.id}}"
+              type="text"
+              aria-label="id_field"
+              [readonly]="true"
+              name="{{'idRecetario-'+recetario.id}}"
+              [(ngModel)]=recetario.id
+            />
+            <label mdbLabel class="form-label" attr.for="{{'id-field-recetario'+recetario.id}}"></label>
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Titulo</span>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Ingrese el titulo del recetario"
+                   aria-label="Recipient's username"
+                   aria-describedby="titulo-recetario"
+                   name="{{'tituloRecetario-'+recetario.titulo}}"
+                   [(ngModel)]=recetario.titulo
+            />
+          </div>
+          <label class="form-label">({{recetario.recetas.length}}) Recetas: </label>
+
+          <div class="input-group mb-3" *ngFor="let receta of recetario.recetas;let indexReceta = index">
+            <span class="input-group-text">ID</span>
+            <label mdbLabel class="form-label" attr.for="{{'id-field-receta'+receta.id}}"></label>
+            <input
+              mdbInput
+              class="form-control"
+              attr.id="{{'id-field-receta-'+ receta.id}}"
+              type="text"
+              aria-label="id_field"
+              [readonly]="true"
+              name="{{'id-receta-'+receta.id}}"
+              [(ngModel)]=receta.id
+            />
+
+            <div style="margin-top: 15px" class="input-group mb-3">
+              <span class="input-group-text">Titulo</span>
+              <input type="text"
+                     class="form-control"
+                     placeholder="Ingrese el titulo del recetario"
+                     aria-label="titulo-receta"
+                     aria-describedby="titulo-receta"
+                     name="{{'titulo-receta-'+receta.id}}"
+                     [(ngModel)]=receta.nombre
+              />
+            </div>
+            <label class="form-label">({{receta.ingredientes.length}}) Ingredientes: </label>
+            <div *ngFor="let ingrediente of receta.ingredientes; let indexIngrediente = index">
+              <hr>
+                <span> Tipo:</span>
+                <select style="width: 80%" class="form-select-lg" [name]="'ingredienteGrupo-'+indexIngrediente"[(ngModel)]="ingrediente.grupo">
+                  <option [value]="grupo" *ngFor="let grupo of gruposIngredientes">{{grupo}}</option>
+                </select>
+
+                <div style="margin-top: 15px" class="input-group mb-3">
+                <span class="input-group-text">Nombre del ingrediente</span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Ingrese el nombre de ingrediente"
+                       aria-label="Recipient's ingredienteNames"
+                       aria-describedby="nombre-ingrediente"
+                       name="{{'nombre-ingrediente-'+ingrediente.name}}"
+                       [(ngModel)]=ingrediente.nombre
+                />
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Calorias</span>
+                  <input type="number"
+                         class="form-control"
+                         placeholder="Ingrese las calorias"
+                         aria-label="Recipient's ingredienteCalorias"
+                         aria-describedby="calorias-ingrediente"
+                         name="{{'calorias-ingrediente-'+ingrediente.calorias}}"
+                         [(ngModel)]=ingrediente.calorias
+                  />
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Cantidad</span>
+                  <input type="number"
+                         class="form-control"
+                         placeholder="Ingrese la cantidad"
+                         aria-label="Recipient's ingredienteCalorias"
+                         aria-describedby="cantidad-ingrediente"
+                         name="{{'cantidad-ingrediente-'+ingrediente.cantidad}}"
+                         [(ngModel)]=ingrediente.cantidad
+                  />
+                </div>
+
+                <select style="width: 80%"  class="form-select-lg" [name]="'ingrediente-unidad-'+indexIngrediente"[(ngModel)]="ingrediente.unidad">
+                <option [value]="unidad" *ngFor="let unidad of unidadesIngredientes">{{unidad}}</option>
+                </select>
+            </div>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button (click)="guardarCambios()" class="btn btn-dark btn-rounded"> Modificar </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<i style="color: #6A5ACDFF" class="fa-solid fa-pencil edit-icon float-end" data-toggle="modal" attr.data-target="{{ '#editModal-' + recetario.id }}"> </i>
-
-

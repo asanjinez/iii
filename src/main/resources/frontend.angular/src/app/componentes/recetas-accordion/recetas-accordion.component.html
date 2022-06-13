@@ -1,0 +1,19 @@
+<!--attr.data-target="{{ '#editModal-' + recetario.id }}"-->
+<div attr.id="{{ 'accordion-' + receta.id }}">
+  <div class="card">
+    <div class="card-header" attr.id="{{ 'heading-' + receta.id }}">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" attr.data-target="{{'#collapse-' + receta.id }}" aria-expanded="false" attr.aria-controls="{{'#collapse-' + receta.id }}">
+          {{receta.nombre}}
+        </button>
+      </h5>
+    </div>
+
+    <div attr.id="{{ 'collapse-' + receta.id }}" class="collapse show" attr.aria-labelledby="{{'heading-' + receta.id }}" attr.data-parent="{{'#accordion-' + receta.id }}">
+      <div class="card-body">
+        <div>Puntaje: {{receta.puntaje}}</div>
+          <span *ngFor="let ingrediente of receta.ingredientes"> {{ingrediente.cantidad}} {{ingrediente.unidad}} de {{ingrediente.nombre}}  </span>
+      </div>
+    </div>
+  </div>
+</div>

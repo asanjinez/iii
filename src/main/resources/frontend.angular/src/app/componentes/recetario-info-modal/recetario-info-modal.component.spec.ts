@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IngredientesListComponent } from './ingredientes-list.component';
+import { RecetarioInfoModalComponent } from './recetario-info-modal.component';
 
 describe('IngredientesListComponent', () => {
-  let component: IngredientesListComponent;
-  let fixture: ComponentFixture<IngredientesListComponent>;
+  let component: RecetarioInfoModalComponent;
+  let fixture: ComponentFixture<RecetarioInfoModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IngredientesListComponent ]
+      declarations: [ RecetarioInfoModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IngredientesListComponent);
+    fixture = TestBed.createComponent(RecetarioInfoModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

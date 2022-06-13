@@ -1,45 +1,154 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-#container {
-  padding:2em;
+//@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+//#container {
+//}
+//
+//.buttonCrud {
+//  border:none;
+//  margin: 7px;
+//  padding:10px;
+//  background: #6A5ACDFF;
+//  color: #fff;
+//}
+//
+//.tituloReceta {
+//  color: #A980F0FF;
+//  text-align: center;
+//  font-size: 3vmin;
+//  position: relative;
+//  left: 50%;
+//  transform: translate(-50%, -50%);
+//
+//  background: linear-gradient(0deg, #a980f0, #a980f0) no-repeat right bottom / 0 var(--bg-h);
+//  transition: background-size 350ms;
+//  --bg-h: 100%;
+//
+//  padding-bottom: 2px;
+//  --bg-h: 5px;
+//}
+//
+//.infoReceta{
+//  color: #6A5ACDFF;
+//  text-align: center;
+//  font-size: 2vmin;
+//  position: relative;
+//  left: 50%;
+//  transform: translate(-50%, -50%);
+//}
+//.tituloReceta:where(:hover, :focus-visible) {
+//  background-size: 100% var(--bg-h);
+//  background-position-x: left;
+//  cursor: pointer;
+//}
+//
+//*:before,
+//*:after {
+//  box-sizing: border-box;
+//}
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+
+html,
+body {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  background: #FFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 }
-.buttonCrud {
-  border:none;
-  margin: 7px;
-  padding:10px;
-  background: #6A5ACDFF;
-  color: #fff;
+.container-fostrap {
+  display: table-cell;
+  padding: 1em;
+  text-align: center;
+  vertical-align: middle;
 }
 
-span {
-  background: linear-gradient(0deg, slateblue, slateblue) no-repeat right bottom / 0 var(--bg-h);
+.wrapper {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: 450px) {
+  h1.heading {
+    font-size: 3.55em;
+  }
+}
+@media (min-width: 760px) {
+  h1.heading {
+    font-size: 3.05em;
+  }
+}
+@media (min-width: 900px) {
+  h1.heading {
+    font-size: 3.25em;
+    margin: 0 0 0.3em;
+  }
+}
+.card {
+  display: block;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  transition: box-shadow .25s;
+}
+.card:hover {
+  box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.img-card {
+  position: relative;
+  width: 100%;
+  height:300px;
+  border-top-left-radius:2px;
+  border-top-right-radius:2px;
+  display:block;
+  overflow: hidden;
+}
+.img-card img{
+  width: 100%;
+  height: 200px;
+  object-fit:cover;
+  transition: all .25s ease;
+}
+.card-content {
+  padding:15px;
+  text-align:center;
+}
+
+.tituloReceta {
+  transform: translate(-50%, -50%);
+
+  background: linear-gradient(0deg, #a980f0, #a980f0) no-repeat right bottom / 0 var(--bg-h);
   transition: background-size 350ms;
   --bg-h: 100%;
+
+  padding-bottom: 2px;
+  --bg-h: 5px;
 }
-span:where(:hover, :focus-visible) {
+.tituloReceta:where(:hover, :focus-visible) {
   background-size: 100% var(--bg-h);
   background-position-x: left;
+  cursor: pointer;
 }
 
-.underline {
-  padding-bottom: 2px;
-  --bg-h: 2px;
+.card-title {
+  text-align: center;
+  margin-top:0px;
+  font-weight: 700;
+  font-size: 1.65em;
 }
-
-*:before,
-*:after {
-  box-sizing: border-box;
+.card-title span {
+  color: #A980F0FF;
+  text-decoration: none !important;
 }
-.button {
-   font-family: Bahnschrift;
-   margin-bottom: 20px;
-   text-align: center;
-   appearance: none;
-   background: whitesmoke;
-   border-radius: 0.25em;
-   cursor: pointer;
-   display: grid;
-   font-weight: 500;
-   padding: 1em;
-   white-space: nowrap;
-   vertical-align: middle;
- }
+.card-read-more {
+  border-top: 1px solid #D4D4D4;
+  text-decoration: none !important;
+  padding:10px;
+  font-weight:600;
+  text-transform: uppercase;
+  border: none;
+  width: 100%;
+}

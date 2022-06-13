@@ -14,7 +14,7 @@ public class Ingrediente {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "TIPO_INGREDIENTE")
     private TipoIngrediente grupo;
     @Column(name = "NOMBRE_INGREDIENTE",
