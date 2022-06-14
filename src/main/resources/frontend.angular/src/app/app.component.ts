@@ -17,7 +17,7 @@ import { trigger,style,transition,animate,keyframes,query,stagger } from '@angul
     ]
 })
 export class AppComponent {
-  title = 'Gourmet';
+  title = 'Gourmet - Application';
   constructor() {
   }
 

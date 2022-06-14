@@ -1,5 +1,11 @@
-<button class="buttonCrud" (click)="agregarElemento()">Add item</button>
-<button class="buttonCrud" (click)="eliminarElemento()">Remove item</button>
+<div style="text-align: center; vertical-align: middle;margin-top: 15px;margin-bottom: 15px" class="row">
+  <div class="col-6">
+    <button class="learn-more" (click)="agregarElemento()">Agregar Receta</button>
+  </div>
+  <div class="col-6">
+    <button class="learn-more" (click)="eliminarElemento()">Eliminar Receta</button>
+  </div>
+</div>
 {{recetarios.length}}
 <div id="container" [@listAnimation]="recetarios.length">
   <div class="row">
@@ -8,9 +14,9 @@
         <div class="content">
           <div class="container">
             <div class="row">
-              <div class="col-xs-12 col-sm-4" *ngFor="let recetario of recetarios">
+              <div class="col-xs-12 col-sm-4" *ngFor="let recetario of recetarios;let indexRecetario = index">
                 <div class="card">
-                    <img class="img-card" src="assets/recetarioImage.png">
+                  <img class="img-card" src="assets/recetaImage3.png">
                   <div class="card-content">
                     <h4 class="card-title">
                       <span class="tituloReceta"> {{recetario.titulo}}</span>
@@ -28,42 +34,6 @@
         </div>
       </div>
     </section>
-
-    <!--    <div class="card col-lg-4 " style= "width: 17vw; margin-top: 10px; margin-left: 10px" *ngFor="let recetario of recetarios">-->
-<!--      <div data-bs-toggle="modal" attr.data-bs-target="{{ '#modal-' + recetario.id }}">-->
-<!--        <img class="card-img-top" src="assets/recetarioImage.png" alt="Card image cap">-->
-<!--        <div class="card-body">-->
-<!--          <div class="tituloReceta"><strong>{{recetario.titulo}}</strong></div>-->
-<!--          <div class="infoReceta">-->
-<!--            Cantidad de recetas: {{recetario.recetas.length}}-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--&lt;!&ndash;  &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;MODAL&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
-<!--      <div class="modal fade" attr.id="{{'modal-'+recetario.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
-<!--        <div class="modal-dialog">-->
-<!--          <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--              <h5 class="modal-title" id="staticBackdropLabel">{{recetario.titulo }} - INFORMACION</h5>-->
-<!--              <button type="button" class="btn-close" data-bs-dismiss="modalRecetarios" aria-label="Close"></button>-->
-<!--            </div>-->
-<!--            <div class="modal-body">-->
-<!--              <p style="text-align: center">ID: {{recetario.id}}</p>-->
-<!--              <p style="text-align: center">Titulo: "{{recetario.titulo}}"</p>-->
-<!--              <p style="text-align: center;">Recetas:</p>-->
-<!--              <div class="recetas" *ngFor="let receta of recetario.recetas">-->
-<!--                 <app-ingredientes-list [receta] = receta> </app-ingredientes-list>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="modal-footer">-->
-<!--              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--    </div>-->
-  -----------------------------
   </div>
 </div>
 

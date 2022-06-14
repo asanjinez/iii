@@ -1,62 +1,5 @@
-//@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-//#container {
-//}
-//
-//.buttonCrud {
-//  border:none;
-//  margin: 7px;
-//  padding:10px;
-//  background: #6A5ACDFF;
-//  color: #fff;
-//}
-//
-//.tituloReceta {
-//  color: #A980F0FF;
-//  text-align: center;
-//  font-size: 3vmin;
-//  position: relative;
-//  left: 50%;
-//  transform: translate(-50%, -50%);
-//
-//  background: linear-gradient(0deg, #a980f0, #a980f0) no-repeat right bottom / 0 var(--bg-h);
-//  transition: background-size 350ms;
-//  --bg-h: 100%;
-//
-//  padding-bottom: 2px;
-//  --bg-h: 5px;
-//}
-//
-//.infoReceta{
-//  color: #6A5ACDFF;
-//  text-align: center;
-//  font-size: 2vmin;
-//  position: relative;
-//  left: 50%;
-//  transform: translate(-50%, -50%);
-//}
-//.tituloReceta:where(:hover, :focus-visible) {
-//  background-size: 100% var(--bg-h);
-//  background-position-x: left;
-//  cursor: pointer;
-//}
-//
-//*:before,
-//*:after {
-//  box-sizing: border-box;
-//}
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
 
-html,
-body {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
-  background: #FFF;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-}
-.container-fostrap {
+r-fostrap {
   display: table-cell;
   padding: 1em;
   text-align: center;
@@ -74,47 +17,54 @@ body {
     font-size: 3.55em;
   }
 }
+
 @media (min-width: 760px) {
   h1.heading {
     font-size: 3.05em;
   }
 }
+
 @media (min-width: 900px) {
   h1.heading {
     font-size: 3.25em;
     margin: 0 0 0.3em;
   }
 }
+
 .card {
   display: block;
   margin-bottom: 20px;
   line-height: 1.42857143;
   background-color: #fff;
   border-radius: 2px;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   transition: box-shadow .25s;
 }
+
 .card:hover {
-  box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .img-card {
   position: relative;
-  width: 100%;
-  height:300px;
-  border-top-left-radius:2px;
-  border-top-right-radius:2px;
-  display:block;
+  height: 300px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
   overflow: hidden;
+  display: block;
+  margin: auto;
 }
-.img-card img{
-  width: 100%;
+
+.img-card img {
   height: 200px;
-  object-fit:cover;
+  object-fit: cover;
   transition: all .25s ease;
+
 }
+
 .card-content {
-  padding:15px;
-  text-align:center;
+  padding: 15px;
+  text-align: center;
 }
 
 .tituloReceta {
@@ -127,6 +77,7 @@ body {
   padding-bottom: 2px;
   --bg-h: 5px;
 }
+
 .tituloReceta:where(:hover, :focus-visible) {
   background-size: 100% var(--bg-h);
   background-position-x: left;
@@ -135,20 +86,117 @@ body {
 
 .card-title {
   text-align: center;
-  margin-top:0px;
+  margin-top: 0px;
   font-weight: 700;
   font-size: 1.65em;
 }
+
 .card-title span {
   color: #A980F0FF;
   text-decoration: none !important;
 }
+
 .card-read-more {
   border-top: 1px solid #D4D4D4;
   text-decoration: none !important;
-  padding:10px;
-  font-weight:600;
+  padding: 10px;
+  font-weight: 600;
   text-transform: uppercase;
   border: none;
   width: 100%;
+}
+
+.crudButton {
+  position: static;
+  padding: 25px;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Rubik:700&display=swap');
+
+$bg: #fff;
+$text: #382b22;
+$light-pink: #fff0f0;
+$pink: #ffe9e9;
+$dark-pink: #f9c4d2;
+$pink-border: #b18597;
+$pink-shadow: #ffe3e2;
+
+* {
+  box-sizing: border-box;
+
+  &::before, &::after {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  min-height: 100vh;
+  background: $bg;
+}
+
+button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: inherit;
+  font-family: inherit;
+
+  &.learn-more {
+    font-weight: 600;
+    color: $text;
+    text-transform: uppercase;
+    padding: 1.25em 2em;
+    background: $light-pink;
+    border: 2px solid $pink-border;
+    border-radius: 0.75em;
+    transform-style: preserve-3d;
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: $dark-pink;
+      border-radius: inherit;
+      box-shadow: 0 0 0 2px $pink-border, 0 0.625em 0 0 $pink-shadow;
+      transform: translate3d(0, 0.75em, -1em);
+      transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+    }
+
+    &:hover {
+      background: $pink;
+      transform: translate(0, 0.25em);
+
+      &::before {
+        box-shadow: 0 0 0 2px $pink-border, 0 0.5em 0 0 $pink-shadow;
+        transform: translate3d(0, 0.5em, -1em);
+      }
+    }
+
+    &:active {
+      background: $pink;
+      transform: translate(0em, 0.75em);
+
+      &::before {
+        box-shadow: 0 0 0 2px $pink-border, 0 0 $pink-shadow;
+        transform: translate3d(0, 0, -1em);
+      }
+    }
+  }
 }

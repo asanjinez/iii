@@ -1,4 +1,3 @@
-import {IRecetario} from "./recetario";
 import {IRecetarioWrapper} from "./recetarioWrapper";
 
 export interface IRecetarioSerializado{
