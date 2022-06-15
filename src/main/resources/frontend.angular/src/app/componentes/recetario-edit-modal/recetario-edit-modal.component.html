@@ -85,8 +85,10 @@
                   <label class="form-label">({{receta.ingredientes.length}}) Ingredientes: </label>
                   <div *ngFor="let ingrediente of receta.ingredientes; let indexIngrediente = index">
                     <hr>
-                    <span> Tipo:</span>
-                    <select style="width: 80%" class="form-select-lg" [name]="'ingredienteGrupo-'+indexIngrediente"
+
+                    <span style="position: absolute" class="input-group-text">Tipo</span>
+                    <select style="width: 80%;margin-left: 60px" class="form-select-lg"
+                            [name]="'ingredienteGrupo-'+indexIngrediente"
                             [(ngModel)]="ingrediente.grupo">
                       <option [value]="grupo" *ngFor="let grupo of gruposIngredientes">{{grupo}}</option>
                     </select>
@@ -127,7 +129,9 @@
                       />
                     </div>
 
-                    <select style="width: 80%" class="form-select-lg" [name]="'ingrediente-unidad-'+indexIngrediente"
+                    <span style="position: absolute" class="input-group-text">Unidades</span>
+                    <select style="width: 80%;margin-left: 92px;" class="form-select-lg"
+                            [name]="'ingrediente-unidad-'+indexIngrediente"
                             [(ngModel)]="ingrediente.unidad">
                       <option [value]="unidad" *ngFor="let unidad of unidadesIngredientes">{{unidad}}</option>
                     </select>
