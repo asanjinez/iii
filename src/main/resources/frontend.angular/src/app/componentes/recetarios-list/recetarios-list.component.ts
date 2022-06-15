@@ -5,8 +5,8 @@ import {IRecetario} from "../../models/recetario";
 
 @Component({
   selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  templateUrl: './recetarios-list.component.html',
+  styleUrls: ['./recetarios-list.component.scss'],
   animations: [
     trigger('listAnimation', [
       transition('* => *', [
@@ -25,10 +25,10 @@ import {IRecetario} from "../../models/recetario";
           ]))]), {optional: true})
       ])
     ])
-  ]
+    ]
 })
 
-export class ListComponent implements OnInit {
+export class RecetariosListComponent implements OnInit {
   recetarios: IRecetario[] = [];
 
   constructor(private dataService: DataService) {
@@ -37,12 +37,13 @@ export class ListComponent implements OnInit {
   agregarElemento() {
     let elemento: IRecetario = {
       id: 0,
-      titulo: this.randomInteger(1, 100),
+      titulo: 'Recetario-' + this.randomInteger(1, 100),
       recetas: [],
       links: null
     }
     this.dataService.postRecetario(elemento).subscribe(recetarioResponse => Object.assign(elemento, recetarioResponse));
     this.recetarios.push(elemento);
+
   }
 
   eliminarElemento() {
