@@ -1,5 +1,4 @@
 package org.dominio.ingredientes.cantidad;
-
 public class CantidadNecesaria implements TipoCantidad {
     private final int cantidad = 0;
 
@@ -21,7 +20,7 @@ public class CantidadNecesaria implements TipoCantidad {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Cantidad Necesaria";
     }
 }

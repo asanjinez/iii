@@ -1,21 +1,21 @@
 package org.dominio;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Ranking {
+public class Ranking implements Observer {
     String nombre;
     List<Receta> recetas;
-
-
     public Ranking(String nombre){
         this.nombre = nombre;
         this.recetas = new ArrayList<Receta>();
     }
-
+    @Override
+    public void actualizar() {
+        this.ordenarRanking();
+    }
     public List<Receta> getRecetas() {
         return recetas;
     }
@@ -25,17 +25,13 @@ public class Ranking {
                 .sorted(Comparator
                 .comparing( (Receta s)-> (s.getPuntaje())).reversed())
                 .collect(Collectors.toList());
-    /*
-    sorted(Comparator.<String>comparingInt(s->Integer.parseInt(s.split(":")[0].trim())).reversed())
-            .collect(Collectors.toList());
-
-     */
     }
 
     public void agregarReceta(Receta receta){
         recetas.add(receta);
         this.ordenarRanking();
-        receta.getNotificadorCambios().agregarRanking(this);
+        receta.getObservers().add(this);
+
     }
 
     public void imprimirRanking(){
@@ -45,6 +41,4 @@ public class Ranking {
             System.out.println("Puntaje: " + receta.getPuntaje());
         }
     }
-
-
 }

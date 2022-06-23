@@ -1,42 +1,36 @@
 package org.dominio;
 
-import org.dominio.acciones.Accion;
-import org.dominio.acciones.AccionAgregarHabilitada;
+import org.dominio.acciones.AccionAgregarReceta;
 import org.dominio.ingredientes.Ingrediente;
 import org.dominio.perfiles.Perfil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Receta {
-    PublisherRanking notificadorCambios;
+public class Receta extends Observable {
     private String nombre;
     private List<Ingrediente> ingredientes;
     private int puntaje;
-    private Accion estadoAgregar;
+    private AccionAgregarReceta accionAgregarReceta;
 
     public Receta(String titulo) {
+        super();
         this.nombre = titulo;
         this.ingredientes = new ArrayList<Ingrediente>();
         this.puntaje = 0;
-        this.notificadorCambios = new PublisherRanking();
-        this.estadoAgregar = new AccionAgregarHabilitada();
+        this.accionAgregarReceta = new AccionAgregarReceta(this);
+    }
+    @Override
+    public void notificarObservers() {
+        this.getObservers().forEach(observer -> observer.actualizar());
     }
     public List<Ingrediente> getIngredientes() { return ingredientes;}
-    public PublisherRanking getNotificadorCambios() {
-        return this.notificadorCambios;
-    }
     public String getNombre() {
         return nombre;
     }
     public int getPuntaje() {
         return puntaje;
     }
-
-    public void setEstadoAgregar(Accion estadoAgregar) {
-        this.estadoAgregar = estadoAgregar;
-    }
-
     public void sumarPuntaje(int puntaje) {
         this.puntaje += puntaje;
     }
@@ -62,19 +56,13 @@ public class Receta {
 
 //Consultar si es necesario un metodo para consultar desde la Receta
     public boolean esAptoPara(Perfil perfil) {
-        return perfil.puedeComer(this);
+        return perfil.getDieta().puedeComer(this);
     }
 
     public void accionAgregar(){
-        this.estadoAgregar.accionar(this,null);
+        this.accionAgregarReceta.accionar();
     }
-
     public void cambiarEstadoSumarPuntaje(){
-        this.estadoAgregar.cambiarEstado(this,null);
+        this.accionAgregarReceta.cambiarEstado();
     }
-
-    public void notificarAgrego(){
-        this.notificadorCambios.notificarRankings();
-    }
-
 }

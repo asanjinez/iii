@@ -1,25 +1,42 @@
 package org.dominio.perfiles;
 
-import org.dominio.Receta;
-import org.dominio.acciones.Accion;
-import org.dominio.acciones.AccionNotificarHabilitada;
-/*
-	Celiaco		No contener cereales
-	Vegetariano		No contener carnes
-	Vegano		No contener carnes o lácteos
-	Carnívoro		Contener carnes y alcanzar las 200 calorías
-
- */
-
-
-public interface Perfil {
-    public boolean puedeComer(Receta receta);
-    public default void notificar(){
+import org.dominio.Observer;
+import org.dominio.acciones.AccionNotificarPerfil;
+import org.dominio.perfiles.dietas.Dieta;
+public class Perfil implements Observer {
+    Dieta dieta;
+    AccionNotificarPerfil accionNotificar;
+    public Perfil(Dieta dieta) {
+        this.dieta = dieta;
+        this.accionNotificar = new AccionNotificarPerfil(this);
     }
-    String getNombre();
+    public Perfil(Dieta dieta, AccionNotificarPerfil accionNotificarPerfil) {
+        this.dieta = dieta;
+        this.accionNotificar = accionNotificarPerfil;
+    }
+    @Override
+    public void actualizar() {
+        this.accionNotificar.accionar();
+    }
+    public void notificar() {
+        /*
+        Aca iria la implementacion de la notifiacion
+         */
+    }
+    public AccionNotificarPerfil getAccionNotificar() {
+        return this.accionNotificar;
+    }
+    void setAccionNotificar(AccionNotificarPerfil accion) {
+        this.accionNotificar = accion;
+    }
+    public Dieta getDieta() {
+        return dieta;
+    }
 
-    Accion getEstadoNotificar();
+    public void setDieta(Dieta dieta) {
+        this.dieta = dieta;
+    }
 
-    void setEstadoNotificar(Accion accion);
+
 }
 

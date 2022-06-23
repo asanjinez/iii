@@ -1,8 +1,5 @@
 package org.dominio.ingredientes;
-
-import org.dominio.ingredientes.cantidad.*;
 import org.dominio.ingredientes.cantidad.TipoCantidad;
-
 public class Ingrediente {
     private final TipoIngrediente grupo;
     private String nombre;

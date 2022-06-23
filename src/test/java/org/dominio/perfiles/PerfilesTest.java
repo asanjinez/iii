@@ -5,9 +5,12 @@ import org.dominio.ingredientes.Ingrediente;
 import org.dominio.ingredientes.TipoIngrediente;
 import org.dominio.ingredientes.cantidad.Medibles;
 import org.dominio.ingredientes.cantidad.Unidades;
+import org.dominio.perfiles.dietas.Carnivoro;
+import org.dominio.perfiles.dietas.Celiaco;
+import org.dominio.perfiles.dietas.Vegano;
+import org.dominio.perfiles.dietas.Vegetariano;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.internal.verification.checkers.AtLeastXNumberOfInvocationsChecker;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -56,42 +59,42 @@ public class PerfilesTest {
         recetaVegana.agregarIngrediente(ingrediente2);
         recetaVegana.agregarIngrediente(ingrediente3);
 
-        this.perfilCarnivoro = new Carnivoro();
-        this.perfilVegetariano = new Vegetariano();
-        this.perfilCeliaco = new Celiaco();
-        this.perfilVegano = new Vegano();
+        this.perfilCarnivoro = new Perfil(new Carnivoro());
+        this.perfilVegetariano = new Perfil(new Vegetariano());
+        this.perfilCeliaco = new Perfil(new Celiaco());
+        this.perfilVegano = new Perfil(new Vegano());
     }
 
     @Test
     public void comidaAptaCarnivoros(){
-    assertTrue("No es apto para el perfil",perfilCarnivoro.puedeComer(recetaCarnivora));
+    assertTrue("No es apto para el perfil",perfilCarnivoro.getDieta().puedeComer(recetaCarnivora));
     }
     @Test
     public void comidaAptaVegetarianos(){
-        assertTrue("No es apto para el perfil",perfilVegetariano.puedeComer(recetaVegetariana));
+        assertTrue("No es apto para el perfil",perfilVegetariano.getDieta().puedeComer(recetaVegetariana));
     }
     @Test
     public void comidaAptaCeliacos(){
-        assertTrue("No es apto para el perfil",perfilCeliaco.puedeComer(recetaCeliaca));
+        assertTrue("No es apto para el perfil",perfilCeliaco.getDieta().puedeComer(recetaCeliaca));
     }
     @Test
     public void comidaAptaVeganos(){
-        assertTrue("No es apto para el perfil",perfilVegano.puedeComer(recetaVegana));
+        assertTrue("No es apto para el perfil",perfilVegano.getDieta().puedeComer(recetaVegana));
     }
     @Test
     public void comidaNoAptaCarnivoros(){
-        assertFalse("Es apto para el perfil",perfilCarnivoro.puedeComer(recetaVegetariana));
+        assertFalse("Es apto para el perfil",perfilCarnivoro.getDieta().puedeComer(recetaVegetariana));
     }
     @Test
     public void comidaNoAptaVegetarianos(){
-        assertFalse("Es apto para el perfil",perfilVegetariano.puedeComer(recetaCarnivora));
+        assertFalse("Es apto para el perfil",perfilVegetariano.getDieta().puedeComer(recetaCarnivora));
     }
     @Test
     public void comidaNoAptaVeganos(){
-        assertFalse("Es apto para el perfil",perfilCeliaco.puedeComer(recetaVegana));
+        assertFalse("Es apto para el perfil",perfilCeliaco.getDieta().puedeComer(recetaVegana));
     }
     @Test
     public void comidaNoAptaCeliacos(){
-        assertFalse("Es apto para el perfil",perfilVegano.puedeComer(recetaCeliaca));
+        assertFalse("Es apto para el perfil",perfilVegano.getDieta().puedeComer(recetaCeliaca));
     }
 }

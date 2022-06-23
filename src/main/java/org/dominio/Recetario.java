@@ -1,36 +1,33 @@
 package org.dominio;
 
-import org.dominio.acciones.Accion;
-import org.dominio.acciones.AccionNotificarHabilitada;
+import org.dominio.perfiles.Perfil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recetario {
+public class Recetario extends Observable {
     String titulo;
     private List<Receta> recetas;
-    private PublisherPerfil notificadorPerfiles;
 
     public Recetario(String nombre) {
+        super();
         this.titulo = nombre;
         recetas = new ArrayList<Receta>();
-        notificadorPerfiles = new PublisherPerfil();
     }
 
-    public PublisherPerfil getNotificadorPerfiles() {
-        return notificadorPerfiles;
+    @Override
+    public void notificarObservers(Object object){
+        Receta receta = (Receta) object;
+        this.getObservers().stream().filter(observer -> ((Perfil) observer).getDieta().puedeComer(receta)).forEach(observer -> observer.actualizar());
     }
+
     public int cantidadRecetas(){
         return recetas.size();
-    }
-
-    public void accionNotificar(Receta receta){
-        this.notificadorPerfiles.notificarPerfiles(receta);
     }
 
     public void agregarReceta(Receta receta){
         recetas.add(receta);
         receta.accionAgregar();
-        this.accionNotificar(receta);
+        this.notificarObservers(receta);
     }
 }

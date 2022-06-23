@@ -5,10 +5,14 @@ import org.dominio.ingredientes.*;
 import org.dominio.ingredientes.cantidad.Medibles;
 import org.dominio.ingredientes.cantidad.Unidades;
 import org.dominio.perfiles.*;
+import org.dominio.perfiles.dietas.Carnivoro;
+import org.dominio.perfiles.dietas.Celiaco;
+import org.dominio.perfiles.dietas.Vegano;
+import org.dominio.perfiles.dietas.Vegetariano;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
+import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -31,12 +35,12 @@ public class NotificacionesTest {
     Usuario usuario2;
     Usuario usuario3;
 
-    @Spy
-    Accion accionNotificar;
+    @Mock
+    AccionNotificarPerfil accionNotificarSpy;
     @InjectMocks
-    Carnivoro perfil1;
+    Perfil perfil1;
     @InjectMocks
-    Vegetariano perfil2;
+    Perfil perfil2;
     Perfil perfil3;
     Perfil perfil4;
 
@@ -57,11 +61,11 @@ public class NotificacionesTest {
         this.usuario2 = new Usuario();
         this.usuario3 = new Usuario();
 
-//      preguntar por que mockito no me inyecta automaticamente la Accion accionNotificarCarnivoro
-        this.perfil1 = new Carnivoro(accionNotificar);
-        this.perfil2 = new Vegetariano(accionNotificar);
-        this.perfil3 = new Celiaco();
-        this.perfil4 = new Vegano();
+//      preguntar por que mockito no me inyecta automaticamente la Accion accionNotificarSpyCarnivoro
+        this.perfil1 = new Perfil(new Carnivoro(),accionNotificarSpy);
+        this.perfil2 = new Perfil(new Vegetariano());
+        this.perfil3 = new Perfil(new Celiaco());
+        this.perfil4 = new Perfil(new Vegano());
 
         receta1.agregarIngrediente(ingrediente1);
 
@@ -81,34 +85,34 @@ public class NotificacionesTest {
 
     @Test
     public void seCreanPerfilPrincipal() {
-        assertSame(usuario3.getPerfilActual().getNombre(), "Celiaco");
+        assertSame(usuario3.getPerfilActual().getDieta().getNombre(), "Celiaco");
     }
 
     @Test
     public void seCreanPerfilesAdicionales() {
-        assertSame(usuario3.getPerfiles().get(1).getNombre(), "Vegano");
+        assertSame(usuario3.getPerfiles().get(1).getDieta().getNombre(), "Vegano");
     }
 
     @Test
     public void seCambiaDePerfil() {
         usuario3.cambiarPerfil("Vegano");
-        assertSame(usuario3.getPerfilActual().getNombre(), "Vegano");
+        assertSame(usuario3.getPerfilActual().getDieta().getNombre(), "Vegano");
     }
 
     @Test
     public void seNotificaCorrespondiente() {
         usuario1.suscribirse(recetario1);
         recetario1.agregarReceta(receta1);
-        verify(accionNotificar, times(1)).accionar(null, perfil1);
+        verify(accionNotificarSpy, times(1)).accionar();
     }
 
     @Test
     public void notificacionesDeshabilitadas() {
-        perfil1 = new Carnivoro();
+//        perfil1 = new Perfil(new Carnivoro());
 //      Usuario con perfil Carnivoro
         usuario1.suscribirse(recetario1);
 //      Desactivo perfil carnivoro
-        perfil1.getEstadoNotificar().cambiarEstado(null, perfil1);
+        perfil1.getAccionNotificar().cambiarEstado();
 
 //      Creo perfil vegetariano
         usuario1.agegarPerfil(perfil2);
@@ -126,8 +130,8 @@ public class NotificacionesTest {
         recetario1.agregarReceta(receta4);
 
         //Se notifica al perfil carnivoro porque se agregaron receta4
-        verify(accionNotificar, times(0)).accionar(null, perfil1);
-        verify(accionNotificar, times(1)).accionar(null, perfil2);
+        verify(accionNotificarSpy, times(2)).accionar();
+
     }
 }
 
