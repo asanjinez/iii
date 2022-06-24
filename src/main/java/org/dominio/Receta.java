@@ -24,6 +24,12 @@ public class Receta extends Observable {
     public void notificarObservers() {
         this.getObservers().forEach(observer -> observer.actualizar());
     }
+
+    @Override
+    public void notificarObservers(Object object) {
+
+    }
+
     public List<Ingrediente> getIngredientes() { return ingredientes;}
     public String getNombre() {
         return nombre;

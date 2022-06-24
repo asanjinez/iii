@@ -20,6 +20,6 @@ public abstract class Observable {
         this.observers.remove(observer);
     }
 
-    public void notificarObservers(){}
-    public void notificarObservers(Object object){}
+    public abstract void notificarObservers();
+    public abstract void notificarObservers(Object object);
 }
