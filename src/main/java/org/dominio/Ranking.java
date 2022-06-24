@@ -16,6 +16,12 @@ public class Ranking implements Observer {
     public void actualizar() {
         this.ordenarRanking();
     }
+
+    @Override
+    public void actualizar(Receta receta){
+
+    }
+
     public List<Receta> getRecetas() {
         return recetas;
     }

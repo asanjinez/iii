@@ -1,7 +1,5 @@
 package org.dominio;
 
-import org.dominio.perfiles.Perfil;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class Recetario extends Observable {
     @Override
     public void notificarObservers(Object object){
         Receta receta = (Receta) object;
-        this.getObservers().stream().filter(observer -> ((Perfil) observer).getDieta().puedeComer(receta)).forEach(observer -> observer.actualizar());
+        this.getObservers().stream().forEach(observer -> observer.actualizar(receta));
     }
 
     public int cantidadRecetas(){

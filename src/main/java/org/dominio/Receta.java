@@ -27,9 +27,7 @@ public class Receta extends Observable {
 
     @Override
     public void notificarObservers(Object object) {
-
     }
-
     public List<Ingrediente> getIngredientes() { return ingredientes;}
     public String getNombre() {
         return nombre;

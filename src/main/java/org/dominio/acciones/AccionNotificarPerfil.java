@@ -3,8 +3,8 @@ import org.dominio.perfiles.Perfil;
 public class AccionNotificarPerfil extends Accion {
     Perfil perfil;
 
-    public AccionNotificarPerfil(Object objeto) {
-        this.perfil = (Perfil) objeto;
+    public AccionNotificarPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     @Override

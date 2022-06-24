@@ -1,6 +1,7 @@
 package org.dominio.perfiles;
 
 import org.dominio.Observer;
+import org.dominio.Receta;
 import org.dominio.acciones.AccionNotificarPerfil;
 import org.dominio.perfiles.dietas.Dieta;
 public class Perfil implements Observer {
@@ -16,6 +17,11 @@ public class Perfil implements Observer {
     }
     @Override
     public void actualizar() {
+    }
+    @Override
+    public void actualizar(Receta receta) {
+        if (!this.getDieta().puedeComer(receta))
+            return;
         this.accionNotificar.accionar();
     }
     public void notificar() {

@@ -3,10 +3,9 @@ import org.dominio.Receta;
 public class AccionAgregarReceta extends Accion {
     Receta receta;
 
-    public AccionAgregarReceta(Object objeto) {
-        this.receta = (Receta) objeto;
+    public AccionAgregarReceta(Receta receta) {
+        this.receta = receta;
     }
-
     @Override
     public void accionar() {
         if (!this.estado)

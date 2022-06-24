@@ -1,4 +1,5 @@
 package org.dominio.acciones;
+
 public abstract class Accion {
     boolean estado = true;
     public void accionar() {}
