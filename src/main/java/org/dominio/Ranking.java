@@ -13,13 +13,8 @@ public class Ranking implements Observer {
         this.recetas = new ArrayList<Receta>();
     }
     @Override
-    public void actualizar() {
-        this.ordenarRanking();
-    }
-
-    @Override
     public void actualizar(Receta receta){
-
+        this.ordenarRanking();
     }
 
     public List<Receta> getRecetas() {
@@ -36,7 +31,7 @@ public class Ranking implements Observer {
     public void agregarReceta(Receta receta){
         recetas.add(receta);
         this.ordenarRanking();
-        receta.getObservers().add(this);
+        receta.suscribir(this);
 
     }
 

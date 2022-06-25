@@ -11,6 +11,6 @@ public class AccionAgregarReceta extends Accion {
         if (!this.estado)
             return;
         receta.sumarPuntaje(10);
-        receta.notificarObservers();
+        receta.getPublisherRankings().notificarObservers();
     }
 }

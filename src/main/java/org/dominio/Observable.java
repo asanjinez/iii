@@ -1,9 +1,14 @@
 package org.dominio;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Observable {
+@Component
+@Scope("prototype")
+public class Observable {
     private List<Observer> observers;
 
     public Observable(){
@@ -12,6 +17,11 @@ public abstract class Observable {
     public List<Observer> getObservers(){
         return this.observers;
     }
+
+    public void setObservers(List<Observer> observers) {
+        this.observers = observers;
+    }
+
     public void agregarObserver(Observer observer){
         this.observers.add(observer);
 
@@ -20,6 +30,10 @@ public abstract class Observable {
         this.observers.remove(observer);
     }
 
-    public abstract void notificarObservers();
-    public abstract void notificarObservers(Object object);
+    public void notificarObservers(){
+        this.observers.forEach(observer -> observer.actualizar(null));
+    }
+    public void notificarObservers(Receta receta){
+        this.observers.forEach(observer -> observer.actualizar(receta));
+    }
 }

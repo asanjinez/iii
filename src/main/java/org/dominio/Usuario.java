@@ -41,7 +41,7 @@ public class Usuario {
 
     }
     public void suscribirse(Recetario recetario){
-        recetario.agregarObserver(this.perfilActual);
+        recetario.suscribir(this.perfilActual);
     }
     public List<Perfil> filtrarPerfiles(String nombre) throws Exception {
         List<Perfil> perfiles = this.perfiles.stream().filter(x-> x.getDieta().getNombre() == nombre).collect(Collectors.toList());

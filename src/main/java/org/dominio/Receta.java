@@ -7,26 +7,19 @@ import org.dominio.perfiles.Perfil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Receta extends Observable {
+public class Receta {
     private String nombre;
     private List<Ingrediente> ingredientes;
     private int puntaje;
     private AccionAgregarReceta accionAgregarReceta;
+    private Observable publisherRankings;
 
     public Receta(String titulo) {
-        super();
         this.nombre = titulo;
         this.ingredientes = new ArrayList<Ingrediente>();
         this.puntaje = 0;
         this.accionAgregarReceta = new AccionAgregarReceta(this);
-    }
-    @Override
-    public void notificarObservers() {
-        this.getObservers().forEach(observer -> observer.actualizar());
-    }
-
-    @Override
-    public void notificarObservers(Object object) {
+        this.publisherRankings = new Observable();
     }
     public List<Ingrediente> getIngredientes() { return ingredientes;}
     public String getNombre() {
@@ -37,6 +30,9 @@ public class Receta extends Observable {
     }
     public void sumarPuntaje(int puntaje) {
         this.puntaje += puntaje;
+    }
+    public Observable getPublisherRankings() {
+        return publisherRankings;
     }
 
     public int cantidadCalorias() {
@@ -68,5 +64,8 @@ public class Receta extends Observable {
     }
     public void cambiarEstadoSumarPuntaje(){
         this.accionAgregarReceta.cambiarEstado();
+    }
+    public void suscribir(Ranking ranking) {
+        this.publisherRankings.agregarObserver(ranking);
     }
 }

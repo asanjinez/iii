@@ -1,26 +1,22 @@
 package org.dominio;
 
+import org.dominio.perfiles.Perfil;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recetario extends Observable {
+public class Recetario {
     String titulo;
     private List<Receta> recetas;
-
+    private Observable publisherPerfiles;
     public Recetario(String nombre) {
-        super();
         this.titulo = nombre;
         recetas = new ArrayList<Receta>();
-    }
+        this.publisherPerfiles = new Observable();
 
-    @Override
-    public void notificarObservers() {
     }
-
-    @Override
-    public void notificarObservers(Object object){
-        Receta receta = (Receta) object;
-        this.getObservers().stream().forEach(observer -> observer.actualizar(receta));
+    public Observable getPublisherPerfiles() {
+        return publisherPerfiles;
     }
 
     public int cantidadRecetas(){
@@ -30,6 +26,9 @@ public class Recetario extends Observable {
     public void agregarReceta(Receta receta){
         recetas.add(receta);
         receta.accionAgregar();
-        this.notificarObservers(receta);
+        this.publisherPerfiles.notificarObservers(receta);
+    }
+    public void suscribir(Perfil perfil){
+        this.publisherPerfiles.agregarObserver(perfil);
     }
 }

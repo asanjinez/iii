@@ -16,9 +16,6 @@ public class Perfil implements Observer {
         this.accionNotificar = accionNotificarPerfil;
     }
     @Override
-    public void actualizar() {
-    }
-    @Override
     public void actualizar(Receta receta) {
         if (!this.getDieta().puedeComer(receta))
             return;
