@@ -13,7 +13,7 @@ public class Ranking implements Observer {
         this.recetas = new ArrayList<Receta>();
     }
     @Override
-    public void actualizar(Receta receta){
+    public void actualizar(){
         this.ordenarRanking();
     }
 

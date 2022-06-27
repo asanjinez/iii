@@ -1,5 +1,9 @@
 package org.dominio;
 
 public interface Observer {
-    public void actualizar(Receta receta);
+    public default void actualizar(Receta receta){
+
+    }
+    public default void actualizar(){
+    }
 }

@@ -31,7 +31,7 @@ public class Observable {
     }
 
     public void notificarObservers(){
-        this.observers.forEach(observer -> observer.actualizar(null));
+        this.observers.forEach(observer -> observer.actualizar());
     }
     public void notificarObservers(Receta receta){
         this.observers.forEach(observer -> observer.actualizar(receta));
