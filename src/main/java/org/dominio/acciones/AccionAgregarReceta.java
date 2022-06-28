@@ -1,16 +1,20 @@
 package org.dominio.acciones;
+import org.dominio.Ranking;
 import org.dominio.Receta;
 public class AccionAgregarReceta extends Accion {
-    Receta receta;
+    private Ranking ranking;
 
-    public AccionAgregarReceta(Receta receta) {
-        this.receta = receta;
+    public AccionAgregarReceta(Ranking ranking){
+        this.ranking = ranking;
     }
     @Override
-    public void accionar() {
+    public void accionar(Receta receta) {
         if (!this.estado)
             return;
+        int index = this.ranking.getRecetas().indexOf(receta);
+        if (index == -1)
+            return;
         receta.sumarPuntaje(10);
-        receta.getPublisherRankings().notificarObservers();
+        this.ranking.ordenarRanking();
     }
 }

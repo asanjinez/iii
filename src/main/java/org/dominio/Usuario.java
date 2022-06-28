@@ -1,6 +1,5 @@
 package org.dominio;
 
-import org.dominio.Recetario;
 import org.dominio.perfiles.Perfil;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class Usuario {
         this.perfiles = new ArrayList<Perfil>();
         this.perfilActual = null;
     }
-    public void agegarPerfil(Perfil perfil){
+    public void agregarPerfil(Perfil perfil){
         this.perfiles.add(perfil);
         if (this.getPerfilActual() == null){
             perfilActual = perfil;
@@ -41,7 +40,7 @@ public class Usuario {
 
     }
     public void suscribirse(Recetario recetario){
-        recetario.suscribir(this.perfilActual);
+        recetario.agregarObserver(this.perfilActual);
     }
     public List<Perfil> filtrarPerfiles(String nombre) throws Exception {
         List<Perfil> perfiles = this.perfiles.stream().filter(x-> x.getDieta().getNombre() == nombre).collect(Collectors.toList());

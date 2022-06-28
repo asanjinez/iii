@@ -13,7 +13,6 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
@@ -77,10 +76,10 @@ public class NotificacionesTest {
         receta3.agregarIngrediente(ingrediente1);
         receta3.agregarIngrediente(ingrediente2);
 
-        usuario1.agegarPerfil(perfil1);
-        usuario2.agegarPerfil(perfil2);
-        usuario3.agegarPerfil(perfil3);
-        usuario3.agegarPerfil(perfil4);
+        usuario1.agregarPerfil(perfil1);
+        usuario2.agregarPerfil(perfil2);
+        usuario3.agregarPerfil(perfil3);
+        usuario3.agregarPerfil(perfil4);
     }
 
     @Test
@@ -103,34 +102,21 @@ public class NotificacionesTest {
     public void seNotificaCorrespondiente() {
         usuario1.suscribirse(recetario1);
         recetario1.agregarReceta(receta1);
-        verify(accionNotificarSpy, times(1)).accionar();
+        verify(accionNotificarSpy, times(1)).accionar(receta1);
     }
 
     @Test
     public void notificacionesDeshabilitadas() {
-//        perfil1 = new Perfil(new Carnivoro());
+        usuario1.agregarPerfil(perfil1);
 //      Usuario con perfil Carnivoro
         usuario1.suscribirse(recetario1);
 //      Desactivo perfil carnivoro
         perfil1.getAccionNotificar().cambiarEstado();
 
-//      Creo perfil vegetariano
-        usuario1.agegarPerfil(perfil2);
-        usuario1.cambiarPerfil("Vegetariano");
-//      Me suscribo como vegetariano
-        usuario1.suscribirse(recetario1);
-
-        Receta receta4 = new Receta("RecetaVegetariana");
-        receta4.agregarIngrediente(new Ingrediente(TipoIngrediente.LEGUMBRES, "legumbre", new Medibles(20, Unidades.GR, 20)));
-
-//      Agrego receta Apta para Carnivoros
         recetario1.agregarReceta(receta1);
-        recetario1.agregarReceta(receta2);
-//      Agrego receta apta para Vegetarianos
-        recetario1.agregarReceta(receta4);
 
         //Se notifica al perfil carnivoro porque se agregaron receta4
-        verify(accionNotificarSpy, times(2)).accionar();
+        verify(accionNotificarSpy, times(1)).accionar(receta1);
 
     }
 }

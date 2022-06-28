@@ -1,4 +1,5 @@
 package org.dominio.acciones;
+import org.dominio.Receta;
 import org.dominio.perfiles.Perfil;
 public class AccionNotificarPerfil extends Accion {
     Perfil perfil;
@@ -8,10 +9,11 @@ public class AccionNotificarPerfil extends Accion {
     }
 
     @Override
-    public void accionar() {
+    public void accionar(Receta receta) {
         if (!this.estado)
             return;
-        perfil.notificar();
+        if (!perfil.getDieta().puedeComer(receta))
+            perfil.notificar();
 
     }
 }
