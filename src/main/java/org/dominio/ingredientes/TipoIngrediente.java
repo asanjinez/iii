@@ -12,7 +12,6 @@ public enum TipoIngrediente {
     private TipoIngrediente(String tipo) {
         this.tipo = tipo;
     }
-
     public String getTipo() {
         return tipo;
     }

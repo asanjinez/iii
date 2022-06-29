@@ -1,22 +1,26 @@
 package org.dominio;
 
+import org.dominio.perfiles.Perfil;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recetario {
+public class Recetario extends Observable{
     String titulo;
-    List<Receta> recetas;
-
+    private List<Receta> recetas;
     public Recetario(String nombre) {
         this.titulo = nombre;
         recetas = new ArrayList<Receta>();
     }
-
-    public void agregarReceta(Receta receta) {
-        recetas.add(receta);
-    }
-
     public int cantidadRecetas(){
         return recetas.size();
+    }
+
+    public void agregarReceta(Receta receta){
+        recetas.add(receta);
+        this.notificarObservers(receta);
+    }
+    public void suscribirse(Ranking ranking){
+        this.agregarObserver(ranking);
     }
 }

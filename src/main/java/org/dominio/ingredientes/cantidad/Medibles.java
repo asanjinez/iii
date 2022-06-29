@@ -1,5 +1,4 @@
 package org.dominio.ingredientes.cantidad;
-
 public class Medibles implements TipoCantidad {
     private int cantidad;
     private Unidades unidades;
@@ -22,11 +21,11 @@ public class Medibles implements TipoCantidad {
     }
 
     @Override
-    public int getCalorias(){
+    public int getCalorias() {
         return this.calorias;
     }
     @Override
-    public String toString(){
+    public String toString() {
         return Integer.toString(this.cantidad) + this.getUnidades();
     }
 }
