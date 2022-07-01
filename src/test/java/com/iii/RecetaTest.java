@@ -20,7 +20,7 @@ public class RecetaTest {
     Receta receta3;
     @Before
     public void setUp() {
-        this.ingrediente1 = new Ingrediente(TipoIngrediente.CARNES, "Milanesa",  new Medibles(1, Unidades.KG),20);
+        this.ingrediente1 = new Ingrediente(TipoIngrediente.CARNES, "Milanesa",  new Medibles(1, Unidades.KG),106);
         this.ingrediente2 = new Ingrediente(TipoIngrediente.CARNES, "Cereal", new Medibles(3, Unidades.UNIDADES),20);
         this.ingrediente3 = new Ingrediente(TipoIngrediente.LEGUMBRES, "Lentejas",new CantidadNecesaria(),0);
         this.receta1 = new Receta("Receta de prueba1");
@@ -41,7 +41,6 @@ public class RecetaTest {
 
         assertEquals(receta1.cantidadIngredientes(),10);
     }
-
     @Test
     public void cantidadCaloriasCero(){
         Receta receta4 = new Receta("Receta de prueba1");
@@ -54,7 +53,7 @@ public class RecetaTest {
             receta1.agregarIngrediente(ingrediente2);
             receta1.agregarIngrediente(ingrediente3);
         }
-        assertEquals(receta1.cantidadCalorias(),320);
+        assertEquals(receta1.cantidadCalorias(),630);
 
     }
 
