@@ -44,7 +44,7 @@ public class Ingrediente {
         this.infoCantidad = cantidad;
     }
     public int getCalorias() {
-        return this.getCalorias();
+        return this.calorias;
     }
     public TipoIngrediente getGrupo() {
         return this.grupo;
