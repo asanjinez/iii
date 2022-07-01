@@ -4,11 +4,14 @@ import com.iii.model.Receta;
 import com.iii.model.Recetario;
 import com.iii.model.ingredientes.Ingrediente;
 import com.iii.model.ingredientes.TipoIngrediente;
+import com.iii.model.ingredientes.cantidad.Medibles;
+import com.iii.model.ingredientes.cantidad.Unidades;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.reactive.context.GenericReactiveWebApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,8 +40,8 @@ class RecetarioServiciosTest {
         receta1 = new Receta("Receta1");
         receta2 = new Receta("Receta2");
 
-        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",20,200,"Unidades");
-        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",1,30,"Gramos");
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",new Medibles(20, Unidades.UNIDADES),200);
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",new Medibles(1, Unidades.GR),30);
 
         receta1.agregarIngrediente(ingrediente1);
         receta2.agregarIngrediente(ingrediente2);
@@ -55,7 +58,6 @@ class RecetarioServiciosTest {
 
     @Test
     void save() {
-        deleteAll();
         servicio.save(recetario1);
         servicio.save(recetario2);
         assertNotNull(servicio.findByName(recetario1.getTitulo()).orElse(null));

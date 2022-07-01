@@ -10,9 +10,8 @@ public enum TipoIngrediente {
 
     private final String tipo;
     private TipoIngrediente(String tipo) {
-    this.tipo = tipo;
+        this.tipo = tipo;
     }
-
     public String getTipo() {
         return tipo;
     }
