@@ -41,10 +41,8 @@ public class RecetasController {
 
     @PostMapping("/recetas")
     public  EntityModel<Receta> create(@RequestBody Receta receta) {
-        receta.setIngredientes(recetasServicios.actualizarIngredientes(receta));
         return recetaAssembler.toModel(recetasServicios.save(receta));
     }
-    // Single item
     @GetMapping("/recetas/{id}")
     public  EntityModel<Receta> singleReceta(@PathVariable Long id) {
         Receta receta = recetasServicios.findById(id).orElseThrow(() -> new RecetaNotFoundException(id));
@@ -53,14 +51,7 @@ public class RecetasController {
 
     @PutMapping("/recetas/{id}")
     public  EntityModel<Receta> modifyReceta(@RequestBody Receta recetaNueva, @PathVariable Long id) {
-        return recetasServicios.findById(id)
-                .map(receta -> {
-                    return recetaAssembler.toModel(recetasServicios.updateByReceta(receta,recetaNueva));
-                })
-                .orElseGet(() -> {
-                    recetaNueva.setId(id);
-                    return recetaAssembler.toModel(recetasServicios.save(recetaNueva));
-                });
+        return recetaAssembler.toModel(recetasServicios.updateById(recetaNueva,id));
     }
 
     @DeleteMapping("/recetas/{id}")

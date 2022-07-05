@@ -1,9 +1,9 @@
 package com.iii.servicios;
 
+import com.iii.exceptions.IngredienteNotFoundException;
 import com.iii.exceptions.NombreExistenteException;
 import com.iii.model.Receta;
 import com.iii.model.Recetario;
-import com.iii.model.ingredientes.Ingrediente;
 import com.iii.repositorios.RecetarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,30 +23,22 @@ public class RecetarioServicios {
         recetario.setRecetas(this.actualizarRecetas(recetario));
         return repo.save(recetario);
     }
-    public Recetario updateByRecetario(Recetario recetarioViejo, Recetario recetarioNuevo){
-        if (!recetarioViejo.getTitulo().equals(recetarioNuevo.getTitulo()))
-            this.nombreExistenteThrowException(recetarioNuevo);
 
-        recetarioViejo.setTitulo(recetarioNuevo.getTitulo());
-        recetarioViejo.setRecetas(this.actualizarRecetas(recetarioNuevo));
+    public Recetario updateById(Recetario recetario, Long id){
+        Recetario recetarioBuscado = repo.findById(id).orElse(null);
+        if (recetarioBuscado == null)
+            throw new IngredienteNotFoundException(id);
+        if (!nombreValido(recetario.getNombre(), recetarioBuscado))
+            throw new NombreExistenteException(recetario.getNombre());
 
-        return repo.save(recetarioViejo);
+        recetarioBuscado.setNombre(recetario.getNombre());
+        recetarioBuscado.setRecetas(this.actualizarRecetas(recetario));
+        return repo.save(recetarioBuscado);
     }
-    public Recetario updateByNombre(Recetario recetarioNuevo) {
-        Recetario recetarioExistente = repo.findByTitulo(recetarioNuevo.getTitulo()).orElse(null);
-        if (recetarioExistente == null)
-            return recetarioNuevo;
-        List<Receta> recetasNuevas = this.actualizarRecetas(recetarioNuevo);
-
-        recetarioExistente.setTitulo(recetarioNuevo.getTitulo());
-        recetarioExistente.setRecetas(recetasNuevas);
-        return repo.save(recetarioExistente);
-    }
-
     public void nombreExistenteThrowException(Recetario recetario){
-        Recetario recetaNombreExistente = repo.findByTitulo(recetario.getTitulo()).orElse(null);
+        Recetario recetaNombreExistente = repo.findByNombre(recetario.getNombre()).orElse(null);
         if (recetaNombreExistente != null)
-            throw new NombreExistenteException(recetaNombreExistente.getTitulo());
+            throw new NombreExistenteException(recetaNombreExistente.getNombre());
     }
     public List<Receta> actualizarRecetas(Recetario recetario){
         List<Receta> listaRecetas = recetario.getRecetas();
@@ -55,6 +47,21 @@ public class RecetarioServicios {
             listaRecetas.set(i,recetasServicios.updateByNombre(receta));
         }
         return listaRecetas;
+    }
+
+    public boolean mismoNombreReceta(Recetario recetario1, Recetario recetario2){
+        return recetario1.getNombre().equals(recetario2.getNombre());
+    }
+
+    public boolean nombreValido(String nombreDeseado, Recetario recetario) {
+        boolean nombreValido = true;
+        Recetario recetarioBuscado = repo.findByNombre(nombreDeseado).orElse(null);
+        if (recetarioBuscado != null) {
+            if (!mismoNombreReceta(recetario, recetarioBuscado))
+                nombreValido = false;
+        }
+        return nombreValido;
+
     }
 
     public List<Recetario> findAll() {
@@ -66,7 +73,7 @@ public class RecetarioServicios {
     }
 
     public Optional<Recetario> findByName(String nombre){
-        return repo.findByTitulo(nombre);
+        return repo.findByNombre(nombre);
     }
 
     public void deleteById(Long id) {

@@ -22,7 +22,7 @@ public class Usuario {
         this.perfiles = new ArrayList<Perfil>();
         this.perfilActual = null;
     }
-    public void agegarPerfil(Perfil perfil){
+    public void agregarPerfil(Perfil perfil){
         this.perfiles.add(perfil);
         if (this.getPerfilActual() == null){
             perfilActual = perfil;
@@ -33,17 +33,17 @@ public class Usuario {
         try {
             Perfil perfilCambio = this.filtrarPerfiles(nombre).get(0);
             this.perfilActual = perfilCambio;
-            System.out.println("Cambiaste al perfil " + perfilCambio.getNombre());
+            System.out.println("Cambiaste al perfil " + perfilCambio.getDieta().getNombre());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
     }
     public void suscribirse(Recetario recetario){
-        recetario.getNotificadorPerfiles().agregarPerfil(perfilActual);
+        recetario.agregarObserver(this.perfilActual);
     }
     public List<Perfil> filtrarPerfiles(String nombre) throws Exception {
-        List<Perfil> perfiles = this.perfiles.stream().filter(x-> x.getNombre() == nombre).collect(Collectors.toList());
+        List<Perfil> perfiles = this.perfiles.stream().filter(x-> x.getDieta().getNombre() == nombre).collect(Collectors.toList());
         if (perfiles.size() == 0){
             throw new Exception("Error: No existe el perfil");
         } else {

@@ -1,58 +1,33 @@
 package com.iii.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
-public class Recetario {
+public class Recetario extends Observable{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @Column(name = "TITULO")
-    String titulo;
+    private String nombre;
     @Column(name = "RECETAS")
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},
-                fetch = FetchType.EAGER )
+    @ManyToMany(cascade = {CascadeType.MERGE},
+            fetch = FetchType.EAGER )
     @JoinTable(joinColumns =  @JoinColumn(name = "recetario_id"),
             inverseJoinColumns = @JoinColumn(name = "receta_id"))
     private List<Receta> recetas;
-    @Transient
-    @JsonIgnore
-    private PublisherPerfil notificadorPerfiles = new PublisherPerfil();
-
-    public Recetario(){
-
-    }
     public Recetario(String nombre) {
-        this.titulo = nombre;
+        this.nombre = nombre;
         recetas = new ArrayList<Receta>();
     }
 
-    public PublisherPerfil getNotificadorPerfiles() {
-        return notificadorPerfiles;
+    public Recetario() {}
+    public String getNombre() {
+        return nombre;
     }
-    public int cantidadRecetas(){
-        return recetas.size();
+    public void setNombre(String titulo) {
+        this.nombre = titulo;
     }
-
-    public void accionNotificar(Receta receta){
-        this.notificadorPerfiles.notificarPerfiles(receta);
-    }
-
-    public void agregarReceta(Receta receta){
-        recetas.add(receta);
-        receta.accionAgregar();
-        this.accionNotificar(receta);
-    }
-    public String getTitulo(){
-        return this.titulo;
-    }
-    public void setTitulo(String titulo){
-        this.titulo = titulo;
-    }
-
     public Long getId() {
         return id;
     }
@@ -68,13 +43,15 @@ public class Recetario {
         this.recetas = recetas;
     }
 
-    @Override
-    public String toString() {
-        return "Recetario{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", recetas=" + recetas +
-                ", notificadorPerfiles=" + notificadorPerfiles +
-                '}';
+    public int cantidadRecetas(){
+        return recetas.size();
+    }
+
+    public void agregarReceta(Receta receta){
+        recetas.add(receta);
+        this.notificarObservers(receta);
+    }
+    public void suscribirse(Ranking ranking){
+        this.agregarObserver(ranking);
     }
 }

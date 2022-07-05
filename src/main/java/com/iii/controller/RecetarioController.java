@@ -33,7 +33,7 @@ public class RecetarioController {
 
     @PostMapping("/recetarios")
     public  EntityModel<Recetario> create(@RequestBody Recetario recetario) {
-        recetario.setRecetas(recetarioServicios.actualizarRecetas(recetario));
+//        recetario.setRecetas(recetarioServicios.actualizarRecetas(recetario));
         return recetarioAssembler.toModel(recetarioServicios.save(recetario));
     }
     // Single item
@@ -45,14 +45,7 @@ public class RecetarioController {
 
     @PutMapping("/recetarios/{id}")
     public EntityModel<Recetario> modifyRecetario(@RequestBody Recetario recetarioNuevo, @PathVariable Long id) {
-        return recetarioServicios.findById(id)
-                .map(recetario -> {
-                    return recetarioAssembler.toModel(recetarioServicios.updateByRecetario(recetario,recetarioNuevo));
-                })
-                .orElseGet(() -> {
-                    recetarioNuevo.setId(id);
-                    return recetarioAssembler.toModel(recetarioServicios.save(recetarioNuevo));
-                });
+        return recetarioAssembler.toModel(recetarioServicios.updateById(recetarioNuevo,id));
     }
 
     @DeleteMapping("/recetarios/{id}")

@@ -1,5 +1,6 @@
 package com.iii.servicios;
 
+import com.iii.exceptions.IngredienteNotFoundException;
 import com.iii.exceptions.NombreExistenteException;
 import com.iii.model.Receta;
 import com.iii.model.ingredientes.Ingrediente;
@@ -20,29 +21,28 @@ public class RecetasServicios {
 
     public Receta save(Receta receta) {
         this.nombreExistenteThrowException(receta);
-        receta.setIngredientes(this.actualizarIngredientes(receta));
+        receta.setIngredientes(receta.getIngredientes());
         return repo.save(receta);
+
 }
-    public Receta updateByReceta(Receta recetaVieja, Receta recetaNueva) {
-        if (!recetaVieja.getNombre().equals(recetaNueva.getNombre()))
-            this.nombreExistenteThrowException(recetaNueva);
+    public Receta updateById(Receta receta, Long id){
+        Receta recetaBuscada = repo.findById(id).orElse(null);
+        if (recetaBuscada == null)
+            throw new IngredienteNotFoundException(id);
+        if (!nombreValido(receta.getNombre(), recetaBuscada))
+            throw new NombreExistenteException(receta.getNombre());
 
-        recetaVieja.setNombre(recetaNueva.getNombre());
-        recetaVieja.setIngredientes(this.actualizarIngredientes(recetaNueva));
-
-        return repo.save(recetaVieja);
+        recetaBuscada.setNombre(receta.getNombre());
+        recetaBuscada.setIngredientes(receta.getIngredientes());
+        return repo.save(recetaBuscada);
     }
-
     public Receta updateByNombre(Receta recetaNueva) {
         Receta recetaExistente = repo.findByNombre(recetaNueva.getNombre()).orElse(null);
-        if (recetaExistente == null){
-            recetaNueva.setIngredientes(this.actualizarIngredientes((recetaNueva)));
+        if (recetaExistente == null)
             return repo.save(recetaNueva);
-        }
-        List<Ingrediente> ingredientesNuevos = this.actualizarIngredientes(recetaNueva);
 
         recetaExistente.setNombre(recetaNueva.getNombre());
-        recetaExistente.setIngredientes(ingredientesNuevos);
+        recetaExistente.setIngredientes(recetaNueva.getIngredientes());
         return repo.save(recetaExistente);
     }
     public void nombreExistenteThrowException(Receta receta){
@@ -51,13 +51,18 @@ public class RecetasServicios {
             throw new NombreExistenteException(recetaNombreExistente.getNombre());
 
     }
-    public List<Ingrediente> actualizarIngredientes(Receta receta){
-        List<Ingrediente> listaIngredientes = receta.getIngredientes();
-        for (int i =0;i < listaIngredientes.size(); i++){
-            Ingrediente ingrediente = listaIngredientes.get(i);
-            listaIngredientes.set(i,ingredientesServicios.updateByNombre(ingrediente));
+    public boolean mismoNombreReceta(Receta receta1, Receta receta2){
+        return receta1.getNombre().equals(receta2.getNombre());
+    }
+    public boolean nombreValido(String nombreDeseado, Receta receta) {
+        boolean nombreValido = true;
+        Receta recetaBuscada = repo.findByNombre(nombreDeseado).orElse(null);
+        if (recetaBuscada != null) {
+            if (!mismoNombreReceta(receta, recetaBuscada))
+                nombreValido = false;
         }
-        return listaIngredientes;
+        return nombreValido;
+
     }
     public List<Receta> findAll() {
        return (List<Receta>) repo.findAll();

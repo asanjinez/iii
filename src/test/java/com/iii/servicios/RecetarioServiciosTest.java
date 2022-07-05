@@ -4,6 +4,8 @@ import com.iii.model.Receta;
 import com.iii.model.Recetario;
 import com.iii.model.ingredientes.Ingrediente;
 import com.iii.model.ingredientes.TipoIngrediente;
+import com.iii.model.ingredientes.cantidad.InfoCantidadDTO;
+import com.iii.model.ingredientes.cantidad.Unidades;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,8 +39,8 @@ class RecetarioServiciosTest {
         receta1 = new Receta("Receta1");
         receta2 = new Receta("Receta2");
 
-        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",20,200,"Unidades");
-        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",1,30,"Gramos");
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",new InfoCantidadDTO(20, Unidades.UNIDADES),200);
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",new InfoCantidadDTO(1, Unidades.GR),30);
 
         receta1.agregarIngrediente(ingrediente1);
         receta2.agregarIngrediente(ingrediente2);
@@ -55,11 +57,10 @@ class RecetarioServiciosTest {
 
     @Test
     void save() {
-        deleteAll();
         servicio.save(recetario1);
         servicio.save(recetario2);
-        assertNotNull(servicio.findByName(recetario1.getTitulo()).orElse(null));
-        assertNotNull(servicio.findByName(recetario2.getTitulo()).orElse(null));
+        assertNotNull(servicio.findByName(recetario1.getNombre()).orElse(null));
+        assertNotNull(servicio.findByName(recetario2.getNombre()).orElse(null));
 
     }
 
@@ -84,7 +85,7 @@ class RecetarioServiciosTest {
 
         String nombreCambiado = "receta_nuevo_nombre";
 
-        recetarioModif.setTitulo(nombreCambiado);
+        recetarioModif.setNombre(nombreCambiado);
         recetarioModif.agregarReceta(receta2);
         servicio.save(recetarioModif);
 

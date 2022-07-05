@@ -1,48 +1,44 @@
 package com.iii.model.ingredientes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.iii.model.Receta;
+import com.iii.model.ingredientes.cantidad.CantidadNecesaria;
+import com.iii.model.ingredientes.cantidad.InfoCantidad;
+import com.iii.model.ingredientes.cantidad.InfoCantidadDTO;
+import com.iii.model.ingredientes.cantidad.Unidades;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name= "INGREDIENTES")
 public class Ingrediente {
-
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "TIPO_INGREDIENTE")
     private TipoIngrediente grupo;
-    @Column(name = "NOMBRE_INGREDIENTE",
-            unique = true)
+    @Column(name = "NOMBRE_INGREDIENTE")
     private String nombre;
-    @Column(name = "CALORIAS")
+    @Column(name = "CALORIAS_INGREDIENTE")
     private int calorias;
-    @Column(name = "CANTIDAD")
-    private int cantidad;
-    @Column(name = "UNIDAD")
-    private String unidad;
 
-    @ManyToMany(mappedBy = "ingredientes")
+    @JoinColumn(name = "info_id",referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
+    private InfoCantidadDTO infoCantidadDTO;
+
+    @Transient
     @JsonIgnore
-    private List<Receta> recetas;
+    private InfoCantidad infoCantidad;
 
     public Ingrediente() {
-        this.grupo = null;
-        this.unidad = null;
     }
 
-    public Ingrediente(TipoIngrediente grupo, String nombre, int calorias, int cantidad, String unidad) {
-        this.grupo = grupo;
+    public Ingrediente(TipoIngrediente tipo, String nombre, InfoCantidadDTO infoCantidadDTO, int calorias) {
+        this.grupo = tipo;
         this.nombre = nombre;
         this.calorias = calorias;
-        this.cantidad = cantidad;
-        this.unidad = unidad;
-        this.recetas = new ArrayList<Receta>();
+        this.infoCantidadDTO = infoCantidadDTO;
+        this.infoCantidad = this.construirInfoCantidad(infoCantidadDTO);
     }
 
     public Long getId() {
@@ -51,20 +47,18 @@ public class Ingrediente {
     public void setId(Long id) {
         this.id = id;
     }
-    public TipoIngrediente getGrupo() {
-        return this.grupo;
-    }
-
-    public void setGrupo(TipoIngrediente grupo){this.grupo = grupo;}
-
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    public TipoIngrediente getGrupo() {
+        return grupo;
+    }
+    public void setGrupo(TipoIngrediente grupo) {
+        this.grupo = grupo;
+    }
     public int getCalorias() {
         return calorias;
     }
@@ -73,34 +67,27 @@ public class Ingrediente {
         this.calorias = calorias;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public InfoCantidadDTO getInfoCantidad() {
+        return infoCantidadDTO;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setInfoCantidad(InfoCantidadDTO infoCantidadDTO) {
+        this.infoCantidadDTO = infoCantidadDTO;
+    }
+    public InfoCantidadDTO getInfoCantidadDTO() {
+        return infoCantidadDTO;
     }
 
-    public String getUnidad() {
-        return unidad;
-    }
-    public void setUnidad(String unidad) {
-        this.unidad = unidad;
+    public void setInfoCantidadDTO(InfoCantidadDTO infoCantidadDTO) {
+        this.infoCantidadDTO = infoCantidadDTO;
     }
 
-    public List<Receta> getRecetas() {
-        return recetas;
-    }
+    public InfoCantidad construirInfoCantidad(InfoCantidadDTO infoCantidadDTO){
+        if(infoCantidadDTO.getUnidad() == Unidades.CN){
+            return new CantidadNecesaria();
+        } else {
+            return new InfoCantidad(infoCantidadDTO.getCantidad(), infoCantidadDTO.getUnidad());
+        }
 
-    @Override
-    public String toString() {
-        return "Ingrediente{" +
-                "id=" + id +
-                ", grupo=" + grupo +
-                ", nombre='" + nombre + '\'' +
-                ", calorias=" + calorias +
-                ", cantidad=" + cantidad +
-                ", unidad='" + unidad + '\'' +
-                '}';
     }
 }
