@@ -4,7 +4,7 @@ import com.iii.model.Ranking;
 import com.iii.model.Receta;
 import com.iii.model.Recetario;
 import com.iii.model.ingredientes.*;
-import com.iii.model.ingredientes.cantidad.InfoCantidadDTO;
+import com.iii.model.ingredientes.cantidad.Medibles;
 import com.iii.model.ingredientes.cantidad.Unidades;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class RankingTest {
 
     @Before
     public void before() {
-        this.ingrediente1 = new Ingrediente(TipoIngrediente.CARNES, "Milanesa", new InfoCantidadDTO(1, Unidades.KG),20);
-        this.ingrediente2 = new Ingrediente(TipoIngrediente.CARNES, "Cereal", new InfoCantidadDTO(3, Unidades.UNIDADES),44);
+        this.ingrediente1 = new Ingrediente(TipoIngrediente.CARNES, "Milanesa", new Medibles(1, Unidades.KG),20);
+        this.ingrediente2 = new Ingrediente(TipoIngrediente.CARNES, "Cereal", new Medibles(3, Unidades.UNIDADES),44);
 
         this.receta1 = new Receta("Receta de prueba1");
         this.receta2 = new Receta("Receta de prueba2");

@@ -1,7 +1,5 @@
 package com.iii.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.iii.model.acciones.Accion;
 import com.iii.model.ingredientes.Ingrediente;
 import com.iii.model.perfiles.Perfil;
 
@@ -76,7 +74,6 @@ public class Receta {
         return this.ingredientes.stream().anyMatch(ingrediente -> ingrediente.getGrupo().getTipo()== grupo);
     }
 
-    //Consultar si es necesario un metodo para consultar desde la Receta
     public boolean esAptoPara(Perfil perfil) {
         return perfil.getDieta().puedeComer(this);
     }

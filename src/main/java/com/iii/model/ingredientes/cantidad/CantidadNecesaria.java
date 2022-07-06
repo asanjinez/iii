@@ -1,17 +1,23 @@
 package com.iii.model.ingredientes.cantidad;
 
+import javax.persistence.*;
 
+@Entity
+@DiscriminatorValue("CantidadNecesaria")
 public class CantidadNecesaria extends InfoCantidad {
-    private int cantidad;
+    @Column(name = "UNIDADES")
+    @Enumerated(EnumType.STRING)
     private Unidades unidad;
 
-    public CantidadNecesaria(){
-        this.cantidad = 0;
+    public CantidadNecesaria(Unidades unidades){
         this.unidad = Unidades.CN;
     }
-
+    public CantidadNecesaria(){
+        this.unidad = Unidades.CN;
+    }
+    @Override
     public int getCantidad(){
-        return this.cantidad;
+        return 0;
     }
 
     public Unidades getUnidad(){
@@ -21,8 +27,8 @@ public class CantidadNecesaria extends InfoCantidad {
     public void setUnidad(Unidades unidades) {
         this.unidad = unidades;
     }
-    @Override
+
     public String toString() {
-        return this.cantidad + this.unidad.getUnidades();
+        return "Cantidad Necesaria";
     }
 }

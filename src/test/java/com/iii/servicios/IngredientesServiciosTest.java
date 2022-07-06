@@ -2,8 +2,7 @@ package com.iii.servicios;
 
 import com.iii.model.ingredientes.Ingrediente;
 import com.iii.model.ingredientes.TipoIngrediente;
-import com.iii.model.ingredientes.cantidad.InfoCantidad;
-import com.iii.model.ingredientes.cantidad.InfoCantidadDTO;
+import com.iii.model.ingredientes.cantidad.Medibles;
 import com.iii.model.ingredientes.cantidad.Unidades;
 import com.iii.repositorios.InfoIngredientesRepositorio;
 import org.junit.jupiter.api.AfterEach;
@@ -11,8 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.persistence.criteria.CriteriaBuilder;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +24,7 @@ class IngredientesServiciosTest {
     Ingrediente ingrediente;
     @BeforeEach
     void setUp() {
-        this.ingrediente = new Ingrediente(TipoIngrediente.CARNES, "Milanesa", new InfoCantidadDTO(1,Unidades.KG), 200);
+        this.ingrediente = new Ingrediente(TipoIngrediente.CARNES, "Milanesa", new Medibles(1,Unidades.KG), 200);
     }
 
     @AfterEach
@@ -51,8 +48,8 @@ class IngredientesServiciosTest {
 
     @Test
     void update() throws Exception {
-        servicio.save(new Ingrediente(TipoIngrediente.CARNES,"MilanesaPrueba",new InfoCantidadDTO(2,Unidades.UNIDADES),0));
-        servicio.save(new Ingrediente(TipoIngrediente.CARNES,"MilanesaPrueba2",new InfoCantidadDTO(2,Unidades.UNIDADES),0));
+        servicio.save(new Ingrediente(TipoIngrediente.CARNES,"MilanesaPrueba",new Medibles(2,Unidades.UNIDADES),0));
+        servicio.save(new Ingrediente(TipoIngrediente.CARNES,"MilanesaPrueba2",new Medibles(2,Unidades.UNIDADES),0));
         String nombre_cambiado = "nombre_prueba";
 
         Ingrediente ingrediente_modif = servicio.findByNombre("MilanesaPrueba2").orElseThrow(Exception::new);
@@ -65,7 +62,7 @@ class IngredientesServiciosTest {
 
     @Test
     void delete() throws Exception {
-        servicio.save(new Ingrediente(TipoIngrediente.LEGUMBRES,"LentejasPrueba",new InfoCantidadDTO(0,Unidades.GR),0));
+        servicio.save(new Ingrediente(TipoIngrediente.LEGUMBRES,"LentejasPrueba",new Medibles(0,Unidades.GR),0));
         Ingrediente ingredienteBuscado = servicio.findByNombre("LentejasPrueba").orElseThrow(Exception::new);
         servicio.delete(ingredienteBuscado);
         assertNull(servicio.findByNombre("LentejasPrueba").orElse(null));

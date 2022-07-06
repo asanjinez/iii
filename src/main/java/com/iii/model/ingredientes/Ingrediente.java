@@ -3,7 +3,7 @@ package com.iii.model.ingredientes;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iii.model.ingredientes.cantidad.CantidadNecesaria;
 import com.iii.model.ingredientes.cantidad.InfoCantidad;
-import com.iii.model.ingredientes.cantidad.InfoCantidadDTO;
+import com.iii.model.ingredientes.cantidad.Medibles;
 import com.iii.model.ingredientes.cantidad.Unidades;
 
 import javax.persistence.*;
@@ -21,24 +21,19 @@ public class Ingrediente {
     private String nombre;
     @Column(name = "CALORIAS_INGREDIENTE")
     private int calorias;
-
     @JoinColumn(name = "info_id",referencedColumnName = "id")
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
-    private InfoCantidadDTO infoCantidadDTO;
-
-    @Transient
-    @JsonIgnore
     private InfoCantidad infoCantidad;
 
     public Ingrediente() {
     }
 
-    public Ingrediente(TipoIngrediente tipo, String nombre, InfoCantidadDTO infoCantidadDTO, int calorias) {
+    public Ingrediente(TipoIngrediente tipo, String nombre, InfoCantidad infoCantidad, int calorias) {
         this.grupo = tipo;
         this.nombre = nombre;
         this.calorias = calorias;
-        this.infoCantidadDTO = infoCantidadDTO;
-        this.infoCantidad = this.construirInfoCantidad(infoCantidadDTO);
+        this.infoCantidad = infoCantidad;
+//        this.infoCantidad = this.construirInfoCantidad(medibles);
     }
 
     public Long getId() {
@@ -67,27 +62,11 @@ public class Ingrediente {
         this.calorias = calorias;
     }
 
-    public InfoCantidadDTO getInfoCantidad() {
-        return infoCantidadDTO;
+    public InfoCantidad getInfoCantidad() {
+        return infoCantidad;
     }
 
-    public void setInfoCantidad(InfoCantidadDTO infoCantidadDTO) {
-        this.infoCantidadDTO = infoCantidadDTO;
-    }
-    public InfoCantidadDTO getInfoCantidadDTO() {
-        return infoCantidadDTO;
-    }
-
-    public void setInfoCantidadDTO(InfoCantidadDTO infoCantidadDTO) {
-        this.infoCantidadDTO = infoCantidadDTO;
-    }
-
-    public InfoCantidad construirInfoCantidad(InfoCantidadDTO infoCantidadDTO){
-        if(infoCantidadDTO.getUnidad() == Unidades.CN){
-            return new CantidadNecesaria();
-        } else {
-            return new InfoCantidad(infoCantidadDTO.getCantidad(), infoCantidadDTO.getUnidad());
-        }
-
+    public void setInfoCantidad(InfoCantidad infoCantidad) {
+        this.infoCantidad = infoCantidad;
     }
 }

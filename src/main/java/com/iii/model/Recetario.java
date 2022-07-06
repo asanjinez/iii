@@ -11,7 +11,7 @@ public class Recetario extends Observable{
     @Column(name = "TITULO")
     private String nombre;
     @Column(name = "RECETAS")
-    @ManyToMany(cascade = {CascadeType.MERGE},
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},
             fetch = FetchType.EAGER )
     @JoinTable(joinColumns =  @JoinColumn(name = "recetario_id"),
             inverseJoinColumns = @JoinColumn(name = "receta_id"))

@@ -4,7 +4,7 @@ import com.iii.model.Receta;
 import com.iii.model.Recetario;
 import com.iii.model.ingredientes.Ingrediente;
 import com.iii.model.ingredientes.TipoIngrediente;
-import com.iii.model.ingredientes.cantidad.InfoCantidadDTO;
+import com.iii.model.ingredientes.cantidad.Medibles;
 import com.iii.model.ingredientes.cantidad.Unidades;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,8 +39,8 @@ class RecetarioServiciosTest {
         receta1 = new Receta("Receta1");
         receta2 = new Receta("Receta2");
 
-        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",new InfoCantidadDTO(20, Unidades.UNIDADES),200);
-        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",new InfoCantidadDTO(1, Unidades.GR),30);
+        Ingrediente ingrediente1 = new Ingrediente(TipoIngrediente.CARNES,"Milanesa",new Medibles(20, Unidades.UNIDADES),200);
+        Ingrediente ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES,"Cereal",new Medibles(1, Unidades.GR),30);
 
         receta1.agregarIngrediente(ingrediente1);
         receta2.agregarIngrediente(ingrediente2);

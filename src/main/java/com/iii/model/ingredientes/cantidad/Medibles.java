@@ -2,14 +2,11 @@ package com.iii.model.ingredientes.cantidad;
 
 import javax.persistence.*;
 
-@Table(name = "informacion_ingrediente")
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 
-public class InfoCantidadDTO {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long Id;
+@Entity
+@DiscriminatorValue(value="Medibles")
+
+public class Medibles extends InfoCantidad {
     @Column(name = "CANTIDAD")
     private int cantidad;
     @Column(name = "UNIDADES")
@@ -17,20 +14,12 @@ public class InfoCantidadDTO {
     private Unidades unidad;
 
 
-    public InfoCantidadDTO(int cantidad, Unidades unidades) {
+    public Medibles(int cantidad, Unidades unidades) {
         this.cantidad = cantidad;
         this.unidad = unidades;
     }
 
-    public InfoCantidadDTO() {
-    }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        this.Id = id;
+    public Medibles() {
     }
 
     public int getCantidad(){

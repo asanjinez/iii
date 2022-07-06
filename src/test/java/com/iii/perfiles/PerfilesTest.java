@@ -1,6 +1,6 @@
 package com.iii.perfiles;
 
-import com.iii.model.ingredientes.cantidad.InfoCantidadDTO;
+import com.iii.model.ingredientes.cantidad.Medibles;
 import com.iii.model.ingredientes.cantidad.Unidades;
 import com.iii.model.perfiles.*;
 import com.iii.model.Receta;
@@ -33,11 +33,11 @@ public class PerfilesTest {
         @Before
         public void setUp() {
 
-        ingrediente1 = new Ingrediente(TipoIngrediente.CARNES, "Milanesa", new InfoCantidadDTO(20, Unidades.GR),197);
-        ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES, "Cereal", new InfoCantidadDTO(3,Unidades.UNIDADES),44);
-        ingrediente3 = new Ingrediente(TipoIngrediente.LEGUMBRES, "Lenteja", new InfoCantidadDTO(3,Unidades.UNIDADES),44);
-        ingrediente4 = new Ingrediente(TipoIngrediente.VEGETALES,"Lechuga", new InfoCantidadDTO(20,Unidades.UNIDADES),30);
-        ingrediente5 = new Ingrediente(TipoIngrediente.LACTEOS,"Leche", new InfoCantidadDTO(2,Unidades.LITROS),40);
+        ingrediente1 = new Ingrediente(TipoIngrediente.CARNES, "Milanesa", new Medibles(20, Unidades.GR),197);
+        ingrediente2 = new Ingrediente(TipoIngrediente.CEREALES, "Cereal", new Medibles(3,Unidades.UNIDADES),44);
+        ingrediente3 = new Ingrediente(TipoIngrediente.LEGUMBRES, "Lenteja", new Medibles(3,Unidades.UNIDADES),44);
+        ingrediente4 = new Ingrediente(TipoIngrediente.VEGETALES,"Lechuga", new Medibles(20,Unidades.UNIDADES),30);
+        ingrediente5 = new Ingrediente(TipoIngrediente.LACTEOS,"Leche", new Medibles(2,Unidades.LITROS),40);
 
         recetaCarnivora = new Receta("recetaCarnivora");
         recetaCarnivora.agregarIngrediente(ingrediente1);

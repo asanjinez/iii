@@ -1,33 +1,24 @@
 package com.iii.model.ingredientes.cantidad;
 
-public class InfoCantidad {
-    private int cantidad;
-    private Unidades unidad;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-    public InfoCantidad(int cantidad, Unidades unidades) {
-        this.cantidad = cantidad;
-        this.unidad = unidades;
-    }
-    public InfoCantidad(){
-    }
+import javax.persistence.*;
 
-    public int getCantidad(){
-        return this.cantidad;
-    }
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME , include=JsonTypeInfo.As.PROPERTY, property="type")
+@JsonSubTypes({ @JsonSubTypes.Type(name = "Medibles", value = Medibles.class),
+                @JsonSubTypes.Type(name = "CantidadNecesaria", value = CantidadNecesaria.class) })
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.STRING)
+public abstract class InfoCantidad {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
 
-    public Unidades getUnidad(){
-        return this.unidad;
-    }
+    public abstract int getCantidad();
+    public abstract Unidades getUnidad();
 
-    public void setUnidad(Unidades unidades) {
-        this.unidad = unidades;
-    }
-    @Override
-    public String toString() {
-        return "Cantidad Necesaria";
-    }
 }
+

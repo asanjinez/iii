@@ -4,7 +4,7 @@ import com.iii.model.Receta;
 import com.iii.model.Recetario;
 import com.iii.model.Usuario;
 import com.iii.model.acciones.*;
-import com.iii.model.ingredientes.cantidad.InfoCantidadDTO;
+import com.iii.model.ingredientes.cantidad.Medibles;
 import com.iii.model.ingredientes.cantidad.Unidades;
 import com.iii.model.perfiles.*;
 import com.iii.model.ingredientes.Ingrediente;
@@ -48,8 +48,8 @@ public class NotificacionesTest {
 
     @Before
     public void setUp() {
-        this.ingrediente1 = new Ingrediente(TipoIngrediente.CARNES, "Milanesa", new InfoCantidadDTO(1, Unidades.KG),200);
-        this.ingrediente2 = new Ingrediente(TipoIngrediente.CARNES, "Cereal", new InfoCantidadDTO(3, Unidades.UNIDADES),440);
+        this.ingrediente1 = new Ingrediente(TipoIngrediente.CARNES, "Milanesa", new Medibles(1, Unidades.KG),200);
+        this.ingrediente2 = new Ingrediente(TipoIngrediente.CARNES, "Cereal", new Medibles(3, Unidades.UNIDADES),440);
 
         this.receta1 = new Receta("Receta de prueba1");
         this.receta2 = new Receta("Receta de prueba2");

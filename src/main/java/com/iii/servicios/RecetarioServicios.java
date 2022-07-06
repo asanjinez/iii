@@ -20,7 +20,7 @@ public class RecetarioServicios {
 
     public Recetario save(Recetario recetario) {
         this.nombreExistenteThrowException(recetario);
-        recetario.setRecetas(this.actualizarRecetas(recetario));
+//        recetario.setRecetas(this.actualizarRecetas(recetario));
         return repo.save(recetario);
     }
 

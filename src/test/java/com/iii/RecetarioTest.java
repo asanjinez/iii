@@ -4,7 +4,7 @@ import com.iii.model.Receta;
 import com.iii.model.Recetario;
 import com.iii.model.ingredientes.Ingrediente;
 import com.iii.model.ingredientes.TipoIngrediente;
-import com.iii.model.ingredientes.cantidad.InfoCantidadDTO;
+import com.iii.model.ingredientes.cantidad.Medibles;
 import com.iii.model.ingredientes.cantidad.Unidades;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +31,8 @@ public class RecetarioTest {
     }
     @Test
     public void cantidadComidasMayoACero(){
-        receta1.agregarIngrediente(new Ingrediente(TipoIngrediente.CARNES,"Milanesa",new InfoCantidadDTO(3, Unidades.UNIDADES),44));
-        receta2.agregarIngrediente(new Ingrediente(TipoIngrediente.VEGETALES,"Lechuga",new InfoCantidadDTO(3, Unidades.UNIDADES),44));
+        receta1.agregarIngrediente(new Ingrediente(TipoIngrediente.CARNES,"Milanesa",new Medibles(3, Unidades.UNIDADES),44));
+        receta2.agregarIngrediente(new Ingrediente(TipoIngrediente.VEGETALES,"Lechuga",new Medibles(3, Unidades.UNIDADES),44));
 
         for (int i=0; i < 5; i++){
             recetario1.agregarReceta(receta1);
