@@ -1,6 +1,6 @@
 package com.iii.servicios;
 
-import com.iii.exceptions.IngredienteNotFoundException;
+import com.iii.exceptions.ResourceNotFoundException;
 import com.iii.exceptions.NombreExistenteException;
 import com.iii.model.Receta;
 import com.iii.model.Recetario;
@@ -27,7 +27,7 @@ public class RecetarioServicios {
     public Recetario updateById(Recetario recetario, Long id){
         Recetario recetarioBuscado = repo.findById(id).orElse(null);
         if (recetarioBuscado == null)
-            throw new IngredienteNotFoundException(id);
+            throw new ResourceNotFoundException(id);
         if (!nombreValido(recetario.getNombre(), recetarioBuscado))
             throw new NombreExistenteException(recetario.getNombre());
 

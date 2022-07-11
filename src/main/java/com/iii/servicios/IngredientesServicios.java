@@ -1,6 +1,6 @@
 package com.iii.servicios;
 
-import com.iii.exceptions.IngredienteNotFoundException;
+import com.iii.exceptions.ResourceNotFoundException;
 import com.iii.model.ingredientes.Ingrediente;
 import com.iii.repositorios.IngredientesRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class IngredientesServicios {
     public Ingrediente updateById(Ingrediente ingrediente, Long id){
         Ingrediente ingredienteBuscado = repo.findById(id).orElse(null);
         if (ingredienteBuscado == null)
-            throw new IngredienteNotFoundException(id);
+            throw new ResourceNotFoundException(id);
         ingredienteBuscado.setInfoCantidad(ingrediente.getInfoCantidad());
         ingredienteBuscado.setCalorias(ingrediente.getCalorias());
         ingredienteBuscado.setNombre(ingrediente.getNombre());

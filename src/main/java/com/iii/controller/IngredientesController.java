@@ -1,6 +1,6 @@
 package com.iii.controller;
 
-import com.iii.exceptions.IngredienteNotFoundException;
+import com.iii.exceptions.ResourceNotFoundException;
 import com.iii.hateoasAssembler.IngredienteAssembler;
 import com.iii.model.Receta;
 import com.iii.model.ingredientes.Ingrediente;
@@ -42,7 +42,7 @@ public class IngredientesController {
     // Single item
     @GetMapping("/ingredientes/{id}")
     public EntityModel<Ingrediente> singleIngrediente(@PathVariable Long id) {
-        Ingrediente ingrediente = servicioIngredientes.findById(id).orElseThrow(() -> new IngredienteNotFoundException(id));
+        Ingrediente ingrediente = servicioIngredientes.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
         return ingredienteAssembler.toModel(ingrediente);
     }
 

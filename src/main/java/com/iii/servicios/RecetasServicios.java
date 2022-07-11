@@ -1,12 +1,10 @@
 package com.iii.servicios;
 
-import com.iii.exceptions.IngredienteNotFoundException;
+import com.iii.exceptions.ResourceNotFoundException;
 import com.iii.exceptions.NombreExistenteException;
 import com.iii.model.Receta;
-import com.iii.model.ingredientes.Ingrediente;
 import com.iii.repositorios.RecetasRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +26,7 @@ public class RecetasServicios {
     public Receta updateById(Receta receta, Long id){
         Receta recetaBuscada = repo.findById(id).orElse(null);
         if (recetaBuscada == null)
-            throw new IngredienteNotFoundException(id);
+            throw new ResourceNotFoundException(id);
         if (!nombreValido(receta.getNombre(), recetaBuscada))
             throw new NombreExistenteException(receta.getNombre());
 
