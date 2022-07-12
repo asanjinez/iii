@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface RecetarioRepositorio extends CrudRepository<Recetario,Long> {
-    Optional<Recetario> findByTitulo(String nombre);
+    Optional<Recetario> findByNombre(String nombre);
 }

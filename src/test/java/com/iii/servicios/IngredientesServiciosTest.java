@@ -2,6 +2,9 @@ package com.iii.servicios;
 
 import com.iii.model.ingredientes.Ingrediente;
 import com.iii.model.ingredientes.TipoIngrediente;
+import com.iii.model.ingredientes.cantidad.Medibles;
+import com.iii.model.ingredientes.cantidad.Unidades;
+import com.iii.repositorios.InfoIngredientesRepositorio;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,22 +18,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class IngredientesServiciosTest {
     @Autowired
     public IngredientesServicios servicio;
+    @Autowired
+    public InfoIngredientesRepositorio infoIngredientesRepositorio;
 
     Ingrediente ingrediente;
     @BeforeEach
     void setUp() {
-        this.ingrediente = new Ingrediente(TipoIngrediente.CARNES, "prueba", 20, 20, "Unidades");
+        this.ingrediente = new Ingrediente(TipoIngrediente.CARNES, "Milanesa", new Medibles(1,Unidades.KG), 200);
     }
 
     @AfterEach
     void after(){
         servicio.deleteAll();
+        this.infoIngredientesRepositorio.deleteAll();
     }
 
     @Test
     void save() {
         servicio.save(ingrediente);
-        assertNotNull(servicio.findByName(ingrediente.getNombre()).orElse(null));
+        assertNotNull(servicio.findByNombre(ingrediente.getNombre()).orElse(null));
     }
 
     @Test
@@ -42,33 +48,30 @@ class IngredientesServiciosTest {
 
     @Test
     void update() throws Exception {
-        servicio.save(new Ingrediente(TipoIngrediente.CARNES,"MilanesaPrueba",0,0,"Unidad"));
-        servicio.save(new Ingrediente(TipoIngrediente.CARNES,"MilanesaPrueba2",0,0,"Unidad"));
-        servicio.save(new Ingrediente(TipoIngrediente.CARNES,"MilanesaPrueba3",0,0,"Unidad"));
-        servicio.save(new Ingrediente(TipoIngrediente.CARNES,"MilanesaPrueba4",0,0,"Unidad"));
-
+        servicio.save(new Ingrediente(TipoIngrediente.CARNES,"MilanesaPrueba",new Medibles(2,Unidades.UNIDADES),0));
+        servicio.save(new Ingrediente(TipoIngrediente.CARNES,"MilanesaPrueba2",new Medibles(2,Unidades.UNIDADES),0));
         String nombre_cambiado = "nombre_prueba";
 
-        Ingrediente ingrediente_modif = servicio.findByName("MilanesaPrueba3").orElseThrow(Exception::new);
+        Ingrediente ingrediente_modif = servicio.findByNombre("MilanesaPrueba2").orElseThrow(Exception::new);
         ingrediente_modif.setNombre(nombre_cambiado);
         servicio.save(ingrediente_modif);
-        assertNotNull(servicio.findByName(nombre_cambiado).orElse(null));
+        assertNotNull(servicio.findByNombre(nombre_cambiado).orElse(null));
 
 
     }
 
     @Test
     void delete() throws Exception {
-        servicio.save(new Ingrediente(TipoIngrediente.LEGUMBRES,"LentejasPrueba",0,0,"Unidad"));
-        Ingrediente ingredienteBuscado = servicio.findByName("LentejasPrueba").orElseThrow(Exception::new);
+        servicio.save(new Ingrediente(TipoIngrediente.LEGUMBRES,"LentejasPrueba",new Medibles(0,Unidades.GR),0));
+        Ingrediente ingredienteBuscado = servicio.findByNombre("LentejasPrueba").orElseThrow(Exception::new);
         servicio.delete(ingredienteBuscado);
-        assertNull(servicio.findByName("LentejasPrueba").orElse(null));
+        assertNull(servicio.findByNombre("LentejasPrueba").orElse(null));
 
     }
 
-    @Test
-    void deleteAll(){
-        servicio.deleteAll();
-    }
+//    @Test
+//    void deleteAll(){
+//        servicio.deleteAll();
+//    }
 }
 

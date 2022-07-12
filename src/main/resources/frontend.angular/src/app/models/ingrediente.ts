@@ -1,8 +1,9 @@
+import {IInfoCantidad} from "./infoCantidad";
+
 export interface IIngrediente{
   id: number,
-  grupo: number,
+  grupo: string,
   nombre: string,
   calorias: number,
-  cantidad: number,
-  unidad: number
+  infoIngrediente: IInfoCantidad
 }

@@ -1,10 +1,9 @@
 package com.iii.controller;
 
-import com.iii.exceptions.RecetarioNotFoundException;
+import com.iii.exceptions.ResourceNotFoundException;
 import com.iii.hateoasAssembler.RecetarioAssembler;
 import com.iii.model.Recetario;
 import com.iii.servicios.RecetarioServicios;
-import com.iii.servicios.RecetasServicios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -33,26 +32,19 @@ public class RecetarioController {
 
     @PostMapping("/recetarios")
     public  EntityModel<Recetario> create(@RequestBody Recetario recetario) {
-        recetario.setRecetas(recetarioServicios.actualizarRecetas(recetario));
+//        recetario.setRecetas(recetarioServicios.actualizarRecetas(recetario));
         return recetarioAssembler.toModel(recetarioServicios.save(recetario));
     }
     // Single item
     @GetMapping("/recetarios/{id}")
     public  EntityModel<Recetario> singleRecetario(@PathVariable Long id) {
-        Recetario recetario = recetarioServicios.findById(id).orElseThrow(() -> new RecetarioNotFoundException(id));
+        Recetario recetario = recetarioServicios.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
         return recetarioAssembler.toModel(recetario);
     }
 
     @PutMapping("/recetarios/{id}")
     public EntityModel<Recetario> modifyRecetario(@RequestBody Recetario recetarioNuevo, @PathVariable Long id) {
-        return recetarioServicios.findById(id)
-                .map(recetario -> {
-                    return recetarioAssembler.toModel(recetarioServicios.updateByRecetario(recetario,recetarioNuevo));
-                })
-                .orElseGet(() -> {
-                    recetarioNuevo.setId(id);
-                    return recetarioAssembler.toModel(recetarioServicios.save(recetarioNuevo));
-                });
+        return recetarioAssembler.toModel(recetarioServicios.updateById(recetarioNuevo,id));
     }
 
     @DeleteMapping("/recetarios/{id}")

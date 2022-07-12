@@ -2,7 +2,7 @@ import {IReceta} from "./receta";
 
 export interface IRecetario{
   id: number,
-  titulo: string,
+  nombre: string,
   recetas: IReceta[],
   links: any
 

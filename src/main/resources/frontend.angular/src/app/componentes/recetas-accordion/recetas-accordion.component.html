@@ -12,7 +12,11 @@
     <div attr.id="{{ 'collapse-' + elementId + '-' + receta.id }}" class="accordion-collapse collapse" attr.aria-labelledby="{{'#heading-' + elementId + '-' + receta.id }}" attr.data-parent="{{'#accordion-' + elementId + '-' + receta.id }}">
       <div class="card-body" style="  background: whitesmoke;">
         <div>Puntaje: {{receta.puntaje}}</div>
-          <span class="ingredientes" *ngFor="let ingrediente of receta.ingredientes"> {{ingrediente.cantidad}} {{ingrediente.unidad}} de {{ingrediente.nombre}} <span class="float-sm-end">({{ingrediente.calorias}}) calorias </span> <br>  </span>
+          <span class="ingredientes" *ngFor="let ingrediente of receta.ingredientes">
+            <span *ngIf="ingrediente.infoCantidad.type == 'CantidadNecesaria'">c/n</span>
+            <span *ngIf="ingrediente.infoCantidad.type != 'CantidadNecesaria'"> {{ingrediente.infoCantidad.cantidad + " " + ingrediente.infoCantidad.unidad}} </span>
+            de {{ingrediente.nombre}} <span class="float-sm-end">({{ingrediente.calorias}}) calorias </span> <br>
+        </span>
       </div>
     </div>
   </div>

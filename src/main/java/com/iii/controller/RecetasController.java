@@ -1,19 +1,13 @@
 package com.iii.controller;
 
 
-import com.iii.exceptions.IngredienteNotFoundException;
-import com.iii.exceptions.NombreExistenteException;
-import com.iii.exceptions.RecetaNotFoundException;
-import com.iii.hateoasAssembler.IngredienteAssembler;
+import com.iii.exceptions.ResourceNotFoundException;
 import com.iii.hateoasAssembler.RecetaAssemebler;
 import com.iii.model.Receta;
-import com.iii.model.ingredientes.Ingrediente;
-import com.iii.servicios.IngredientesServicios;
 import com.iii.servicios.RecetasServicios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,26 +35,17 @@ public class RecetasController {
 
     @PostMapping("/recetas")
     public  EntityModel<Receta> create(@RequestBody Receta receta) {
-        receta.setIngredientes(recetasServicios.actualizarIngredientes(receta));
         return recetaAssembler.toModel(recetasServicios.save(receta));
     }
-    // Single item
     @GetMapping("/recetas/{id}")
     public  EntityModel<Receta> singleReceta(@PathVariable Long id) {
-        Receta receta = recetasServicios.findById(id).orElseThrow(() -> new RecetaNotFoundException(id));
+        Receta receta = recetasServicios.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
         return recetaAssembler.toModel(receta);
     }
 
     @PutMapping("/recetas/{id}")
     public  EntityModel<Receta> modifyReceta(@RequestBody Receta recetaNueva, @PathVariable Long id) {
-        return recetasServicios.findById(id)
-                .map(receta -> {
-                    return recetaAssembler.toModel(recetasServicios.updateByReceta(receta,recetaNueva));
-                })
-                .orElseGet(() -> {
-                    recetaNueva.setId(id);
-                    return recetaAssembler.toModel(recetasServicios.save(recetaNueva));
-                });
+        return recetaAssembler.toModel(recetasServicios.updateById(recetaNueva,id));
     }
 
     @DeleteMapping("/recetas/{id}")

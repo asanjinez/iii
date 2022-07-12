@@ -1,6 +1,6 @@
 package com.iii.servicios;
 
-import com.iii.exceptions.NombreExistenteException;
+import com.iii.exceptions.ResourceNotFoundException;
 import com.iii.model.ingredientes.Ingrediente;
 import com.iii.repositorios.IngredientesRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,53 +12,31 @@ import java.util.Optional;
 @Service
 public class IngredientesServicios {
     @Autowired
-    IngredientesRepositorio repo;
+    private IngredientesRepositorio repo;
 
     public Ingrediente save(Ingrediente ingrediente) {
-        this.nombreExistenteThrowException(ingrediente);
         return repo.save(ingrediente);
-    }
-
-    public Ingrediente updateByIngrediente(Ingrediente ingredienteViejo,Ingrediente ingredienteNuevo) {
-        if (!ingredienteViejo.getNombre().equals(ingredienteNuevo.getNombre()))
-            this.nombreExistenteThrowException(ingredienteNuevo);
-
-        ingredienteViejo.setNombre(ingredienteNuevo.getNombre());
-        ingredienteViejo.setUnidad(ingredienteNuevo.getUnidad());
-        ingredienteViejo.setGrupo(ingredienteNuevo.getGrupo());
-        ingredienteViejo.setCantidad(ingredienteNuevo.getCantidad());
-        ingredienteViejo.setCalorias(ingredienteNuevo.getCalorias());
-
-        return repo.save(ingredienteViejo);
-
-    }
-    public Ingrediente updateByNombre(Ingrediente ingrediente) {
-        Ingrediente ingredienteExistente = repo.findByNombre(ingrediente.getNombre()).orElse(null);
-        if (ingredienteExistente != null){
-            ingredienteExistente.setUnidad(ingrediente.getUnidad());
-            ingredienteExistente.setGrupo(ingrediente.getGrupo());
-            ingredienteExistente.setCantidad(ingrediente.getCantidad());
-            ingredienteExistente.setCalorias(ingrediente.getCalorias());
-            return repo.save(ingredienteExistente);
-
-        }
-        return repo.save(ingrediente);
-    }
-    public void nombreExistenteThrowException(Ingrediente ingrediente){
-        Ingrediente ingredienteNombreExistente = repo.findByNombre(ingrediente.getNombre()).orElse(null);
-        if (ingredienteNombreExistente != null)
-                throw new NombreExistenteException(ingredienteNombreExistente.getNombre());
     }
     public List<Ingrediente> findAll() {
         return (List<Ingrediente>) repo.findAll();
+    }
+    public Ingrediente updateById(Ingrediente ingrediente, Long id){
+        Ingrediente ingredienteBuscado = repo.findById(id).orElse(null);
+        if (ingredienteBuscado == null)
+            throw new ResourceNotFoundException(id);
+        ingredienteBuscado.setInfoCantidad(ingrediente.getInfoCantidad());
+        ingredienteBuscado.setCalorias(ingrediente.getCalorias());
+        ingredienteBuscado.setNombre(ingrediente.getNombre());
+        ingredienteBuscado.setGrupo(ingrediente.getGrupo());
 
+        return repo.save(ingredienteBuscado);
     }
 
     public Optional<Ingrediente> findById(Long id) {
         return repo.findById(id);
     }
 
-    public Optional<Ingrediente> findByName(String nombre){
+    public Optional<Ingrediente> findByNombre(String nombre){
         return repo.findByNombre(nombre);
     }
 

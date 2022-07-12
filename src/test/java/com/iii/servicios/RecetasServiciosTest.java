@@ -1,9 +1,10 @@
 package com.iii.servicios;
 
 import com.iii.model.Receta;
-import com.iii.model.ingredientes.*;
 import com.iii.model.ingredientes.Ingrediente;
 import com.iii.model.ingredientes.TipoIngrediente;
+import com.iii.model.ingredientes.cantidad.Medibles;
+import com.iii.model.ingredientes.cantidad.Unidades;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,8 @@ class RecetasServiciosTest {
 
     @BeforeEach
     void setUp(){
-        this.ingrediente1 = new Ingrediente(TipoIngrediente.VEGETALES,"Lechuga",2,10,"Unidades");
-        this.ingrediente2 = new Ingrediente(TipoIngrediente.CARNES,"Lomo",150,4,"Unidades");
+        this.ingrediente1 = new Ingrediente(TipoIngrediente.VEGETALES,"Lechuga",new Medibles(2, Unidades.UNIDADES),10);
+        this.ingrediente2 = new Ingrediente(TipoIngrediente.CARNES,"Lomo",new Medibles(4,Unidades.UNIDADES),155);
         this.recetaPrueba = new Receta("RecetaPrueba");
 
         recetaPrueba.agregarIngrediente(ingrediente1);

@@ -37,7 +37,7 @@ export class RecetariosListComponent implements OnInit {
   agregarElemento() {
     let elemento: IRecetario = {
       id: 0,
-      titulo: 'Recetario-' + this.randomInteger(1, 100),
+      nombre: 'Recetario-' + this.randomInteger(1, 100),
       recetas: [],
       links: null
     }

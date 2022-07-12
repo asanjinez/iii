@@ -1,4 +1,4 @@
-<div [@fadeInAnim] style="text-align: center; vertical-align: middle;margin-top: 15px;margin-bottom: 15px" class="row">
+<div style="text-align: center; vertical-align: middle;margin-top: 15px;margin-bottom: 15px" class="row">
   <div class="col-6">
     <button class="learn-more" (click)="agregarElemento()">Agregar Recetario</button>
   </div>
@@ -19,7 +19,7 @@
                   <img class="img-card" src="assets/recetaImage3.png">
                   <div class="card-content">
                     <h4 class="card-title">
-                      <span class="tituloReceta"> {{recetario.titulo}}</span>
+                      <span class="tituloReceta"> {{recetario.nombre}}</span>
                     </h4>
                     <span style="text-align: center">
                       Cantidad de recetas: {{recetario.recetas.length}}

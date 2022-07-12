@@ -11,7 +11,7 @@ export class RecetarioEditModalComponent implements OnInit {
   @Input() recetario: IRecetario | any;
   @Input() elementId: number = 0;
   gruposIngredientes = ["CARNES", "CEREALES", "FRUTAS", "LACTEOS", "LEGUMBRES", "VEGETALES"];
-  unidadesIngredientes = ["Unidades", "Kg", "Gr", "L", "Ml", "Cantidad Necesaria"];
+  unidadesIngredientes = ["Unidades", "Kg", "Gr", "L", "Ml", "CN"];
 
   constructor(private dataService: DataService) {
   }
