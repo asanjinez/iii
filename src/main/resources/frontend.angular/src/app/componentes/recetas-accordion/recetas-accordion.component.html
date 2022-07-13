@@ -1,4 +1,3 @@
-<!--attr.data-target="{{ '#editModal-' + recetario.id }}"-->
 <div attr.id="{{ 'accordion-'+ elementId + '-' + elementId + '-' + receta.id }}">
   <div class="card">
     <div class="card-header" attr.id="{{ 'heading-' + elementId + '-' + receta.id }}">
@@ -13,8 +12,11 @@
       <div class="card-body" style="  background: whitesmoke;">
         <div>Puntaje: {{receta.puntaje}}</div>
           <span class="ingredientes" *ngFor="let ingrediente of receta.ingredientes">
-            <span *ngIf="ingrediente.infoCantidad.type == 'CantidadNecesaria'">c/n</span>
-            <span *ngIf="ingrediente.infoCantidad.type != 'CantidadNecesaria'"> {{ingrediente.infoCantidad.cantidad + " " + ingrediente.infoCantidad.unidad}} </span>
+            <span [ngSwitch]="ingrediente.infoCantidad?.type">
+              <span *ngSwitchCase="'CantidadNecesaria'">c/n</span>
+              <span *ngSwitchCase="'Medibles'"> {{ingrediente.infoCantidad.cantidad + " " + ingrediente.infoCantidad.unidad}} </span>
+              <span *ngSwitchDefault></span>
+            </span>
             de {{ingrediente.nombre}} <span class="float-sm-end">({{ingrediente.calorias}}) calorias </span> <br>
         </span>
       </div>

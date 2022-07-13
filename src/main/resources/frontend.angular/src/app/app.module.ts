@@ -9,6 +9,11 @@ import { RecetarioEditModalComponent } from './componentes/recetario-edit-modal/
 import {FormsModule} from "@angular/forms";
 import { RecetasAccordionComponent } from './componentes/recetas-accordion/recetas-accordion.component';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import {Routes} from "@angular/router";
+
+// const routes: Routes = [
+//   {path: }
+// ]
 
 @NgModule({
   declarations: [
