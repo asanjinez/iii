@@ -9,14 +9,6 @@ import { RecetarioEditModalComponent } from './componentes/recetario-edit-modal/
 import {FormsModule} from "@angular/forms";
 import { RecetasAccordionComponent } from './componentes/recetas-accordion/recetas-accordion.component';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import {APP_INITIALIZER} from "@angular/core";
-import {ConfigService} from "./servicios/config.service";
-
-export function loadConfiguration(configService:ConfigService) {
-  return () => {
-    return configService.loadConfig();
-  }
-}
 
 @NgModule({
   declarations: [
@@ -33,16 +25,7 @@ export function loadConfiguration(configService:ConfigService) {
     FormsModule,
     MdbFormsModule
   ],
-  providers: [
-    ConfigService,
-    {
-    provide: APP_INITIALIZER,
-    useFactory: loadConfiguration,
-    multi: true,
-    deps: [
-      ConfigService
-    ],
-  }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
+import {environment} from "../environments/environment";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,7 +18,9 @@ import { trigger,style,transition,animate,keyframes,query,stagger } from '@angul
     ]
 })
 export class AppComponent {
-  title = 'Gourmet - Application';
+  title = environment.titulo;
+  version = environment.version;
+
   constructor() {
   }
 

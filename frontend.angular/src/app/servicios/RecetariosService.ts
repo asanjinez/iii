@@ -3,7 +3,7 @@ import {IRecetario} from "../models/IRecetario"
 import {map, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {IRecetarioSerializado} from "../models/IRecetariosSerializados";
-import {ConfigService} from "./config.service";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ import {ConfigService} from "./config.service";
 export class RecetariosService {
   private urlApi = "";
 
-  constructor(private http: HttpClient, private config:ConfigService) {
-    this.urlApi = config.datos.baseUrl;
+  constructor(private http: HttpClient) {
+    this.urlApi = environment.baseUrl;
   }
 
   getAllRecetarios(): Observable<IRecetario[]> {
