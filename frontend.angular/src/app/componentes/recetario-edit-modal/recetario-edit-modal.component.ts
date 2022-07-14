@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, NgModule} from '@angular/core';
-import {IRecetario} from "../../models/recetario";
-import {DataService} from "../recetarios-list/data.service";
+import {IRecetario} from "../../models/IRecetario";
+import {RecetariosService} from "../../servicios/RecetariosService";
+import {GRUPOSINGREDIENTES, INGREDIENTESTYPE, UNIDADESINGREDIENTES} from "../../models/Constants";
 
 @Component({
   selector: 'app-recetario-edit-modal',
@@ -10,10 +11,12 @@ import {DataService} from "../recetarios-list/data.service";
 export class RecetarioEditModalComponent implements OnInit {
   @Input() recetario: IRecetario | any;
   @Input() elementId: number = 0;
-  gruposIngredientes = ["CARNES", "CEREALES", "FRUTAS", "LACTEOS", "LEGUMBRES", "VEGETALES"];
-  unidadesIngredientes = ["Unidades", "Kg", "Gr", "L", "Ml", "CN"];
+  gruposIngredientes = GRUPOSINGREDIENTES;
+  unidadesIngredientes = UNIDADESINGREDIENTES;
+  ingredientesType = INGREDIENTESTYPE;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: RecetariosService) {
+
   }
 
   ngOnInit(): void {

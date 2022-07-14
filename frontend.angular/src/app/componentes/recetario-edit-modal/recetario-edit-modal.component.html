@@ -1,15 +1,15 @@
 <div class="btn btn-outline-info card-read-more" data-bs-toggle="modal"
-     attr.data-bs-target="{{ '#modalEdit' + recetario.id }}"> Editar <i class="fas fa-edit float-end"></i></div>
+     attr.data-bs-target="#modalEdit{{ recetario.id }}"> Editar <i class="fas fa-edit float-end"></i></div>
 <!--  ------------------MODAL-------------------->
-<div class="modal fade" attr.id="{{'modalEdit'+recetario.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+<div class="modal fade" attr.id="modalEdit{{ recetario.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
      tabindex="-1" attr.aria-labelledby="{{ '#editStaticBackdropLabel-' + recetario.id }}" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" attr.id="{{'editStaticEditBackdropLabel-'+ recetario.id}}">{{recetario.nombre }} -
+        <h5 class="modal-title" attr.id="editStaticEditBackdropLabel-{{ recetario.id}}">{{recetario.nombre }} -
           Informacion</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="EditClose"
-                attr.data-bs-target="{{'#modalEdit-'+recetario.id}}"></button>
+                attr.data-bs-target="#modalEdit-{{recetario.id}}"></button>
       </div>
       <div class="modal-body">
         <div class="input-group mb-3">
@@ -17,14 +17,14 @@
           <input
             mdbInput
             class="form-control"
-            attr.id="{{'id-field-recetario'+recetario.id}}"
+            attr.id="id-field-recetario{{recetario.id}}"
             type="text"
             aria-label="id_field"
             [readonly]="true"
-            name="{{'idRecetario-'+recetario.id}}"
+            name="idRecetario-{{recetario.id}}"
             [(ngModel)]=recetario.id
           />
-          <label mdbLabel class="form-label" attr.for="{{'id-field-recetario'+recetario.id}}"></label>
+          <label mdbLabel class="form-label" attr.for="id-field-recetario{{recetario.id}}"></label>
         </div>
 
         <div class="input-group mb-3">
@@ -34,40 +34,40 @@
                  placeholder="Ingrese el titulo del recetario"
                  aria-label="Recipient's username"
                  aria-describedby="titulo-recetario"
-                 name="{{'tituloRecetario-'+recetario.nombre}}"
+                 name="tituloRecetario-{{recetario.nombre}}"
                  [(ngModel)]=recetario.nombre
           />
         </div>
         <div class="form-label">({{recetario.recetas.length}}) Recetas:</div>
-        <div attr.id="{{ 'accordionEdit-' +recetario.id + '-' + indexReceta }}"
+        <div attr.id="accordionEdit-{{ recetario.id + '-' + indexReceta }}"
              *ngFor="let receta of recetario.recetas; let indexReceta = index">
           <div class="card">
-            <div class="card-header" attr.id="{{ 'headingEdit-' + recetario.id + '-' + indexReceta }}">
+            <div class="card-header" attr.id="headingEdit-'{{ recetario.id + '-' + indexReceta }}">
               <h5 class="mb-0">
                 <button style="width: 100%" class="btn btn-link" data-toggle="collapse"
-                        attr.data-target="{{'#collapseEdit-' + recetario.id + '-' + indexReceta }}"
+                        attr.data-target="#collapseEdit-{{recetario.id + '-' + indexReceta }}"
                         aria-expanded="false"
-                        attr.aria-controls="{{'#collapseEdit-' + recetario.id + '-' + indexReceta }}">
+                        attr.aria-controls="#collapseEdit-{{recetario.id + '-' + indexReceta }}">
                   {{receta.nombre}}
                 </button>
               </h5>
             </div>
 
-            <div attr.id="{{ 'collapseEdit-' + recetario.id + '-' + indexReceta }}" class="accordion-collapse collapse"
-                 attr.aria-labelledby="{{'headingEdit-' + recetario.id + '-' + indexReceta }}"
-                 attr.data-parent="{{'#accordionEdit-' + recetario.id + '-' + indexReceta }}">
+            <div attr.id="collapseEdit-{{recetario.id + '-' + indexReceta }}" class="accordion-collapse collapse"
+                 attr.aria-labelledby="headingEdit-{{recetario.id + '-' + indexReceta }}"
+                 attr.data-parent="#accordionEdit-{{ recetario.id + '-' + indexReceta }}">
               <div class="card-body" style="  background: whitesmoke;">
                 <div class="input-group mb-3">
                   <span class="input-group-text">ID</span>
-                  <label mdbLabel class="form-label" attr.for="{{'id-field-receta'+ receta.id}}"></label>
+                  <label mdbLabel class="form-label" attr.for="id-field-receta {{receta.id}}"></label>
                   <input
                     mdbInput
                     class="form-control"
-                    attr.id="{{'id-field-receta-'+ receta.id}}"
+                    attr.id="id-field-receta-{{receta.id}}"
                     type="text"
                     aria-label="id_field"
                     [readonly]="true"
-                    name="{{'id-receta-'+receta.id}}"
+                    name="id-receta-{{receta.id}}"
                     [(ngModel)]=receta.id
                   />
 
@@ -78,7 +78,7 @@
                            placeholder="Ingrese el titulo del recetario"
                            aria-label="titulo-receta"
                            aria-describedby="titulo-receta"
-                           name="{{'titulo-receta-'+receta.id}}"
+                           name="titulo-receta-{{receta.id}}"
                            [(ngModel)]=receta.nombre
                     />
                   </div>
@@ -86,7 +86,7 @@
                   <div *ngFor="let ingrediente of receta.ingredientes; let indexIngrediente = index">
                     <hr>
 
-                    <span style="position: absolute" class="input-group-text">Tipo</span>
+                    <span style="position: absolute" class="input-group-text">Grupo</span>
                     <select style="width: 80%;margin-left: 60px" class="form-select-lg"
                             [name]="'ingredienteGrupo-'+indexIngrediente"
                             [(ngModel)]="ingrediente.grupo">
@@ -100,7 +100,7 @@
                              placeholder="Ingrese el nombre de ingrediente"
                              aria-label="Recipient's ingredienteNames"
                              aria-describedby="nombre-ingrediente"
-                             name="{{'nombre-ingrediente-'+ingrediente.name}}"
+                             name="nombre-ingrediente-{{ingrediente.name}}"
                              [(ngModel)]=ingrediente.nombre
                       />
                     </div>
@@ -112,10 +112,17 @@
                              placeholder="Ingrese las calorias"
                              aria-label="Recipient's ingredienteCalorias"
                              aria-describedby="calorias-ingrediente"
-                             name="{{'calorias-ingrediente-'+ingrediente.calorias}}"
+                             name="calorias-ingrediente-{{ingrediente.calorias}}"
                              [(ngModel)]=ingrediente.calorias
                       />
                     </div>
+
+                    <span style="position: absolute" class="input-group-text">Tipo</span>
+                    <select style="width: 80%;margin-left: 60px" class="form-select-lg"
+                            [name]="'ingredienteType-'+indexIngrediente"
+                            [(ngModel)]="ingrediente.infoIngrediente">
+                      <option [value]="type" *ngFor="let type of ingredientesType">{{type}}</option>
+                    </select>
 
                     <div class="input-group mb-3">
                       <span class="input-group-text">Cantidad</span>
@@ -124,7 +131,7 @@
                              placeholder="Ingrese la cantidad"
                              aria-label="Recipient's ingredienteCalorias"
                              aria-describedby="cantidad-ingrediente"
-                             name="{{'cantidad-ingrediente-'+ingrediente.cantidad}}"
+                             name="cantidad-ingrediente-{{ingrediente.cantidad}}"
                              [(ngModel)]=ingrediente.cantidad
                       />
                     </div>

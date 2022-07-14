@@ -22,7 +22,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-<<<<<<< HEAD
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -96,8 +95,3 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-=======
-### VS Code ###
-.vscode/
-
->>>>>>> Entrega5

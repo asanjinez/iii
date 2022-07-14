@@ -1,22 +1,23 @@
 import {Injectable} from '@angular/core';
-import {IRecetario} from "../../models/recetario"
+import {IRecetario} from "../models/IRecetario"
 import {map, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {IRecetarioSerializado} from "../../models/recetariosSerializados";
-import {IRecetarioWrapper} from "../../models/recetarioWrapper";
+import {IRecetarioSerializado} from "../models/IRecetariosSerializados";
+import {ConfigService} from "./config.service";
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class DataService {
-  private urlApi = 'http://localhost:8080'
+export class RecetariosService {
+  private urlApi = "";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private config:ConfigService) {
+    this.urlApi = config.datos.baseUrl;
   }
 
-  getAllRecetarios(): Observable<IRecetarioWrapper> {
-    return this.http.get<IRecetarioSerializado>(`${this.urlApi}/recetarios`).pipe(map(response => response._embedded));
+  getAllRecetarios(): Observable<IRecetario[]> {
+    return this.http.get<IRecetarioSerializado>(`${this.urlApi}/recetarios`).pipe(map(response => response._embedded.recetarioList));
   }
 
   putRecetario(id: number, objeto: IRecetario) {

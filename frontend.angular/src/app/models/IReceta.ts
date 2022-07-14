@@ -1,4 +1,4 @@
-import {IIngrediente} from "./ingrediente";
+import {IIngrediente} from "./IIngrediente";
 
 export interface IReceta{
   id: number,
@@ -7,3 +7,4 @@ export interface IReceta{
   ingredientes: IIngrediente[]
 
 }
+

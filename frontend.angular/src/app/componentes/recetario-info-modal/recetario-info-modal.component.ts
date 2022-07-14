@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IRecetario} from "../../models/recetario";
+import {IRecetario} from "../../models/IRecetario";
 
 
 @Component({
