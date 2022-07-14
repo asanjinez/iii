@@ -21,9 +21,7 @@ public class IngredientesServicios {
         return (List<Ingrediente>) repo.findAll();
     }
     public Ingrediente updateById(Ingrediente ingrediente, Long id){
-        Ingrediente ingredienteBuscado = repo.findById(id).orElse(null);
-        if (ingredienteBuscado == null)
-            throw new ResourceNotFoundException(id);
+        Ingrediente ingredienteBuscado = repo.findById(id).orElseThrow( () -> new ResourceNotFoundException(id) );
         ingredienteBuscado.setInfoCantidad(ingrediente.getInfoCantidad());
         ingredienteBuscado.setCalorias(ingrediente.getCalorias());
         ingredienteBuscado.setNombre(ingrediente.getNombre());
