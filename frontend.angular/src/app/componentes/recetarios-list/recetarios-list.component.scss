@@ -47,8 +47,9 @@ r-fostrap {
 
 .img-card {
   position: relative;
-  top: 10px;
-  height: 30vh;
+  top: 15px;
+  height: auto;
+  max-width: 80%;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
   overflow: hidden;
