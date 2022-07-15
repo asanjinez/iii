@@ -124,17 +124,6 @@ $pink-shadow: #ffe3e2;
   }
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    top: -100px;
-  }
-  100% {
-    opacity: 1;
-    top: 0px;
-  }
-}
-
 button {
   font-family: 'Rubik', sans-serif;
   position: relative;

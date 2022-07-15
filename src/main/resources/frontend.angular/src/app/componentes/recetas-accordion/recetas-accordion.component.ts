@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IReceta} from "../../models/receta";
+import {IReceta} from "../../models/IReceta";
 import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({

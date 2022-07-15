@@ -1,4 +1,4 @@
-import {IReceta} from "./receta";
+import {IReceta} from "./IReceta";
 
 export interface IRecetario{
   id: number,

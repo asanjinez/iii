@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, keyframes, query, stagger, style, transition, trigger} from "@angular/animations";
 import {DataService} from "./data.service";
-import {IRecetario} from "../../models/recetario";
+import {IRecetario} from "../../models/IRecetario";
 
 @Component({
-  selector: 'app-list',
+  selector: 'recetarios-list',
   templateUrl: './recetarios-list.component.html',
   styleUrls: ['./recetarios-list.component.scss'],
   animations: [
@@ -60,7 +60,7 @@ export class RecetariosListComponent implements OnInit {
   }
 
   showTodos() {
-    this.dataService.getAllRecetarios().subscribe(recetario => this.recetarios = recetario.recetarioList);
+    this.dataService.getAllRecetarios().subscribe(recetarios => this.recetarios = recetarios);
   }
 
 }

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, NgModule} from '@angular/core';
-import {IRecetario} from "../../models/recetario";
+import {IRecetario} from "../../models/IRecetario";
 import {DataService} from "../recetarios-list/data.service";
 
 @Component({

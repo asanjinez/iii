@@ -7,13 +7,11 @@ import { RecetariosListComponent } from './componentes/recetarios-list/recetario
 import { RecetarioInfoModalComponent } from './componentes/recetario-info-modal/recetario-info-modal.component';
 import { RecetarioEditModalComponent } from './componentes/recetario-edit-modal/recetario-edit-modal.component';
 import {FormsModule} from "@angular/forms";
-import { RecetasAccordionComponent } from './componentes/recetas-accordion/recetas-accordion.component';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import {Routes} from "@angular/router";
-
-// const routes: Routes = [
-//   {path: }
-// ]
+import { RecetasAccordionComponent } from './componentes/recetas-accordion/recetas-accordion.component';
+import {IngredientesListComponent} from "./componentes/ingredientes/ingredientes-list/ingredientes-list.component";
+import { IngredientesInfoComponent } from './componentes/ingredientes/ingredientes-info/ingredientes-info.component';
+import {AppRoutingModule} from "./app.routing.module";
 
 @NgModule({
   declarations: [
@@ -22,13 +20,16 @@ import {Routes} from "@angular/router";
     RecetarioInfoModalComponent,
     RecetarioEditModalComponent,
     RecetasAccordionComponent,
+    IngredientesListComponent,
+    IngredientesInfoComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    MdbFormsModule
+    MdbFormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
