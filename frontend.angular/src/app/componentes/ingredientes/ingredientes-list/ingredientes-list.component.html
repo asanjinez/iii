@@ -1,0 +1,39 @@
+<div style="text-align: center; vertical-align: middle;margin-top: 15px;margin-bottom: 15px" class="row">
+  <div class="col-6">
+    <button class="learn-more" (click)="agregarElemento()">Agregar Recetario</button>
+  </div>
+  <div class="col-6">
+    <button class="learn-more" (click)="eliminarElemento()">Eliminar Recetario</button>
+  </div>
+</div>
+<br>
+<div id="container" [@listAnimation]="ingredientes.length">
+  <div class="row">
+    <section class="wrapper">
+      <div class="container-fostrap">
+        <div class="content">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-sm-4" *ngFor="let ingrediente of ingredientes;let indexIngrediente = index">
+                <div class="card">
+                  <img class="img-card" src="assets/ingredienteImage.png">
+                  <div class="card-content">
+                    <h4 class="card-title">
+                      <span class="tituloReceta"> {{ingrediente.nombre}}</span>
+                    </h4>
+                    <span style="text-align: center">
+                      Cantidad de Calorias: {{ingrediente.calorias}}
+                    </span>
+                  </div>
+                      <app-ingrediente-info-modal [ingrediente]= "ingrediente"></app-ingrediente-info-modal>
+                      <app-ingrediente-edit-modal></app-ingrediente-edit-modal>
+<!--                  <app-recetario-edit-modal [recetario]="recetario"></app-recetario-edit-modal>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

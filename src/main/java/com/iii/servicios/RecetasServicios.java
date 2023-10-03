@@ -24,9 +24,7 @@ public class RecetasServicios {
 
 }
     public Receta updateById(Receta receta, Long id){
-        Receta recetaBuscada = repo.findById(id).orElse(null);
-        if (recetaBuscada == null)
-            throw new ResourceNotFoundException(id);
+        Receta recetaBuscada = repo.findById(id).orElseThrow( () -> new ResourceNotFoundException(id) );
         if (!nombreValido(receta.getNombre(), recetaBuscada))
             throw new NombreExistenteException(receta.getNombre());
 

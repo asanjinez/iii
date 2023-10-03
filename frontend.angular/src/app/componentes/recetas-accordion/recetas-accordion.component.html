@@ -1,0 +1,25 @@
+<div attr.id="accordion-{{elementId + '-' + elementId + '-' + receta.id }}">
+  <div class="card">
+    <div class="card-header" attr.id="heading-{{elementId + '-' + receta.id }}">
+      <h5 class="mb-0">
+        <button style="width: 100%" class="btn btn-link" data-toggle="collapse" attr.data-target="#collapse-{{elementId + '-' + receta.id }}" aria-expanded="false" attr.aria-controls="#collapse-{{elementId + '-' + receta.id }}">
+          {{receta.nombre}}
+        </button>
+      </h5>
+    </div>
+
+    <div attr.id="collapse-{{elementId + '-' + receta.id }}" class="accordion-collapse collapse" attr.aria-labelledby="#heading-{{elementId + '-' + receta.id }}" attr.data-parent="#accordion-{{elementId + '-' + receta.id }}">
+      <div class="card-body" style="  background: whitesmoke;">
+        <div>Puntaje: {{receta.puntaje}}</div>
+          <span class="ingredientes" *ngFor="let ingrediente of receta.ingredientes">
+            <span [ngSwitch]="ingrediente.infoCantidad?.type">
+              <span *ngSwitchCase="'CantidadNecesaria'">c/n</span>
+              <span *ngSwitchCase="'Medibles'"> {{ingrediente.infoCantidad.cantidad + " " + ingrediente.infoCantidad.unidad}} </span>
+              <span *ngSwitchDefault></span>
+            </span>
+            de {{ingrediente.nombre}} <span class="float-sm-end">({{ingrediente.calorias}}) calorias </span> <br>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
